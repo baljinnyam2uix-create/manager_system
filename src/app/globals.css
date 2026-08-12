@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #faf9f7;
+  --surface: #ffffff;
+  --border: #e8e3dd;
+  --text: #1c1c22;
+  --muted: #7c7c8c;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------------ */
+/* Бүрэлдэхүүн хэсгүүд                                                 */
+/* ------------------------------------------------------------------ */
+@layer components {
+  .card {
+    @apply rounded-2xl border border-[#e8e3dd] bg-white shadow-soft;
+  }
+
+  .card-pad {
+    @apply rounded-2xl border border-[#e8e3dd] bg-white p-5 shadow-soft;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold
+           transition-all duration-150 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn text-white shadow-soft hover:shadow-lift;
+    background-image: linear-gradient(135deg, #8257fb 0%, #7434f3 55%, #a47864 140%);
+  }
+
+  .btn-ghost {
+    @apply btn border border-[#e8e3dd] bg-white text-ink-700 hover:bg-ink-50;
+  }
+
+  .btn-soft {
+    @apply btn bg-lavender-50 text-lavender-700 hover:bg-lavender-100;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-50 text-red-700 hover:bg-red-100;
+  }
+
+  .btn-sm {
+    @apply px-3 py-1.5 text-xs;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-[#e8e3dd] bg-white px-3.5 py-2.5 text-sm text-ink-900
+           outline-none transition placeholder:text-ink-300
+           focus:border-lavender-400 focus:ring-4 focus:ring-lavender-100;
+  }
+
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-ink-500;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-lg px-2 py-0.5 text-[11px] font-semibold;
+  }
+
+  .th {
+    @apply whitespace-nowrap px-3 py-2.5 text-left text-[11px] font-bold uppercase tracking-wide text-ink-500;
+  }
+
+  .td {
+    @apply px-3 py-2.5 text-sm text-ink-800;
+  }
+
+  .table-wrap {
+    @apply overflow-x-auto rounded-2xl border border-[#e8e3dd] bg-white shadow-soft;
+  }
+
+  .section-title {
+    @apply text-lg font-bold text-ink-900;
+  }
+}
+
+/* Гүйлгэх мөрний загвар */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d8d2ca;
+  border-radius: 8px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #bdb5aa;
+}
+
+/* Хэвлэх */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+  .card,
+  .table-wrap {
+    box-shadow: none !important;
+    border-color: #ccc !important;
+  }
+}
