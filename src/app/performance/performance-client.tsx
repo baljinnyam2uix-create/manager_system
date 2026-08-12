@@ -178,7 +178,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
     load();
   }
 
-  function exportXlsx() {
+  async function exportXlsx() {
     const rows: (string | number | null)[][] = [
       ["Багшийн ажлын гүйцэтгэлийн үнэлгээ"],
       [periods.find((p) => p.id === selPeriod)?.name || "Бүх хугацаа"],
@@ -202,7 +202,12 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
         t.comment || "",
       ]);
     });
-    exportRows(rows, "Ажлын-гүйцэтгэл", "Гүйцэтгэл", [5, 20, 42, 20, 13, 13, 8, 10, 8, 30]);
+    try {
+      await exportRows(rows, "Ажлын-гүйцэтгэл", "Гүйцэтгэл", [5, 20, 42, 20, 13, 13, 8, 10, 8, 30]);
+      show("Excel файл татагдлаа");
+    } catch (e) {
+      show(e instanceof Error ? e.message : "Excel үүсгэхэд алдаа гарлаа", false);
+    }
   }
 
   const doneCount = visible.filter((t) => t.is_done).length;

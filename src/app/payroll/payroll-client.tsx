@@ -181,7 +181,7 @@ export default function PayrollClient({ profile }: { profile: Profile }) {
     load();
   }
 
-  function exportXlsx() {
+  async function exportXlsx() {
     if (!settings) return;
 
     // 1) Сонгосон сарын цалингийн хүснэгт
@@ -240,16 +240,20 @@ export default function PayrollClient({ profile }: { profile: Profile }) {
       }
     }
 
-    exportSheets(
-      [
-        { name: `${MONTH_ROMAN[selMonth]} сар — цалин`, rows: salary,
-          cols: [4, 20, 12, 13, 10, 11, 9, 9, 14, 12, 15, 11, 12, 11, 11, 12, 15, 14, 12, 12, 13, 14] },
-        { name: "Цагийн тооцоо", rows: hours,
-          cols: [20, 6, 12, 12, 13, 13, 16, 16, 12, 14, 15, 15, 10, 11, 10, 9, 11, 9] },
-      ],
-      "Цалингийн-тооцоо"
-    );
-    show("Excel файл татагдлаа");
+    try {
+      await exportSheets(
+        [
+          { name: `${MONTH_ROMAN[selMonth]} сар — цалин`, rows: salary,
+            cols: [4, 20, 12, 13, 10, 11, 9, 9, 14, 12, 15, 11, 12, 11, 11, 12, 15, 14, 12, 12, 13, 14] },
+          { name: "Цагийн тооцоо", rows: hours,
+            cols: [20, 6, 12, 12, 13, 13, 16, 16, 12, 14, 15, 15, 10, 11, 10, 9, 11, 9] },
+        ],
+        "Цалингийн-тооцоо"
+      );
+      show("Excel файл татагдлаа");
+    } catch (e) {
+      show(e instanceof Error ? e.message : "Excel үүсгэхэд алдаа гарлаа", false);
+    }
   }
 
   return (

@@ -246,12 +246,21 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
   }
 
   // ---------------- Excel ----------------
-  function doExport() {
+  const [exporting, setExporting] = useState(false);
+
+  async function doExport() {
     const base = { teachers, classes, rooms, subjects, slots, shifts: shifts.filter((s) => s.active) };
-    if (view === "teacher") exportTeacherSchedule(base);
-    else if (view === "class") exportClassSchedule(base);
-    else exportSchoolSchedule({ ...base, title: profile.school_name || "СУРГУУЛЬ" });
-    show("Excel файл татагдлаа");
+    setExporting(true);
+    try {
+      if (view === "teacher") await exportTeacherSchedule(base);
+      else if (view === "class") await exportClassSchedule(base);
+      else await exportSchoolSchedule({ ...base, title: profile.school_name || "СУРГУУЛЬ" });
+      show("Excel файл татагдлаа");
+    } catch (e) {
+      show(e instanceof Error ? e.message : "Excel үүсгэхэд алдаа гарлаа", false);
+    } finally {
+      setExporting(false);
+    }
   }
 
   const requiredHours = loads.reduce((s, l) => s + Number(l.hours_per_week), 0);
@@ -267,8 +276,12 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
       }
       actions={
         <>
-          <button onClick={doExport} disabled={!slots.length} className="btn-ghost btn-sm">
-            Excel татах
+          <button
+            onClick={doExport}
+            disabled={!slots.length || exporting}
+            className="btn-ghost btn-sm"
+          >
+            {exporting ? "Бэлдэж байна…" : "Excel татах"}
           </button>
           <button onClick={() => setGenOpen(true)} className="btn-primary btn-sm">
             ⚡ Хуваарь зохиох

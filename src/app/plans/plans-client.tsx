@@ -118,7 +118,7 @@ export default function PlansClient({ profile }: { profile: Profile }) {
     setItems((v) => v.map((x) => (x.id === item.id ? { ...x, ...patch } : x)));
   }
 
-  function exportPlan() {
+  async function exportPlan() {
     if (!current) return;
     const rows: (string | number | null)[][] = [
       [`${PLAN_PERIOD_LABEL[current.period]} төлөвлөгөө — ${current.title}`],
@@ -140,7 +140,13 @@ export default function PlansClient({ profile }: { profile: Profile }) {
         i.note || "",
       ])
     );
-    exportRows(rows, `Төлөвлөгөө-${current.title}`, "Төлөвлөгөө", [5, 42, 18, 13, 30, 12, 14, 8, 26]);
+    try {
+      await exportRows(rows, `Төлөвлөгөө-${current.title}`, "Төлөвлөгөө",
+        [5, 42, 18, 13, 30, 12, 14, 8, 26]);
+      show("Excel файл татагдлаа");
+    } catch (e) {
+      show(e instanceof Error ? e.message : "Excel үүсгэхэд алдаа гарлаа", false);
+    }
   }
 
   const doneCount = currentItems.filter((i) => i.status === "done").length;

@@ -269,7 +269,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
     }
   }
 
-  function exportXlsx() {
+  async function exportXlsx() {
     // 1) Сонгосон ангийн матриц
     const head: (string | number | null)[] = ["№", "Сурагчийн нэр"];
     subjects.forEach((s) => head.push(s.name));
@@ -332,15 +332,19 @@ export default function GradesClient({ profile }: { profile: Profile }) {
       ]);
     }
 
-    exportSheets(
-      [
-        { name: "Ангийн матриц", rows: matrix, cols: [4, 24, ...subjects.map(() => 12), 10, 10] },
-        { name: "Сургуулийн нэгдсэн", rows: school, cols: [10, 13, ...subjects.map(() => 12), 14] },
-        { name: "Дүнгийн жагсаалт", rows: raw, cols: [10, 24, 22, 9, 8] },
-      ],
-      "Дүнгийн-матриц"
-    );
-    show("Excel файл татагдлаа");
+    try {
+      await exportSheets(
+        [
+          { name: "Ангийн матриц", rows: matrix, cols: [4, 24, ...subjects.map(() => 12), 10, 10] },
+          { name: "Сургуулийн нэгдсэн", rows: school, cols: [10, 13, ...subjects.map(() => 12), 14] },
+          { name: "Дүнгийн жагсаалт", rows: raw, cols: [10, 24, 22, 9, 8] },
+        ],
+        "Дүнгийн-матриц"
+      );
+      show("Excel файл татагдлаа");
+    } catch (e) {
+      show(e instanceof Error ? e.message : "Excel үүсгэхэд алдаа гарлаа", false);
+    }
   }
 
   const stats = useMemo(() => {

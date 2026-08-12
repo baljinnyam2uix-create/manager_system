@@ -85,7 +85,7 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
     load();
   }
 
-  function exportXlsx() {
+  async function exportXlsx() {
     const data: (string | number | null)[][] = [
       ["ХИЧЭЭЛД СУУСАН АЖИГЛАЛТЫН ТЭМДЭГЛЭЛ"],
       [profile.school_name || ""],
@@ -109,8 +109,13 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
         r.observer || "",
       ])
     );
-    exportRows(data, "Ажиглалтын-тэмдэглэл", "Ажиглалт",
-      [4, 20, 12, 18, 12, 14, 34, 40, 30, 30, 7, 18]);
+    try {
+      await exportRows(data, "Ажиглалтын-тэмдэглэл", "Ажиглалт",
+        [4, 20, 12, 18, 12, 14, 34, 40, 30, 30, 7, 18]);
+      show("Excel файл татагдлаа");
+    } catch (e) {
+      show(e instanceof Error ? e.message : "Excel үүсгэхэд алдаа гарлаа", false);
+    }
   }
 
   const avgScore = (() => {

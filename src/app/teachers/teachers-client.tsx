@@ -249,7 +249,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
     }
   }
 
-  function exportXlsx() {
+  async function exportXlsx() {
     const rows: (string | number | null)[][] = [
       [
         "№", "Овог", "Нэр", "РД", "Утас", "И-мэйл", "Гэрийн хаяг",
@@ -294,8 +294,13 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
         rooms.find((r) => r.id === t.main_room_id)?.name || "",
       ]);
     });
-    exportRows(rows, "Багшийн-бүртгэл", "Багш нар",
-      [4, 14, 14, 14, 12, 22, 26, 13, 9, 13, 22, 24, 34, 10, 12, 12, 14]);
+    try {
+      await exportRows(rows, "Багшийн-бүртгэл", "Багш нар",
+        [4, 14, 14, 14, 12, 22, 26, 13, 9, 13, 22, 24, 34, 10, 12, 12, 14]);
+      show("Excel файл татагдлаа");
+    } catch (e) {
+      show(e instanceof Error ? e.message : "Excel үүсгэхэд алдаа гарлаа", false);
+    }
   }
 
   const totalHours = teachers.reduce((s, t) => s + hoursOf(t.id), 0);

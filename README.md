@@ -42,7 +42,7 @@
 | Frontend | Next.js 15 (App Router), React 19, TypeScript |
 | Загвар | Tailwind CSS — GEOid логоны өнгөний систем |
 | Backend / DB | Supabase (PostgreSQL + Auth + Row Level Security) |
-| Excel | SheetJS (xlsx) |
+| Excel | ExcelJS (динамикаар ачаалагдана) |
 | Hosting | Vercel |
 
 ---
@@ -307,7 +307,7 @@ update profiles
 │   ├── lib/
 │   │   ├── scheduler.ts       Хуваарь зохиох алгоритм
 │   │   ├── payroll.ts         Цалингийн тооцоо
-│   │   ├── excel.ts           Excel импорт/экспорт
+│   │   ├── excel.ts           Excel импорт/экспорт (ExcelJS)
 │   │   ├── types.ts           Төрөл, тогтмол
 │   │   ├── guard.ts           Эрхийн шалгалт
 │   │   └── supabase/          Клиент, сервер, middleware
