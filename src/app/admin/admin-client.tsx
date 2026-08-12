@@ -66,14 +66,14 @@ export default function AdminClient({
       )}
 
       <div className="flex flex-wrap items-center gap-3">
-        <div className="flex gap-1 rounded-xl border border-[#e8e3dd] bg-white p-1">
+        <div className="flex gap-1 rounded-xl border border-[#dbe6ea] bg-white p-1">
           {TABS.map((t) => (
             <button
               key={t.key}
               onClick={() => setTab(t.key)}
               className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
                 tab === t.key
-                  ? "bg-lavender-500 text-white shadow-soft"
+                  ? "bg-geo-500 text-white shadow-soft"
                   : "text-ink-500 hover:bg-ink-50"
               }`}
             >
@@ -96,7 +96,7 @@ export default function AdminClient({
 
       <div className="table-wrap">
         <table className="w-full min-w-[900px]">
-          <thead className="border-b border-[#e8e3dd] bg-ink-50/50">
+          <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
             <tr>
               <th className="th">Хэрэглэгч</th>
               <th className="th">Сургууль</th>
@@ -107,7 +107,7 @@ export default function AdminClient({
               <th className="th text-right">Үйлдэл</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#f1ece6]">
+          <tbody className="divide-y divide-[#e9f0f2]">
             {filtered.length === 0 && (
               <tr>
                 <td colSpan={7} className="td py-12 text-center text-ink-400">
@@ -121,7 +121,7 @@ export default function AdminClient({
                   <div className="font-semibold text-ink-900">
                     {p.last_name} {p.first_name}
                     {p.id === meId && (
-                      <span className="badge ml-2 bg-lavender-100 text-lavender-700">
+                      <span className="badge ml-2 bg-geo-100 text-geo-700">
                         Та
                       </span>
                     )}
@@ -140,7 +140,7 @@ export default function AdminClient({
                         "Эрх шинэчлэгдлээ"
                       )
                     }
-                    className="rounded-lg border border-[#e8e3dd] bg-white px-2 py-1 text-xs font-semibold disabled:opacity-50"
+                    className="rounded-lg border border-[#dbe6ea] bg-white px-2 py-1 text-xs font-semibold disabled:opacity-50"
                   >
                     <option value="manager">Менежер</option>
                     <option value="admin">Админ</option>
@@ -175,7 +175,7 @@ export default function AdminClient({
                           setRejectFor(p);
                           setReason("");
                         }}
-                        className="btn btn-sm bg-sand-100 text-sand-800 hover:bg-sand-200"
+                        className="btn btn-sm bg-amber-100 text-amber-800 hover:bg-amber-200"
                       >
                         Татгалзах
                       </button>
@@ -207,7 +207,7 @@ export default function AdminClient({
       {/* Татгалзах шалтгаан */}
       {rejectFor && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-ink-900/40 p-5 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-2xl border border-[#e8e3dd] bg-white p-6 shadow-lift">
+          <div className="w-full max-w-md rounded-2xl border border-[#dbe6ea] bg-white p-6 shadow-lift">
             <h3 className="text-lg font-bold text-ink-900">
               Бүртгэлийг татгалзах
             </h3>
@@ -252,7 +252,7 @@ export default function AdminClient({
 
 function StatusBadge({ s }: { s: ApprovalStatus }) {
   const map = {
-    pending: ["bg-sand-100 text-sand-800", "Хүлээгдэж буй"],
+    pending: ["bg-amber-100 text-amber-800", "Хүлээгдэж буй"],
     approved: ["bg-aqua-100 text-aqua-800", "Батлагдсан"],
     rejected: ["bg-red-100 text-red-700", "Татгалзсан"],
   } as const;

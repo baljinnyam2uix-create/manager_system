@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
+import { LogoMark } from "@/components/logo";
 
 type Aph = { text: string; author: string | null };
 
@@ -12,7 +13,7 @@ const FEATURES = [
     icon: "🗓️",
     title: "Хичээлийн хуваарь",
     desc: "Багш, кабинет давхцахгүй, 7 хоногийн цаг яг таарсан хуваарийг автоматаар зохионо. Багшаар, ангиар, нэгдсэн харагдац.",
-    tint: "from-lavender-500/12 to-lavender-500/0",
+    tint: "from-geo-500/12 to-geo-500/0",
   },
   {
     icon: "✅",
@@ -24,31 +25,31 @@ const FEATURES = [
     icon: "📋",
     title: "Менежерийн төлөвлөгөө",
     desc: "Жил, улирал, сар, 7 хоногийн төлөвлөгөөг зорилго, хугацаа, хариуцагч, шалгуур үзүүлэлттэйгээр боловсруулна.",
-    tint: "from-mocha-500/12 to-mocha-500/0",
+    tint: "from-sun-500/12 to-sun-500/0",
   },
   {
     icon: "💰",
     title: "Цагийн тооцоо, цалин",
     desc: "Хичээл заасан, орлон заасан, илүү цаг, СХА, анги даалт, зэрэг, ур чадварын нэмэгдлээр цалинг бодно.",
-    tint: "from-sand-500/12 to-sand-500/0",
+    tint: "from-amber-500/12 to-amber-500/0",
   },
   {
     icon: "👩‍🏫",
     title: "Багшийн бүртгэл",
     desc: "Овог нэр, РД, утас, хаяг, ажилласан жил, судлагдахуун, ордог анги, долоо хоногийн цаг, анги даалт.",
-    tint: "from-lavender-500/12 to-aqua-500/0",
+    tint: "from-geo-500/12 to-aqua-500/0",
   },
   {
     icon: "🔍",
     title: "Ажиглалтын тэмдэглэл",
     desc: "Хичээлд суусан тэмдэглэл: багш, анги, цаг, сэдэв, ажиглалт, давуу тал, зөвлөмж.",
-    tint: "from-aqua-500/12 to-mocha-500/0",
+    tint: "from-aqua-500/12 to-sun-500/0",
   },
   {
     icon: "📊",
     title: "Дүнгийн матриц",
     desc: "Сургуулийн хэмжээний дүнгийн нэгдсэн матриц: анги, сурагч, судлагдахуун, улирлаар шүүж дүгнэнэ.",
-    tint: "from-mocha-500/12 to-sand-500/0",
+    tint: "from-sun-500/12 to-amber-500/0",
   },
   {
     icon: "🛡️",
@@ -112,20 +113,19 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
   const aph = aphorisms[idx] || aphorisms[0];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#faf9f7]">
+    <div className="relative min-h-screen overflow-hidden bg-[#f6fafb]">
       {/* Дэвсгэрийн гялбаа */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-40 -top-40 h-[36rem] w-[36rem] rounded-full bg-lavender-400/25 blur-3xl animate-float" />
+        <div className="absolute -left-40 -top-40 h-[36rem] w-[36rem] rounded-full bg-geo-400/25 blur-3xl animate-float" />
         <div className="absolute -right-32 top-24 h-[30rem] w-[30rem] rounded-full bg-aqua-300/25 blur-3xl animate-float [animation-delay:2s]" />
-        <div className="absolute bottom-[-12rem] left-1/3 h-[32rem] w-[32rem] rounded-full bg-mocha-300/30 blur-3xl animate-float [animation-delay:4s]" />
+        <div className="absolute bottom-[-12rem] left-1/3 h-[32rem] w-[32rem] rounded-full bg-amber-300/25 blur-3xl animate-float [animation-delay:4s]" />
+        <div className="absolute -bottom-24 right-10 h-[24rem] w-[24rem] rounded-full bg-sun-300/20 blur-3xl animate-float [animation-delay:6s]" />
       </div>
 
       {/* ---------------- Толгой ---------------- */}
       <header className="mx-auto flex max-w-7xl items-center justify-between px-5 py-6">
         <div className="flex items-center gap-3">
-          <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-lavender-500 via-lavender-600 to-mocha-500 text-lg font-black text-white shadow-lift">
-            СМ
-          </div>
+          <LogoMark size={46} />
           <div className="leading-tight">
             <div className="text-[15px] font-extrabold tracking-tight text-ink-900">
               Сургалтын менежер
@@ -145,13 +145,13 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
         <div className="grid items-start gap-10 lg:grid-cols-[1.15fr_.85fr]">
           {/* Зүүн — тайлбар */}
           <div className="animate-fade-up pt-6">
-            <span className="badge bg-lavender-100 text-lavender-700">
+            <span className="badge bg-geo-100 text-geo-700">
               2025–2026 оны хичээлийн жил
             </span>
 
             <h1 className="mt-5 text-4xl font-black leading-[1.1] tracking-tight text-ink-900 sm:text-5xl lg:text-[3.4rem]">
               Сургуулийн сургалтын
-              <span className="block bg-gradient-to-r from-lavender-600 via-lavender-500 to-mocha-500 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-geo-600 via-aqua-500 to-sun-500 bg-clip-text text-transparent">
                 удирдлагыг нэг дороос
               </span>
             </h1>
@@ -164,9 +164,9 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
 
             {/* Афоризм */}
             <div className="relative mt-8 max-w-xl overflow-hidden rounded-3xl border border-white/70 bg-white/70 p-6 shadow-soft backdrop-blur-xl">
-              <div className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-lavender-500 via-aqua-400 to-mocha-400" />
+              <div className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-geo-500 via-aqua-400 to-sun-400" />
               <div className="pl-3">
-                <div className="mb-2 text-2xl leading-none text-lavender-400">❝</div>
+                <div className="mb-2 text-2xl leading-none text-geo-400">❝</div>
                 <p
                   key={idx}
                   className="animate-fade-up text-[17px] font-semibold leading-relaxed text-ink-800"
@@ -187,7 +187,7 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
                         onClick={() => setIdx(i)}
                         className={`h-1.5 rounded-full transition-all ${
                           i === idx
-                            ? "w-6 bg-lavender-500"
+                            ? "w-6 bg-geo-500"
                             : "w-1.5 bg-ink-200 hover:bg-ink-300"
                         }`}
                       />
@@ -329,7 +329,7 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
         </section>
       </main>
 
-      <footer className="border-t border-[#e8e3dd] bg-white/50 py-6 backdrop-blur">
+      <footer className="border-t border-[#dbe6ea] bg-white/50 py-6 backdrop-blur">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 text-xs text-ink-400 sm:flex-row">
           <span>© {new Date().getFullYear()} Сургалтын менежерийн систем</span>
           <span>Next.js · Supabase · Vercel</span>

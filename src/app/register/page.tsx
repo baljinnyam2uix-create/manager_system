@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { LogoMark } from "@/components/logo";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -158,7 +159,7 @@ export default function RegisterPage() {
 
         <p className="text-center text-sm text-ink-400">
           Бүртгэлтэй юу?{" "}
-          <Link href="/" className="font-semibold text-lavender-600 hover:underline">
+          <Link href="/" className="font-semibold text-geo-600 hover:underline">
             Нэвтрэх
           </Link>
         </p>
@@ -169,16 +170,14 @@ export default function RegisterPage() {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative grid min-h-screen place-items-center overflow-hidden bg-[#faf9f7] px-5 py-12">
+    <div className="relative grid min-h-screen place-items-center overflow-hidden bg-[#f6fafb] px-5 py-12">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-32 top-0 h-[30rem] w-[30rem] rounded-full bg-lavender-400/25 blur-3xl" />
-        <div className="absolute -right-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-mocha-300/30 blur-3xl" />
+        <div className="absolute -left-32 top-0 h-[30rem] w-[30rem] rounded-full bg-geo-400/25 blur-3xl" />
+        <div className="absolute -right-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-sun-300/30 blur-3xl" />
       </div>
       <div className="w-full max-w-lg">
         <Link href="/" className="mb-6 flex items-center justify-center gap-3">
-          <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-lavender-500 via-lavender-600 to-mocha-500 text-lg font-black text-white shadow-lift">
-            СМ
-          </div>
+          <LogoMark size={46} />
           <span className="text-[15px] font-extrabold tracking-tight text-ink-900">
             Сургалтын менежер
           </span>

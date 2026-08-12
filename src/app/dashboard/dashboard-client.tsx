@@ -57,7 +57,7 @@ export default function DashboardClient({
     >
       <div className="space-y-6">
         {/* Мэндчилгээ */}
-        <div className="relative overflow-hidden rounded-2xl border border-[#e8e3dd] bg-gradient-to-br from-lavender-500 via-lavender-600 to-mocha-500 p-7 text-white shadow-lift">
+        <div className="brand-gradient relative overflow-hidden rounded-2xl border border-[#dbe6ea] p-7 text-white shadow-lift">
           <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-white/10" />
           <div className="pointer-events-none absolute -bottom-20 right-24 h-44 w-44 rounded-full bg-white/10" />
           <div className="relative">
@@ -77,11 +77,11 @@ export default function DashboardClient({
 
         {/* Тохиргоо шаардлагатай */}
         {setupNeeded && (
-          <div className="rounded-2xl border border-sand-300 bg-sand-50 p-5">
-            <h3 className="text-sm font-bold text-sand-900">
+          <div className="rounded-2xl border border-amber-300 bg-amber-50 p-5">
+            <h3 className="text-sm font-bold text-amber-900">
               🚀 Системийг ашиглаж эхлэхийн тулд
             </h3>
-            <ol className="mt-3 space-y-2 text-[13px] text-sand-900">
+            <ol className="mt-3 space-y-2 text-[13px] text-amber-900">
               <Step done={stats.subjects > 0} n={1}>
                 <Link href="/settings" className="font-semibold underline">
                   Тохиргоо
@@ -106,10 +106,10 @@ export default function DashboardClient({
 
         {/* Үзүүлэлтүүд */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard label="Багш" value={stats.teachers} sub={`${stats.homeroom} анги даасан`} icon="👩‍🏫" tone="lavender" />
+          <StatCard label="Багш" value={stats.teachers} sub={`${stats.homeroom} анги даасан`} icon="👩‍🏫" tone="geo" />
           <StatCard label="Анги" value={stats.classes} sub={`${stats.students} сурагч`} icon="🏫" tone="aqua" />
-          <StatCard label="Хуваарийн цаг" value={stats.slots} sub="7 хоногт" icon="🗓️" tone="mocha" />
-          <StatCard label="Судлагдахуун" value={stats.subjects} icon="📚" tone="sand" />
+          <StatCard label="Хуваарийн цаг" value={stats.slots} sub="7 хоногт" icon="🗓️" tone="sun" />
+          <StatCard label="Судлагдахуун" value={stats.subjects} icon="📚" tone="amber" />
         </div>
 
         <div className="grid gap-5 lg:grid-cols-3">
@@ -117,14 +117,14 @@ export default function DashboardClient({
           <div className="card-pad">
             <h3 className="text-sm font-bold text-ink-800">Төлөвлөгөөний явц</h3>
             <div className="mt-4 flex items-end gap-2">
-              <span className="text-4xl font-black text-lavender-600">
+              <span className="text-4xl font-black text-geo-600">
                 {stats.planProgress}%
               </span>
               <span className="pb-1.5 text-xs text-ink-400">дундаж гүйцэтгэл</span>
             </div>
             <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-ink-100">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-lavender-500 to-aqua-400 transition-all"
+                className="h-full rounded-full bg-gradient-to-r from-geo-500 to-aqua-400 transition-all"
                 style={{ width: `${stats.planProgress}%` }}
               />
             </div>
@@ -145,7 +145,7 @@ export default function DashboardClient({
             </div>
             <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-ink-100">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-aqua-500 to-lavender-400 transition-all"
+                className="h-full rounded-full bg-gradient-to-r from-aqua-500 to-geo-400 transition-all"
                 style={{ width: `${stats.perfScore}%` }}
               />
             </div>
@@ -192,10 +192,10 @@ export default function DashboardClient({
               <Link
                 key={q.href}
                 href={q.href}
-                className="group rounded-2xl border border-[#e8e3dd] bg-white p-4 shadow-soft transition-all hover:-translate-y-0.5 hover:border-lavender-200 hover:shadow-lift"
+                className="group rounded-2xl border border-[#dbe6ea] bg-white p-4 shadow-soft transition-all hover:-translate-y-0.5 hover:border-geo-200 hover:shadow-lift"
               >
                 <div className="mb-2 text-xl">{q.icon}</div>
-                <div className="text-[13px] font-bold text-ink-900 group-hover:text-lavender-600">
+                <div className="text-[13px] font-bold text-ink-900 group-hover:text-geo-600">
                   {q.label}
                 </div>
                 <div className="text-[11px] text-ink-400">{q.desc}</div>
@@ -221,7 +221,7 @@ function Step({
     <li className="flex items-start gap-3">
       <span
         className={`grid h-5 w-5 shrink-0 place-items-center rounded-full text-[10px] font-black ${
-          done ? "bg-aqua-500 text-white" : "bg-sand-300 text-sand-900"
+          done ? "bg-aqua-500 text-white" : "bg-amber-300 text-amber-900"
         }`}
       >
         {done ? "✓" : n}

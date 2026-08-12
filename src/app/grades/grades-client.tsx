@@ -22,9 +22,9 @@ function letterOf(score: number | null | undefined) {
 function scoreColor(score: number | null | undefined) {
   if (score == null) return "";
   if (score >= 90) return "bg-aqua-100 text-aqua-800";
-  if (score >= 80) return "bg-lavender-100 text-lavender-700";
-  if (score >= 70) return "bg-sand-100 text-sand-800";
-  if (score >= 60) return "bg-mocha-100 text-mocha-800";
+  if (score >= 80) return "bg-geo-100 text-geo-700";
+  if (score >= 70) return "bg-amber-100 text-amber-800";
+  if (score >= 60) return "bg-sun-100 text-sun-800";
   return "bg-red-100 text-red-700";
 }
 
@@ -394,10 +394,10 @@ export default function GradesClient({ profile }: { profile: Profile }) {
       ) : (
         <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Бүртгэсэн дүн" value={stats.total} icon="📊" tone="lavender" />
+            <StatCard label="Бүртгэсэн дүн" value={stats.total} icon="📊" tone="geo" />
             <StatCard label="Дундаж оноо" value={stats.avg || "—"} icon="📈" tone="aqua" />
-            <StatCard label="Чанарын хувь" value={`${stats.quality}%`} sub="80-аас дээш" icon="⭐" tone="mocha" />
-            <StatCard label="Амжилтгүй" value={stats.fails} sub="60-аас доош" icon="⚠️" tone="sand" />
+            <StatCard label="Чанарын хувь" value={`${stats.quality}%`} sub="80-аас дээш" icon="⭐" tone="sun" />
+            <StatCard label="Амжилтгүй" value={stats.fails} sub="60-аас доош" icon="⚠️" tone="amber" />
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -407,7 +407,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
               ))}
             </select>
 
-            <div className="flex gap-1 rounded-xl border border-[#e8e3dd] bg-white p-1">
+            <div className="flex gap-1 rounded-xl border border-[#dbe6ea] bg-white p-1">
               {QUARTERS.map((q) => (
                 <button
                   key={q}
@@ -417,7 +417,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                     setQuarter(q);
                   }}
                   className={`rounded-lg px-3.5 py-1.5 text-xs font-bold transition ${
-                    quarter === q ? "bg-lavender-500 text-white shadow-soft" : "text-ink-500 hover:bg-ink-50"
+                    quarter === q ? "bg-geo-500 text-white shadow-soft" : "text-ink-500 hover:bg-ink-50"
                   }`}
                 >
                   {q}-р улирал
@@ -449,13 +449,13 @@ export default function GradesClient({ profile }: { profile: Profile }) {
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-ink-50/60">
-                    <th className="sticky left-0 z-10 border-b border-r border-[#e8e3dd] bg-ink-50 px-3 py-2 text-left text-[11px] font-bold uppercase text-ink-500">
+                    <th className="sticky left-0 z-10 border-b border-r border-[#dbe6ea] bg-ink-50 px-3 py-2 text-left text-[11px] font-bold uppercase text-ink-500">
                       Сурагч
                     </th>
                     {subjects.map((s) => (
                       <th
                         key={s.id}
-                        className="border-b border-[#e8e3dd] px-1 py-2 text-center text-[10px] font-bold text-ink-500"
+                        className="border-b border-[#dbe6ea] px-1 py-2 text-center text-[10px] font-bold text-ink-500"
                         title={s.name}
                       >
                         <div
@@ -465,12 +465,12 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                         <span className="block max-w-[64px] truncate">{s.name}</span>
                       </th>
                     ))}
-                    <th className="border-b border-l border-[#e8e3dd] px-2 py-2 text-center text-[10px] font-bold text-ink-500">
+                    <th className="border-b border-l border-[#dbe6ea] px-2 py-2 text-center text-[10px] font-bold text-ink-500">
                       Дундаж
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#f1ece6]">
+                <tbody className="divide-y divide-[#e9f0f2]">
                   {classStudents.map((st, i) => {
                     const vals = subjects
                       .map((s) => valueOf(st.id, s.id))
@@ -479,8 +479,8 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                       ? Math.round((vals.reduce((a, b) => a + b, 0) / vals.length) * 10) / 10
                       : null;
                     return (
-                      <tr key={st.id} className="hover:bg-lavender-50/30">
-                        <td className="sticky left-0 z-10 border-r border-[#e8e3dd] bg-white px-3 py-1.5">
+                      <tr key={st.id} className="hover:bg-geo-50/30">
+                        <td className="sticky left-0 z-10 border-r border-[#dbe6ea] bg-white px-3 py-1.5">
                           <div className="flex items-center gap-2">
                             <span className="text-[10px] text-ink-300">{i + 1}</span>
                             <div className="min-w-0">
@@ -491,7 +491,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                             </div>
                             <button
                               onClick={() => setStuModal(st)}
-                              className="ml-auto text-[10px] text-ink-300 hover:text-lavender-600"
+                              className="ml-auto text-[10px] text-ink-300 hover:text-geo-600"
                             >
                               ✎
                             </button>
@@ -508,18 +508,18 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                                 max={100}
                                 value={v ?? ""}
                                 onChange={(e) => setCell(st.id, s.id, e.target.value)}
-                                className={`h-8 w-14 rounded-md border text-center text-xs font-bold outline-none transition focus:ring-2 focus:ring-lavender-200 ${
+                                className={`h-8 w-14 rounded-md border text-center text-xs font-bold outline-none transition focus:ring-2 focus:ring-geo-200 ${
                                   dirty.has(k)
-                                    ? "border-lavender-400 bg-lavender-50"
+                                    ? "border-geo-400 bg-geo-50"
                                     : v != null
                                       ? `border-transparent ${scoreColor(v)}`
-                                      : "border-[#eee8e1] bg-white"
+                                      : "border-[#e2edf0] bg-white"
                                 }`}
                               />
                             </td>
                           );
                         })}
-                        <td className="border-l border-[#e8e3dd] px-2 py-1.5 text-center">
+                        <td className="border-l border-[#dbe6ea] px-2 py-1.5 text-center">
                           {avg != null && (
                             <span className={`badge ${scoreColor(avg)}`}>
                               {avg} · {letterOf(avg)}
@@ -530,9 +530,9 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                     );
                   })}
                 </tbody>
-                <tfoot className="border-t-2 border-[#ddd6cd] bg-ink-50/60">
+                <tfoot className="border-t-2 border-[#c9dbe0] bg-ink-50/60">
                   <tr>
-                    <td className="sticky left-0 z-10 border-r border-[#e8e3dd] bg-ink-50 px-3 py-2 text-[11px] font-black text-ink-700">
+                    <td className="sticky left-0 z-10 border-r border-[#dbe6ea] bg-ink-50 px-3 py-2 text-[11px] font-black text-ink-700">
                       Хичээлийн дундаж
                     </td>
                     {subjects.map((s) => {
@@ -548,7 +548,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                         </td>
                       );
                     })}
-                    <td className="border-l border-[#e8e3dd]" />
+                    <td className="border-l border-[#dbe6ea]" />
                   </tr>
                 </tfoot>
               </table>
@@ -571,7 +571,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
             />
             <div className="table-wrap">
               <table className="w-full min-w-[600px]">
-                <thead className="border-b border-[#e8e3dd] bg-ink-50/50">
+                <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
                   <tr>
                     <th className="th">Анги</th>
                     <th className="th text-center">Сурагч</th>
@@ -581,7 +581,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                     <th className="th text-center">Амжилт</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#f1ece6]">
+                <tbody className="divide-y divide-[#e9f0f2]">
                   {classes.map((c) => {
                     const sts = students.filter((s) => s.class_id === c.id);
                     const gs = grades.filter(
@@ -600,7 +600,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                     return (
                       <tr
                         key={c.id}
-                        className={`cursor-pointer hover:bg-ink-50/40 ${c.id === selClass ? "bg-lavender-50/50" : ""}`}
+                        className={`cursor-pointer hover:bg-ink-50/40 ${c.id === selClass ? "bg-geo-50/50" : ""}`}
                         onClick={() => setSelClass(c.id)}
                       >
                         <td className="td font-semibold">{c.name}</td>

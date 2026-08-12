@@ -155,16 +155,16 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
       ) : (
         <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Нийт тэмдэглэл" value={rows.length} icon="🔍" tone="lavender" />
+            <StatCard label="Нийт тэмдэглэл" value={rows.length} icon="🔍" tone="geo" />
             <StatCard label="Энэ сард" value={thisMonth} icon="📅" tone="aqua" />
             <StatCard
               label="Хамрагдсан багш"
               value={new Set(rows.map((r) => r.teacher_id)).size}
               sub={`нийт ${teachers.length}`}
               icon="👩‍🏫"
-              tone="mocha"
+              tone="sun"
             />
-            <StatCard label="Дундаж оноо" value={avgScore || "—"} icon="⭐" tone="sand" />
+            <StatCard label="Дундаж оноо" value={avgScore || "—"} icon="⭐" tone="amber" />
           </div>
 
           <div className="flex flex-wrap gap-3">
@@ -208,7 +208,7 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
           ) : (
             <div className="table-wrap">
               <table className="w-full min-w-[900px]">
-                <thead className="border-b border-[#e8e3dd] bg-ink-50/50">
+                <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
                   <tr>
                     <th className="th">Огноо</th>
                     <th className="th">Багшийн нэр</th>
@@ -220,7 +220,7 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
                     <th className="th text-right">Үйлдэл</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#f1ece6]">
+                <tbody className="divide-y divide-[#e9f0f2]">
                   {filtered.map((r) => (
                     <tr
                       key={r.id}
@@ -232,7 +232,7 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
                       </td>
                       <td className="td font-semibold">{tName(r.teacher_id)}</td>
                       <td className="td">
-                        <span className="badge bg-lavender-100 text-lavender-700">
+                        <span className="badge bg-geo-100 text-geo-700">
                           {cName(r.class_id)}
                         </span>
                         <div className="mt-0.5 text-[11px] text-ink-400">
@@ -446,7 +446,7 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
           <div className="space-y-4 text-sm">
             <Block title="Тэмдэглэл" text={view.note} />
             <Block title="Давуу тал" text={view.strengths} tone="aqua" />
-            <Block title="Зөвлөмж" text={view.suggestions} tone="sand" />
+            <Block title="Зөвлөмж" text={view.suggestions} tone="amber" />
             <div className="flex flex-wrap gap-4 rounded-xl bg-ink-50 p-4 text-xs">
               <span>
                 <b className="text-ink-500">Цаг:</b>{" "}
@@ -473,13 +473,13 @@ function Block({
 }: {
   title: string;
   text: string | null;
-  tone?: "ink" | "aqua" | "sand";
+  tone?: "ink" | "aqua" | "amber";
 }) {
   if (!text) return null;
   const tones = {
-    ink: "border-[#e8e3dd] bg-white",
+    ink: "border-[#dbe6ea] bg-white",
     aqua: "border-aqua-200 bg-aqua-50",
-    sand: "border-sand-200 bg-sand-50",
+    amber: "border-amber-200 bg-amber-50",
   };
   return (
     <div className={`rounded-xl border p-4 ${tones[tone]}`}>

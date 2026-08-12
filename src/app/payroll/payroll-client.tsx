@@ -275,10 +275,10 @@ export default function PayrollClient({ profile }: { profile: Profile }) {
       ) : (
         <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Нийт цалин" value={money(totals.gross)} icon="💰" tone="lavender" />
+            <StatCard label="Нийт цалин" value={money(totals.gross)} icon="💰" tone="geo" />
             <StatCard label="НДШ" value={money(totals.ndsh)} icon="🏥" tone="aqua" />
-            <StatCard label="ХХОАТ" value={money(totals.hhoat)} icon="🧾" tone="sand" />
-            <StatCard label="Гарт олгох" value={money(totals.net)} icon="✅" tone="mocha" />
+            <StatCard label="ХХОАТ" value={money(totals.hhoat)} icon="🧾" tone="amber" />
+            <StatCard label="Гарт олгох" value={money(totals.net)} icon="✅" tone="sun" />
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -289,8 +289,8 @@ export default function PayrollClient({ profile }: { profile: Profile }) {
                 onClick={() => setSelMonth(m)}
                 className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
                   selMonth === m
-                    ? "bg-lavender-500 text-white shadow-soft"
-                    : "border border-[#e8e3dd] bg-white text-ink-500 hover:bg-ink-50"
+                    ? "bg-geo-500 text-white shadow-soft"
+                    : "border border-[#dbe6ea] bg-white text-ink-500 hover:bg-ink-50"
                 }`}
               >
                 {MONTH_ROMAN[m]}
@@ -299,13 +299,13 @@ export default function PayrollClient({ profile }: { profile: Profile }) {
           </div>
 
           {teachers.length === 0 ? (
-            <p className="rounded-2xl border border-dashed border-[#ddd6cd] bg-white/60 px-6 py-14 text-center text-sm text-ink-400">
+            <p className="rounded-2xl border border-dashed border-[#c9dbe0] bg-white/60 px-6 py-14 text-center text-sm text-ink-400">
               Багш бүртгэгдээгүй байна. Багшийн бүртгэл хэсгээс нэмнэ үү.
             </p>
           ) : (
             <div className="table-wrap">
               <table className="w-full min-w-[1100px]">
-                <thead className="border-b border-[#e8e3dd] bg-ink-50/50">
+                <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
                   <tr>
                     <th className="th">Багш</th>
                     <th className="th text-center">Заасан цаг</th>
@@ -319,7 +319,7 @@ export default function PayrollClient({ profile }: { profile: Profile }) {
                     <th className="th text-right">Үйлдэл</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#f1ece6]">
+                <tbody className="divide-y divide-[#e9f0f2]">
                   {teachers.map((t) => {
                     const r = results.get(t.id)!;
                     const m = rowOf(t.id, selMonth);
@@ -361,7 +361,7 @@ export default function PayrollClient({ profile }: { profile: Profile }) {
                     );
                   })}
                 </tbody>
-                <tfoot className="border-t-2 border-[#ddd6cd] bg-ink-50/60">
+                <tfoot className="border-t-2 border-[#c9dbe0] bg-ink-50/60">
                   <tr>
                     <td className="td font-black">НИЙТ ({teachers.length} багш)</td>
                     <td colSpan={5} />
@@ -475,7 +475,7 @@ export default function PayrollClient({ profile }: { profile: Profile }) {
                 key={i}
                 className={`flex items-center justify-between gap-4 rounded-lg px-3 py-2 text-sm ${
                   l.kind === "info"
-                    ? "bg-lavender-50 font-black text-lavender-800"
+                    ? "bg-geo-50 font-black text-geo-800"
                     : l.kind === "sub"
                       ? "text-red-600"
                       : "text-ink-700"

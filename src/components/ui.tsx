@@ -42,11 +42,11 @@ export function Modal({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`mx-auto rounded-2xl border border-[#e8e3dd] bg-white shadow-lift ${
+        className={`mx-auto rounded-2xl border border-[#dbe6ea] bg-white shadow-lift ${
           wide ? "max-w-4xl" : "max-w-lg"
         }`}
       >
-        <div className="flex items-start justify-between gap-4 border-b border-[#e8e3dd] px-6 py-4">
+        <div className="flex items-start justify-between gap-4 border-b border-[#dbe6ea] px-6 py-4">
           <div>
             <h3 className="text-base font-extrabold text-ink-900">{title}</h3>
             {subtitle && <p className="mt-0.5 text-xs text-ink-400">{subtitle}</p>}
@@ -61,7 +61,7 @@ export function Modal({
         </div>
         <div className="max-h-[70vh] overflow-y-auto px-6 py-5">{children}</div>
         {footer && (
-          <div className="flex justify-end gap-2 border-t border-[#e8e3dd] px-6 py-4">
+          <div className="flex justify-end gap-2 border-t border-[#dbe6ea] px-6 py-4">
             {footer}
           </div>
         )}
@@ -108,7 +108,7 @@ export function Empty({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="grid place-items-center rounded-2xl border border-dashed border-[#ddd6cd] bg-white/60 px-6 py-16 text-center">
+    <div className="grid place-items-center rounded-2xl border border-dashed border-[#c9dbe0] bg-white/60 px-6 py-16 text-center">
       <div className="mb-3 text-4xl opacity-60">{icon}</div>
       <h3 className="text-base font-bold text-ink-800">{title}</h3>
       {desc && <p className="mt-1.5 max-w-sm text-sm text-ink-400">{desc}</p>}
@@ -124,25 +124,26 @@ export function StatCard({
   label,
   value,
   sub,
-  tone = "lavender",
+  tone = "geo",
   icon,
 }: {
   label: string;
   value: string | number;
   sub?: string;
-  tone?: "lavender" | "aqua" | "mocha" | "sand" | "ink";
+  /** Логоны өнгөнүүд: geo=цэнхэр, aqua=номин, sun=улбар шар, amber=алт, ink=саарал */
+  tone?: "geo" | "aqua" | "sun" | "amber" | "ink";
   icon?: string;
 }) {
   const tones: Record<string, string> = {
-    lavender: "from-lavender-100 to-lavender-50 text-lavender-800",
+    geo: "from-geo-100 to-geo-50 text-geo-800",
     aqua: "from-aqua-100 to-aqua-50 text-aqua-800",
-    mocha: "from-mocha-100 to-mocha-50 text-mocha-800",
-    sand: "from-sand-100 to-sand-50 text-sand-800",
+    sun: "from-sun-100 to-sun-50 text-sun-800",
+    amber: "from-amber-100 to-amber-50 text-amber-800",
     ink: "from-ink-100 to-ink-50 text-ink-800",
   };
   return (
     <div
-      className={`rounded-2xl border border-[#e8e3dd] bg-gradient-to-br ${tones[tone]} p-5 shadow-soft`}
+      className={`rounded-2xl border border-[#dbe6ea] bg-gradient-to-br ${tones[tone]} p-5 shadow-soft`}
     >
       <div className="flex items-start justify-between">
         <div>
@@ -190,7 +191,7 @@ export function useToast() {
 export function Loading({ text = "Ачаалж байна…" }: { text?: string }) {
   return (
     <div className="grid place-items-center py-20 text-sm font-medium text-ink-400">
-      <div className="mb-3 h-8 w-8 animate-spin rounded-full border-[3px] border-lavender-200 border-t-lavender-500" />
+      <div className="mb-3 h-8 w-8 animate-spin rounded-full border-[3px] border-geo-200 border-t-geo-500" />
       {text}
     </div>
   );

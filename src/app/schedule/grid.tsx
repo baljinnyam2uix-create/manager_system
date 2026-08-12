@@ -31,7 +31,7 @@ function useMaps(ctx: GridCtx) {
 
 /** Сонгон судлах хичээлийг тод шар/улбар өнгөөр ялгана */
 const ELECTIVE_STYLE =
-  "bg-gradient-to-br from-sand-200 to-sand-100 ring-2 ring-sand-400 text-sand-900";
+  "bg-gradient-to-br from-amber-200 to-amber-100 ring-2 ring-amber-400 text-amber-900";
 
 // ====================================================================
 // БАГШИЙН ХУВААРЬ
@@ -66,9 +66,9 @@ export function TeacherGrid({
               <table className="w-full min-w-[720px] border-collapse">
                 <thead>
                   <tr className="bg-ink-50/60">
-                    <th className="th w-24 border-b border-r border-[#e8e3dd]">Цаг</th>
+                    <th className="th w-24 border-b border-r border-[#dbe6ea]">Цаг</th>
                     {DAYS.slice(0, st.days_per_week).map((d) => (
-                      <th key={d} className="th border-b border-[#e8e3dd] text-center">
+                      <th key={d} className="th border-b border-[#dbe6ea] text-center">
                         {d}
                       </th>
                     ))}
@@ -80,7 +80,7 @@ export function TeacherGrid({
                     const t = times[pi];
                     return (
                       <tr key={period}>
-                        <td className="border-b border-r border-[#f1ece6] bg-ink-50/40 px-3 py-2 text-center">
+                        <td className="border-b border-r border-[#e9f0f2] bg-ink-50/40 px-3 py-2 text-center">
                           <div className="text-sm font-black text-ink-700">
                             {ROMAN[pi]}
                           </div>
@@ -100,8 +100,8 @@ export function TeacherGrid({
                             <td
                               key={day}
                               onClick={() => onCellClick?.(day, period, st.shift)}
-                              className={`border-b border-r border-[#f1ece6] p-1.5 align-top ${
-                                onCellClick ? "cursor-pointer hover:bg-lavender-50" : ""
+                              className={`border-b border-r border-[#e9f0f2] p-1.5 align-top ${
+                                onCellClick ? "cursor-pointer hover:bg-geo-50" : ""
                               }`}
                             >
                               <div className="flex flex-col gap-1">
@@ -118,7 +118,7 @@ export function TeacherGrid({
                                       style={
                                         s.is_elective
                                           ? undefined
-                                          : { backgroundColor: subj?.color || "#8257fb" }
+                                          : { backgroundColor: subj?.color || "#1b9ad6" }
                                       }
                                     >
                                       <div className="font-bold">
@@ -178,9 +178,9 @@ export function ClassGrid({
       <table className="w-full min-w-[720px] border-collapse">
         <thead>
           <tr className="bg-ink-50/60">
-            <th className="th w-24 border-b border-r border-[#e8e3dd]">Цаг</th>
+            <th className="th w-24 border-b border-r border-[#dbe6ea]">Цаг</th>
             {DAYS.slice(0, st.days_per_week).map((d) => (
-              <th key={d} className="th border-b border-[#e8e3dd] text-center">
+              <th key={d} className="th border-b border-[#dbe6ea] text-center">
                 {d}
               </th>
             ))}
@@ -192,7 +192,7 @@ export function ClassGrid({
             const t = times[pi];
             return (
               <tr key={period}>
-                <td className="border-b border-r border-[#f1ece6] bg-ink-50/40 px-3 py-2 text-center">
+                <td className="border-b border-r border-[#e9f0f2] bg-ink-50/40 px-3 py-2 text-center">
                   <div className="text-sm font-black text-ink-700">{ROMAN[pi]}</div>
                   <div className="text-[10px] text-ink-400">
                     {t?.start}–{t?.end}
@@ -207,8 +207,8 @@ export function ClassGrid({
                     <td
                       key={day}
                       onClick={() => onCellClick?.(day, period, st.shift)}
-                      className={`border-b border-r border-[#f1ece6] p-1.5 align-top ${
-                        onCellClick ? "cursor-pointer hover:bg-lavender-50" : ""
+                      className={`border-b border-r border-[#e9f0f2] p-1.5 align-top ${
+                        onCellClick ? "cursor-pointer hover:bg-geo-50" : ""
                       }`}
                     >
                       <div className="flex flex-col gap-1">
@@ -225,7 +225,7 @@ export function ClassGrid({
                               style={
                                 s.is_elective
                                   ? undefined
-                                  : { backgroundColor: subj?.color || "#8257fb" }
+                                  : { backgroundColor: subj?.color || "#1b9ad6" }
                               }
                             >
                               <div className="font-bold">
@@ -277,19 +277,19 @@ export function SchoolGrid({ ctx, shift }: { ctx: GridCtx; shift: number }) {
       <table className="w-full border-collapse text-[10px]">
         <thead>
           <tr className="bg-ink-50/60">
-            <th className="sticky left-0 z-10 border-b border-r border-[#e8e3dd] bg-ink-50 px-2 py-2 text-left text-[11px] font-bold text-ink-600">
+            <th className="sticky left-0 z-10 border-b border-r border-[#dbe6ea] bg-ink-50 px-2 py-2 text-left text-[11px] font-bold text-ink-600">
               Анги
             </th>
             {Array.from({ length: st.days_per_week }).map((_, di) =>
               Array.from({ length: st.periods_per_day }).map((__, pi) => (
                 <th
                   key={`${di}-${pi}`}
-                  className={`border-b border-[#e8e3dd] px-1 py-1.5 text-center font-bold text-ink-500 ${
-                    pi === st.periods_per_day - 1 ? "border-r-2 border-r-[#ddd6cd]" : ""
+                  className={`border-b border-[#dbe6ea] px-1 py-1.5 text-center font-bold text-ink-500 ${
+                    pi === st.periods_per_day - 1 ? "border-r-2 border-r-[#c9dbe0]" : ""
                   }`}
                 >
                   {pi === 0 && (
-                    <div className="mb-0.5 whitespace-nowrap text-[10px] text-lavender-600">
+                    <div className="mb-0.5 whitespace-nowrap text-[10px] text-geo-600">
                       {DAYS[di]}
                     </div>
                   )}
@@ -303,8 +303,8 @@ export function SchoolGrid({ ctx, shift }: { ctx: GridCtx; shift: number }) {
           {classes.map((c) => {
             const mine = ctx.slots.filter((s) => s.class_id === c.id);
             return (
-              <tr key={c.id} className="hover:bg-lavender-50/30">
-                <td className="sticky left-0 z-10 border-b border-r border-[#e8e3dd] bg-white px-2 py-1.5 text-[12px] font-bold text-ink-800">
+              <tr key={c.id} className="hover:bg-geo-50/30">
+                <td className="sticky left-0 z-10 border-b border-r border-[#dbe6ea] bg-white px-2 py-1.5 text-[12px] font-bold text-ink-800">
                   {c.name}
                 </td>
                 {Array.from({ length: st.days_per_week }).map((_, di) =>
@@ -323,21 +323,21 @@ export function SchoolGrid({ ctx, shift }: { ctx: GridCtx; shift: number }) {
                             ? `${subj?.name} · ${teacherName(m.tch.get(s0.teacher_id))}${room ? " · " + room.name : ""}`
                             : ""
                         }
-                        className={`border-b border-[#f1ece6] p-0.5 text-center ${
-                          pi === st.periods_per_day - 1 ? "border-r-2 border-r-[#ddd6cd]" : ""
+                        className={`border-b border-[#e9f0f2] p-0.5 text-center ${
+                          pi === st.periods_per_day - 1 ? "border-r-2 border-r-[#c9dbe0]" : ""
                         }`}
                       >
                         {s0 && (
                           <div
                             className={`truncate rounded px-1 py-1 font-semibold leading-none ${
                               s0.is_elective
-                                ? "bg-sand-200 text-sand-900 ring-1 ring-sand-400"
+                                ? "bg-amber-200 text-amber-900 ring-1 ring-amber-400"
                                 : "text-white"
                             }`}
                             style={
                               s0.is_elective
                                 ? undefined
-                                : { backgroundColor: subj?.color || "#8257fb" }
+                                : { backgroundColor: subj?.color || "#1b9ad6" }
                             }
                           >
                             {abbr(subj?.name)}
@@ -373,7 +373,7 @@ function abbr(name?: string) {
 // ====================================================================
 export function Legend({ subjects }: { subjects: Subject[] }) {
   return (
-    <div className="flex flex-wrap items-center gap-2 rounded-xl border border-[#e8e3dd] bg-white p-3">
+    <div className="flex flex-wrap items-center gap-2 rounded-xl border border-[#dbe6ea] bg-white p-3">
       <span className="text-[11px] font-bold uppercase text-ink-400">Тайлбар:</span>
       {subjects.slice(0, 14).map((s) => (
         <span
@@ -384,7 +384,7 @@ export function Legend({ subjects }: { subjects: Subject[] }) {
           {s.name}
         </span>
       ))}
-      <span className="rounded-md bg-sand-200 px-2 py-0.5 text-[10px] font-bold text-sand-900 ring-1 ring-sand-400">
+      <span className="rounded-md bg-amber-200 px-2 py-0.5 text-[10px] font-bold text-amber-900 ring-1 ring-amber-400">
         Сонгон судлах
       </span>
     </div>

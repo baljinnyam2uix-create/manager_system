@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import SignOutButton from "./sign-out-button";
+import { LogoMark } from "./logo";
 
 export const NAV = [
   { href: "/dashboard", icon: "🏠", label: "Хяналтын самбар" },
@@ -37,21 +38,19 @@ export default function Shell({
     href === "/dashboard" ? path === href : path.startsWith(href);
 
   return (
-    <div className="min-h-screen bg-[#faf9f7]">
+    <div className="min-h-screen bg-[#f6fafb]">
       {/* ---------- Хажуугийн цэс ---------- */}
       <aside
-        className={`no-print fixed inset-y-0 left-0 z-40 w-64 border-r border-[#e8e3dd] bg-white transition-transform lg:translate-x-0 ${
+        className={`no-print fixed inset-y-0 left-0 z-40 w-64 border-r border-[#dbe6ea] bg-white transition-transform lg:translate-x-0 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="flex h-full flex-col">
           <Link
             href="/dashboard"
-            className="flex items-center gap-3 border-b border-[#e8e3dd] px-5 py-5"
+            className="flex items-center gap-3 border-b border-[#dbe6ea] px-5 py-5"
           >
-            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-lavender-500 via-lavender-600 to-mocha-500 text-sm font-black text-white shadow-soft">
-              СМ
-            </div>
+            <LogoMark size={42} className="shrink-0" />
             <div className="min-w-0 leading-tight">
               <div className="truncate text-[13px] font-extrabold text-ink-900">
                 Сургалтын менежер
@@ -70,7 +69,7 @@ export default function Shell({
                 onClick={() => setOpen(false)}
                 className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-semibold transition ${
                   isActive(n.href)
-                    ? "bg-gradient-to-r from-lavender-500 to-lavender-600 text-white shadow-soft"
+                    ? "bg-gradient-to-r from-geo-500 to-geo-600 text-white shadow-soft"
                     : "text-ink-600 hover:bg-ink-50"
                 }`}
               >
@@ -80,7 +79,7 @@ export default function Shell({
             ))}
           </nav>
 
-          <div className="border-t border-[#e8e3dd] p-3">
+          <div className="border-t border-[#dbe6ea] p-3">
             {profile.role === "admin" && (
               <Link
                 href="/admin"
@@ -90,7 +89,7 @@ export default function Shell({
               </Link>
             )}
             <div className="flex items-center gap-2 rounded-xl bg-ink-50 px-3 py-2.5">
-              <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-lavender-100 text-xs font-black text-lavender-700">
+              <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-geo-100 text-xs font-black text-geo-700">
                 {(profile.first_name || "?").charAt(0)}
               </div>
               <div className="min-w-0 flex-1 leading-tight">
@@ -116,7 +115,7 @@ export default function Shell({
 
       {/* ---------- Агуулга ---------- */}
       <div className="lg:pl-64">
-        <header className="no-print sticky top-0 z-20 border-b border-[#e8e3dd] bg-white/85 backdrop-blur-xl">
+        <header className="no-print sticky top-0 z-20 border-b border-[#dbe6ea] bg-white/85 backdrop-blur-xl">
           <div className="flex items-center gap-3 px-5 py-4">
             <button
               onClick={() => setOpen(true)}

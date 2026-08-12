@@ -2,12 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Логоны өнгө — brand tokens */
 :root {
-  --bg: #faf9f7;
+  --bg: #f6fafb;
   --surface: #ffffff;
-  --border: #e8e3dd;
-  --text: #1c1c22;
-  --muted: #7c7c8c;
+  --border: #dbe6ea;
+  --text: #1c2a31;
+  --muted: #739caa;
+
+  --geo: #1b9ad6; /* «GE» цэнхэр */
+  --sun: #fa7314; /* «id» улбар шар */
+  --aqua: #2fb9d6; /* тойрог замын цэнхэр */
+  --amber: #fba92a; /* тойрог замын алт */
+  --slate: #3f6b7c; /* ном, луужингийн шугам */
 }
 
 html,
@@ -31,11 +38,11 @@ body {
 /* ------------------------------------------------------------------ */
 @layer components {
   .card {
-    @apply rounded-2xl border border-[#e8e3dd] bg-white shadow-soft;
+    @apply rounded-2xl border border-[#dbe6ea] bg-white shadow-soft;
   }
 
   .card-pad {
-    @apply rounded-2xl border border-[#e8e3dd] bg-white p-5 shadow-soft;
+    @apply rounded-2xl border border-[#dbe6ea] bg-white p-5 shadow-soft;
   }
 
   .btn {
@@ -45,15 +52,32 @@ body {
 
   .btn-primary {
     @apply btn text-white shadow-soft hover:shadow-lift;
-    background-image: linear-gradient(135deg, #8257fb 0%, #7434f3 55%, #a47864 140%);
+    background-image: linear-gradient(
+      135deg,
+      var(--geo) 0%,
+      var(--aqua) 48%,
+      var(--sun) 125%
+    );
+  }
+
+  /* Логоны тойрог замын шилжилт — толгой хэсэг, идэвхтэй элементэд */
+  .brand-gradient {
+    background-image: linear-gradient(
+      110deg,
+      #0d7cb6 0%,
+      var(--geo) 26%,
+      var(--aqua) 52%,
+      var(--amber) 82%,
+      var(--sun) 100%
+    );
   }
 
   .btn-ghost {
-    @apply btn border border-[#e8e3dd] bg-white text-ink-700 hover:bg-ink-50;
+    @apply btn border border-[#dbe6ea] bg-white text-ink-700 hover:bg-ink-50;
   }
 
   .btn-soft {
-    @apply btn bg-lavender-50 text-lavender-700 hover:bg-lavender-100;
+    @apply btn bg-geo-50 text-geo-700 hover:bg-geo-100;
   }
 
   .btn-danger {
@@ -65,9 +89,9 @@ body {
   }
 
   .input {
-    @apply w-full rounded-xl border border-[#e8e3dd] bg-white px-3.5 py-2.5 text-sm text-ink-900
+    @apply w-full rounded-xl border border-[#dbe6ea] bg-white px-3.5 py-2.5 text-sm text-ink-900
            outline-none transition placeholder:text-ink-300
-           focus:border-lavender-400 focus:ring-4 focus:ring-lavender-100;
+           focus:border-geo-400 focus:ring-4 focus:ring-geo-100;
   }
 
   .label {
@@ -87,7 +111,7 @@ body {
   }
 
   .table-wrap {
-    @apply overflow-x-auto rounded-2xl border border-[#e8e3dd] bg-white shadow-soft;
+    @apply overflow-x-auto rounded-2xl border border-[#dbe6ea] bg-white shadow-soft;
   }
 
   .section-title {
@@ -104,12 +128,18 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d8d2ca;
+  background: #b9d0d8;
   border-radius: 8px;
   border: 2px solid var(--bg);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #bdb5aa;
+  background: #94b6c2;
+}
+
+/* Сонгосон текст — брэндийн цэнхэр */
+::selection {
+  background: #cdeafa;
+  color: #0e6393;
 }
 
 /* Хэвлэх */

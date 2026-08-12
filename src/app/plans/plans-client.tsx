@@ -21,7 +21,7 @@ const STATUSES: PlanStatus[] = ["planned", "in_progress", "done", "cancelled"];
 
 const STATUS_STYLE: Record<PlanStatus, string> = {
   planned: "bg-ink-100 text-ink-600",
-  in_progress: "bg-lavender-100 text-lavender-700",
+  in_progress: "bg-geo-100 text-geo-700",
   done: "bg-aqua-100 text-aqua-800",
   cancelled: "bg-red-100 text-red-700",
 };
@@ -190,20 +190,20 @@ export default function PlansClient({ profile }: { profile: Profile }) {
       ) : (
         <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Төлөвлөгөө" value={plans.length} icon="📋" tone="lavender" />
-            <StatCard label="Нийт ажил" value={currentItems.length} icon="📌" tone="mocha" />
+            <StatCard label="Төлөвлөгөө" value={plans.length} icon="📋" tone="geo" />
+            <StatCard label="Нийт ажил" value={currentItems.length} icon="📌" tone="sun" />
             <StatCard label="Дууссан" value={doneCount} icon="✅" tone="aqua" />
-            <StatCard label="Дундаж явц" value={`${avgProgress}%`} icon="📈" tone="sand" />
+            <StatCard label="Дундаж явц" value={`${avgProgress}%`} icon="📈" tone="amber" />
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <div className="flex gap-1 rounded-xl border border-[#e8e3dd] bg-white p-1">
+            <div className="flex gap-1 rounded-xl border border-[#dbe6ea] bg-white p-1">
               {(["all", ...PERIODS] as const).map((p) => (
                 <button
                   key={p}
                   onClick={() => setFilter(p as PlanPeriod | "all")}
                   className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
-                    filter === p ? "bg-lavender-500 text-white shadow-soft" : "text-ink-500 hover:bg-ink-50"
+                    filter === p ? "bg-geo-500 text-white shadow-soft" : "text-ink-500 hover:bg-ink-50"
                   }`}
                 >
                   {p === "all" ? "Бүгд" : PLAN_PERIOD_LABEL[p as PlanPeriod]}
@@ -228,7 +228,7 @@ export default function PlansClient({ profile }: { profile: Profile }) {
               <div className="card-pad">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    <span className="badge bg-lavender-100 text-lavender-700">
+                    <span className="badge bg-geo-100 text-geo-700">
                       {PLAN_PERIOD_LABEL[current.period]}
                       {current.quarter ? ` · ${current.quarter}-р улирал` : ""}
                       {current.month ? ` · ${MONTH_NAMES_MN[current.month]}` : ""}
@@ -273,7 +273,7 @@ export default function PlansClient({ profile }: { profile: Profile }) {
 
                 <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-ink-100">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-lavender-500 to-aqua-400"
+                    className="h-full rounded-full bg-gradient-to-r from-geo-500 to-aqua-400"
                     style={{ width: `${avgProgress}%` }}
                   />
                 </div>
@@ -305,7 +305,7 @@ export default function PlansClient({ profile }: { profile: Profile }) {
                 ) : (
                   <div className="table-wrap">
                     <table className="w-full min-w-[900px]">
-                      <thead className="border-b border-[#e8e3dd] bg-ink-50/50">
+                      <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
                         <tr>
                           <th className="th w-10">№</th>
                           <th className="th">Хийх ажил</th>
@@ -317,7 +317,7 @@ export default function PlansClient({ profile }: { profile: Profile }) {
                           <th className="th text-right">Үйлдэл</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-[#f1ece6]">
+                      <tbody className="divide-y divide-[#e9f0f2]">
                         {currentItems.map((it, n) => (
                           <tr key={it.id} className="hover:bg-ink-50/40">
                             <td className="td text-ink-400">{n + 1}</td>
@@ -360,7 +360,7 @@ export default function PlansClient({ profile }: { profile: Profile }) {
                                   onChange={(e) =>
                                     quickUpdate(it, { progress: Number(e.target.value) })
                                   }
-                                  className="w-20 accent-lavender-500"
+                                  className="w-20 accent-geo-500"
                                 />
                                 <span className="w-9 text-xs font-bold text-ink-600">
                                   {it.progress}%
@@ -419,7 +419,7 @@ export default function PlansClient({ profile }: { profile: Profile }) {
         {planModal && (
           <div className="space-y-4">
             <Field label="Хугацааны төрөл">
-              <div className="flex gap-1 rounded-xl border border-[#e8e3dd] bg-white p-1">
+              <div className="flex gap-1 rounded-xl border border-[#dbe6ea] bg-white p-1">
                 {PERIODS.map((p) => (
                   <button
                     key={p}
@@ -427,7 +427,7 @@ export default function PlansClient({ profile }: { profile: Profile }) {
                     onClick={() => setPlanModal({ ...planModal, period: p })}
                     className={`flex-1 rounded-lg px-2 py-1.5 text-xs font-bold transition ${
                       planModal.period === p
-                        ? "bg-lavender-500 text-white"
+                        ? "bg-geo-500 text-white"
                         : "text-ink-500 hover:bg-ink-50"
                     }`}
                   >
@@ -595,7 +595,7 @@ export default function PlansClient({ profile }: { profile: Profile }) {
                 min={0}
                 max={100}
                 step={5}
-                className="w-full accent-lavender-500"
+                className="w-full accent-geo-500"
                 value={itemModal.progress || 0}
                 onChange={(e) => setItemModal({ ...itemModal, progress: Number(e.target.value) })}
               />
