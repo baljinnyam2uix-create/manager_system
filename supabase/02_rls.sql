@@ -14,13 +14,32 @@ create policy "profiles_select_self_or_admin" on profiles
 
 drop policy if exists "profiles_update_self" on profiles;
 create policy "profiles_update_self" on profiles
-  for update using (id = auth.uid())
-  with check (
-    id = auth.uid()
-    -- энгийн хэрэглэгч өөрийн role/status-аа өөрчилж чадахгүй
-    and role   = (select p.role   from profiles p where p.id = auth.uid())
-    and status = (select p.status from profiles p where p.id = auth.uid())
-  );
+  for update using (id = auth.uid()) with check (id = auth.uid());
+
+-- ВАЖНО: role / status-ыг бодлого дотор шалгаж БОЛОХГҮЙ.
+-- profiles дээрх policy дотроос profiles-г query хийвэл PostgreSQL
+-- "infinite recursion detected in policy" алдаа өгдөг.
+-- Тиймээс хамгаалалтыг security definer триггерээр хийнэ.
+create or replace function public.protect_profile_fields()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  -- Админ бүх талбарыг өөрчилж болно
+  if public.is_admin() then
+    return new;
+  end if;
+  -- Энгийн хэрэглэгч эдгээрийг өөрчилж чадахгүй — хуучин утгаар нь буцаана
+  new.role          := old.role;
+  new.status        := old.status;
+  new.approved_at   := old.approved_at;
+  new.approved_by   := old.approved_by;
+  new.reject_reason := old.reject_reason;
+  return new;
+end $$;
+
+drop trigger if exists trg_protect_profile on profiles;
+create trigger trg_protect_profile
+  before update on profiles
+  for each row execute function public.protect_profile_fields();
 
 drop policy if exists "profiles_admin_all" on profiles;
 create policy "profiles_admin_all" on profiles
