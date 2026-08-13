@@ -24,6 +24,162 @@ async function requireAdmin() {
   return { ok: true as const, userId: user.id };
 }
 
+/** Админы үйлдлийг журналд бичнэ */
+async function log(
+  actorId: string,
+  action: string,
+  entity: string,
+  entityId: string | null,
+  detail?: Record<string, unknown>
+) {
+  const supabase = await createClient();
+  await supabase.from("audit_log").insert({
+    actor_id: actorId,
+    action,
+    entity,
+    entity_id: entityId,
+    detail: detail || null,
+  });
+}
+
+// =====================================================================
+//  АФОРИЗМ — нүүр хуудсанд харагдах урам зоригийн үг
+// =====================================================================
+
+export async function saveAphorism(input: {
+  id?: string;
+  text: string;
+  author: string | null;
+  active: boolean;
+}): Promise<{ error?: string }> {
+  const auth = await requireAdmin();
+  if (!auth.ok) return { error: auth.error };
+  if (!input.text.trim()) return { error: "Афоризмын текстийг бичнэ үү" };
+
+  const supabase = await createClient();
+  const payload = {
+    text: input.text.trim(),
+    author: input.author?.trim() || null,
+    active: input.active,
+  };
+
+  const { error } = input.id
+    ? await supabase.from("aphorisms").update(payload).eq("id", input.id)
+    : await supabase.from("aphorisms").insert(payload);
+
+  if (error) {
+    return {
+      error: error.message.includes("uq_aphorism_text")
+        ? "Ийм афоризм аль хэдийн бүртгэгдсэн байна"
+        : error.message,
+    };
+  }
+
+  await log(auth.userId, input.id ? "update_aphorism" : "create_aphorism", "aphorisms", input.id || null, {
+    text: payload.text.slice(0, 60),
+  });
+  revalidatePath("/admin");
+  revalidatePath("/");
+  return {};
+}
+
+export async function deleteAphorism(id: string): Promise<{ error?: string }> {
+  const auth = await requireAdmin();
+  if (!auth.ok) return { error: auth.error };
+
+  const supabase = await createClient();
+  const { error } = await supabase.from("aphorisms").delete().eq("id", id);
+  if (error) return { error: error.message };
+
+  await log(auth.userId, "delete_aphorism", "aphorisms", id);
+  revalidatePath("/admin");
+  revalidatePath("/");
+  return {};
+}
+
+export async function toggleAphorism(
+  id: string,
+  active: boolean
+): Promise<{ error?: string }> {
+  const auth = await requireAdmin();
+  if (!auth.ok) return { error: auth.error };
+
+  const supabase = await createClient();
+  const { error } = await supabase.from("aphorisms").update({ active }).eq("id", id);
+  if (error) return { error: error.message };
+
+  revalidatePath("/admin");
+  revalidatePath("/");
+  return {};
+}
+
+// =====================================================================
+//  СУРГУУЛЬ — системд бүртгэлтэй байгууллагууд
+// =====================================================================
+
+export async function saveSchool(input: {
+  id?: string;
+  name: string;
+  aimag: string | null;
+  soum: string | null;
+}): Promise<{ error?: string }> {
+  const auth = await requireAdmin();
+  if (!auth.ok) return { error: auth.error };
+  if (!input.name.trim()) return { error: "Сургуулийн нэрийг бичнэ үү" };
+
+  const supabase = await createClient();
+  const payload = {
+    name: input.name.trim(),
+    aimag: input.aimag?.trim() || null,
+    soum: input.soum?.trim() || null,
+  };
+
+  const { error } = input.id
+    ? await supabase.from("schools").update(payload).eq("id", input.id)
+    : await supabase.from("schools").insert(payload);
+
+  if (error) return { error: error.message };
+
+  await log(auth.userId, input.id ? "update_school" : "create_school", "schools", input.id || null, {
+    name: payload.name,
+  });
+  revalidatePath("/admin");
+  return {};
+}
+
+export async function deleteSchool(id: string): Promise<{ error?: string }> {
+  const auth = await requireAdmin();
+  if (!auth.ok) return { error: auth.error };
+
+  const supabase = await createClient();
+  const { error } = await supabase.from("schools").delete().eq("id", id);
+  if (error) return { error: error.message };
+
+  await log(auth.userId, "delete_school", "schools", id);
+  revalidatePath("/admin");
+  return {};
+}
+
+/** Менежерийг сургуульд хамааруулах */
+export async function assignSchool(
+  profileId: string,
+  schoolId: string | null
+): Promise<{ error?: string }> {
+  const auth = await requireAdmin();
+  if (!auth.ok) return { error: auth.error };
+
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from("profiles")
+    .update({ school_id: schoolId, updated_at: new Date().toISOString() })
+    .eq("id", profileId);
+  if (error) return { error: error.message };
+
+  await log(auth.userId, "assign_school", "profiles", profileId, { schoolId });
+  revalidatePath("/admin");
+  return {};
+}
+
 export async function approveProfile(
   id: string,
   status: ApprovalStatus,

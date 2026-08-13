@@ -559,6 +559,15 @@ create policy "profiles_update_self" on profiles
 create or replace function public.protect_profile_fields()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
+  -- auth.uid() = NULL гэдэг нь нэвтэрсэн хэрэглэгчээс ирээгүй гэсэн үг:
+  -- service_role түлхүүр эсвэл SQL Editor. Хоёулаа итгэмжлэгдсэн суваг тул
+  -- зөвшөөрнө — эс бөгөөс АНХНЫ АДМИНЫГ огт үүсгэж чадахгүй болно.
+  -- (Нэвтрээгүй хэрэглэгч энд хүрэхгүй: profiles-ийн update policy нь
+  --  id = auth.uid() шаарддаг тул RLS түүнийг аль хэдийн зогсоосон байна.)
+  if auth.uid() is null then
+    return new;
+  end if;
+
   -- Админ бүх талбарыг өөрчилж болно
   if public.is_admin() then
     return new;
@@ -731,18 +740,3 @@ on conflict do nothing;
 --  where email = 'ТАНЫ_ИМЭЙЛ@example.com';
 
 
-
--- ---------------------------------------------------------------------
--- СҮҮЛИЙН АЛХАМ: АНХНЫ АДМИН
--- ---------------------------------------------------------------------
--- Дээрх бүхнийг ажиллуулсны дараа:
---   1) Вэб сайтын /register хуудсаар бүртгүүлнэ
---   2) Доорх мөрийн и-мэйлийг ӨӨРИЙНХӨӨР солиод, тайлбарыг арилгаж ажиллуулна
---
--- update profiles
---    set role = 'admin', status = 'approved', approved_at = now()
---  where email = 'ТАНЫ_ИМЭЙЛ@example.com';
---
--- Шалгах:
---   select email, role, status from profiles;
--- ---------------------------------------------------------------------

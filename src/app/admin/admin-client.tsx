@@ -2,10 +2,30 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { LogoMark } from "@/components/logo";
+import SignOutButton from "@/components/sign-out-button";
 import type { Profile, ApprovalStatus, UserRole } from "@/lib/types";
-import { approveProfile, setRole, deleteProfile } from "./actions";
+import { approveProfile, setRole, deleteProfile, assignSchool } from "./actions";
+import type { Aphorism, AuditEntry, ManagerUsage, School } from "./page";
+import {
+  AphorismsTab,
+  SchoolsTab,
+  SystemTab,
+  Stat,
+  type SetMsg,
+} from "./admin-content";
 
-const TABS: { key: ApprovalStatus | "all"; label: string }[] = [
+type Tab = "managers" | "aphorisms" | "schools" | "system";
+
+const TABS: { k: Tab; label: string; icon: string }[] = [
+  { k: "managers", label: "Менежерүүд", icon: "👤" },
+  { k: "aphorisms", label: "Афоризм", icon: "❝" },
+  { k: "schools", label: "Сургууль", icon: "🏫" },
+  { k: "system", label: "Систем", icon: "📊" },
+];
+
+const STATUS_TABS: { key: ApprovalStatus | "all"; label: string }[] = [
   { key: "pending", label: "Хүлээгдэж буй" },
   { key: "approved", label: "Батлагдсан" },
   { key: "rejected", label: "Татгалзсан" },
@@ -13,22 +33,142 @@ const TABS: { key: ApprovalStatus | "all"; label: string }[] = [
 ];
 
 export default function AdminClient({
+  me,
   profiles,
+  aphorisms,
+  schools,
+  audit,
+  usage,
+  totals,
+}: {
+  me: Profile;
+  profiles: Profile[];
+  aphorisms: Aphorism[];
+  schools: School[];
+  audit: AuditEntry[];
+  usage: ManagerUsage[];
+  totals: Record<string, number>;
+}) {
+  const [tab, setTab] = useState<Tab>("managers");
+  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+
+  const pending = profiles.filter((p) => p.status === "pending").length;
+
+  return (
+    <div className="min-h-screen bg-[#f6fafb]">
+      <header className="sticky top-0 z-20 border-b border-[#dbe6ea] bg-white/85 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4">
+          <div className="flex items-center gap-3">
+            <LogoMark size={42} />
+            <div className="leading-tight">
+              <div className="flex items-center gap-2 text-sm font-extrabold text-ink-900">
+                Админ удирдлага
+                <span className="badge bg-ink-900 text-white">SYSTEM</span>
+              </div>
+              <div className="text-[11px] text-ink-400">
+                {me.last_name} {me.first_name} · {me.email}
+              </div>
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
+            <Link href="/dashboard" className="btn-ghost btn-sm">
+              Систем рүү
+            </Link>
+            <SignOutButton className="btn-soft btn-sm" />
+          </div>
+        </div>
+
+        <div className="mx-auto flex max-w-7xl gap-1 overflow-x-auto px-5 pb-2">
+          {TABS.map((t) => (
+            <button
+              key={t.k}
+              onClick={() => setTab(t.k)}
+              className={`flex shrink-0 items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-bold transition ${
+                tab === t.k
+                  ? "bg-geo-500 text-white shadow-soft"
+                  : "text-ink-500 hover:bg-ink-50"
+              }`}
+            >
+              <span>{t.icon}</span>
+              {t.label}
+              {t.k === "managers" && pending > 0 && (
+                <span className="rounded-md bg-sun-500 px-1.5 text-[10px] text-white">
+                  {pending}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-7xl space-y-5 px-5 py-7">
+        {msg && (
+          <div
+            className={`rounded-xl border px-4 py-3 text-sm font-medium ${
+              msg.ok
+                ? "border-aqua-200 bg-aqua-50 text-aqua-800"
+                : "border-red-200 bg-red-50 text-red-700"
+            }`}
+          >
+            {msg.text}
+          </div>
+        )}
+
+        {tab === "managers" && (
+          <ManagersTab
+            profiles={profiles}
+            schools={schools}
+            usage={usage}
+            meId={me.id}
+            setMsg={setMsg}
+          />
+        )}
+        {tab === "aphorisms" && <AphorismsTab items={aphorisms} setMsg={setMsg} />}
+        {tab === "schools" && (
+          <SchoolsTab items={schools} profiles={profiles} setMsg={setMsg} />
+        )}
+        {tab === "system" && (
+          <SystemTab
+            profiles={profiles}
+            usage={usage}
+            totals={totals}
+            audit={audit}
+            aphorisms={aphorisms}
+            schools={schools}
+          />
+        )}
+      </main>
+    </div>
+  );
+}
+
+// =====================================================================
+//  МЕНЕЖЕРҮҮД
+// =====================================================================
+function ManagersTab({
+  profiles,
+  schools,
+  usage,
   meId,
+  setMsg,
 }: {
   profiles: Profile[];
+  schools: School[];
+  usage: ManagerUsage[];
   meId: string;
+  setMsg: SetMsg;
 }) {
   const router = useRouter();
-  const [tab, setTab] = useState<ApprovalStatus | "all">("pending");
+  const [statusTab, setStatusTab] = useState<ApprovalStatus | "all">("pending");
   const [q, setQ] = useState("");
-  const [pending, startTransition] = useTransition();
-  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+  const [busy, startTransition] = useTransition();
   const [rejectFor, setRejectFor] = useState<Profile | null>(null);
   const [reason, setReason] = useState("");
 
+  const usageOf = (id: string) => usage.find((u) => u.owner_id === id);
+
   const filtered = profiles.filter((p) => {
-    if (tab !== "all" && p.status !== tab) return false;
+    if (statusTab !== "all" && p.status !== statusTab) return false;
     if (!q.trim()) return true;
     const s = q.toLowerCase();
     return (
@@ -51,28 +191,30 @@ export default function AdminClient({
     });
   }
 
+  const counts = {
+    pending: profiles.filter((p) => p.status === "pending").length,
+    approved: profiles.filter((p) => p.status === "approved").length,
+    rejected: profiles.filter((p) => p.status === "rejected").length,
+    admins: profiles.filter((p) => p.role === "admin").length,
+  };
+
   return (
     <div className="space-y-4">
-      {msg && (
-        <div
-          className={`rounded-xl border px-4 py-3 text-sm font-medium ${
-            msg.ok
-              ? "border-aqua-200 bg-aqua-50 text-aqua-800"
-              : "border-red-200 bg-red-50 text-red-700"
-          }`}
-        >
-          {msg.text}
-        </div>
-      )}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Stat label="Хүлээгдэж буй" value={counts.pending} tone="amber" />
+        <Stat label="Батлагдсан" value={counts.approved} tone="aqua" />
+        <Stat label="Татгалзсан" value={counts.rejected} tone="red" />
+        <Stat label="Админ" value={counts.admins} tone="ink" />
+      </div>
 
       <div className="flex flex-wrap items-center gap-3">
         <div className="flex gap-1 rounded-xl border border-[#dbe6ea] bg-white p-1">
-          {TABS.map((t) => (
+          {STATUS_TABS.map((t) => (
             <button
               key={t.key}
-              onClick={() => setTab(t.key)}
+              onClick={() => setStatusTab(t.key)}
               className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
-                tab === t.key
+                statusTab === t.key
                   ? "bg-geo-500 text-white shadow-soft"
                   : "text-ink-500 hover:bg-ink-50"
               }`}
@@ -95,122 +237,159 @@ export default function AdminClient({
       </div>
 
       <div className="table-wrap">
-        <table className="w-full min-w-[900px]">
+        <table className="w-full min-w-[1050px]">
           <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
             <tr>
               <th className="th">Хэрэглэгч</th>
               <th className="th">Сургууль</th>
-              <th className="th">Утас</th>
+              <th className="th">Оруулсан өгөгдөл</th>
               <th className="th">Эрх</th>
               <th className="th">Төлөв</th>
-              <th className="th">Бүртгүүлсэн</th>
               <th className="th text-right">Үйлдэл</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[#e9f0f2]">
             {filtered.length === 0 && (
               <tr>
-                <td colSpan={7} className="td py-12 text-center text-ink-400">
+                <td colSpan={6} className="td py-12 text-center text-ink-400">
                   Бичлэг олдсонгүй
                 </td>
               </tr>
             )}
-            {filtered.map((p) => (
-              <tr key={p.id} className="hover:bg-ink-50/40">
-                <td className="td">
-                  <div className="font-semibold text-ink-900">
-                    {p.last_name} {p.first_name}
-                    {p.id === meId && (
-                      <span className="badge ml-2 bg-geo-100 text-geo-700">
-                        Та
-                      </span>
+            {filtered.map((p) => {
+              const u = usageOf(p.id);
+              return (
+                <tr key={p.id} className="hover:bg-ink-50/40">
+                  <td className="td">
+                    <div className="font-semibold text-ink-900">
+                      {p.last_name} {p.first_name}
+                      {p.id === meId && (
+                        <span className="badge ml-2 bg-geo-100 text-geo-700">Та</span>
+                      )}
+                    </div>
+                    <div className="text-xs text-ink-400">{p.email}</div>
+                    <div className="text-[11px] text-ink-300">
+                      {p.phone || "утасгүй"} ·{" "}
+                      {new Date(p.created_at).toLocaleDateString("mn-MN")}
+                    </div>
+                  </td>
+                  <td className="td">
+                    <div className="text-[13px]">{p.school_name || "—"}</div>
+                    <select
+                      disabled={busy}
+                      value={p.school_id || ""}
+                      onChange={(e) =>
+                        run(
+                          () => assignSchool(p.id, e.target.value || null),
+                          "Сургууль оноогдлоо"
+                        )
+                      }
+                      className="mt-1 rounded-lg border border-[#dbe6ea] bg-white px-2 py-1 text-[11px]"
+                    >
+                      <option value="">— бүртгэлд холбоогүй —</option>
+                      {schools.map((s) => (
+                        <option key={s.id} value={s.id}>
+                          {s.name}
+                        </option>
+                      ))}
+                    </select>
+                  </td>
+                  <td className="td">
+                    {u && (u.teachers || u.classes || u.slots) ? (
+                      <div className="flex flex-wrap gap-1 text-[10px]">
+                        <Chip n={u.teachers} l="багш" />
+                        <Chip n={u.classes} l="анги" />
+                        <Chip n={u.students} l="сурагч" />
+                        <Chip n={u.slots} l="цаг" />
+                        <Chip n={u.observations} l="ажиглалт" />
+                        <Chip n={u.plans} l="төлөвлөгөө" />
+                      </div>
+                    ) : (
+                      <span className="text-xs text-ink-300">хоосон</span>
                     )}
-                  </div>
-                  <div className="text-xs text-ink-400">{p.email}</div>
-                </td>
-                <td className="td">{p.school_name || "—"}</td>
-                <td className="td">{p.phone || "—"}</td>
-                <td className="td">
-                  <select
-                    disabled={pending || p.id === meId}
-                    value={p.role}
-                    onChange={(e) =>
-                      run(
-                        () => setRole(p.id, e.target.value as UserRole),
-                        "Эрх шинэчлэгдлээ"
-                      )
-                    }
-                    className="rounded-lg border border-[#dbe6ea] bg-white px-2 py-1 text-xs font-semibold disabled:opacity-50"
-                  >
-                    <option value="manager">Менежер</option>
-                    <option value="admin">Админ</option>
-                  </select>
-                </td>
-                <td className="td">
-                  <StatusBadge s={p.status} />
-                </td>
-                <td className="td text-xs text-ink-400">
-                  {new Date(p.created_at).toLocaleDateString("mn-MN")}
-                </td>
-                <td className="td">
-                  <div className="flex justify-end gap-1.5">
-                    {p.status !== "approved" && (
-                      <button
-                        disabled={pending}
-                        onClick={() =>
-                          run(
-                            () => approveProfile(p.id, "approved"),
-                            `${p.first_name} батлагдлаа`
-                          )
-                        }
-                        className="btn btn-sm bg-aqua-100 text-aqua-800 hover:bg-aqua-200"
-                      >
-                        Батлах
-                      </button>
+                  </td>
+                  <td className="td">
+                    <select
+                      disabled={busy || p.id === meId}
+                      value={p.role}
+                      onChange={(e) =>
+                        run(() => setRole(p.id, e.target.value as UserRole), "Эрх шинэчлэгдлээ")
+                      }
+                      className={`rounded-lg border px-2 py-1 text-xs font-bold disabled:opacity-50 ${
+                        p.role === "admin"
+                          ? "border-ink-800 bg-ink-900 text-white"
+                          : "border-[#dbe6ea] bg-white"
+                      }`}
+                    >
+                      <option value="manager">Менежер</option>
+                      <option value="admin">Админ</option>
+                    </select>
+                  </td>
+                  <td className="td">
+                    <StatusBadge s={p.status} />
+                    {p.reject_reason && (
+                      <div className="mt-1 max-w-[160px] text-[10px] text-red-600">
+                        {p.reject_reason}
+                      </div>
                     )}
-                    {p.status !== "rejected" && p.id !== meId && (
-                      <button
-                        disabled={pending}
-                        onClick={() => {
-                          setRejectFor(p);
-                          setReason("");
-                        }}
-                        className="btn btn-sm bg-amber-100 text-amber-800 hover:bg-amber-200"
-                      >
-                        Татгалзах
-                      </button>
-                    )}
-                    {p.id !== meId && (
-                      <button
-                        disabled={pending}
-                        onClick={() => {
-                          if (
-                            confirm(
-                              `${p.last_name} ${p.first_name}-ийн бүртгэлийг бүрмөсөн устгах уу? Түүний оруулсан бүх өгөгдөл устана.`
+                  </td>
+                  <td className="td">
+                    <div className="flex justify-end gap-1.5">
+                      {p.status !== "approved" && (
+                        <button
+                          disabled={busy}
+                          onClick={() =>
+                            run(
+                              () => approveProfile(p.id, "approved"),
+                              `${p.first_name || p.email} батлагдлаа`
                             )
-                          )
-                            run(() => deleteProfile(p.id), "Хэрэглэгч устлаа");
-                        }}
-                        className="btn-danger btn-sm"
-                      >
-                        Устгах
-                      </button>
-                    )}
-                  </div>
-                </td>
-              </tr>
-            ))}
+                          }
+                          className="btn btn-sm bg-aqua-100 text-aqua-800 hover:bg-aqua-200"
+                        >
+                          Батлах
+                        </button>
+                      )}
+                      {p.status !== "rejected" && p.id !== meId && (
+                        <button
+                          disabled={busy}
+                          onClick={() => {
+                            setRejectFor(p);
+                            setReason("");
+                          }}
+                          className="btn btn-sm bg-amber-100 text-amber-800 hover:bg-amber-200"
+                        >
+                          Татгалзах
+                        </button>
+                      )}
+                      {p.id !== meId && (
+                        <button
+                          disabled={busy}
+                          onClick={() => {
+                            if (
+                              confirm(
+                                `${p.last_name} ${p.first_name} (${p.email})-ийн бүртгэлийг бүрмөсөн устгах уу?\n\nТүүний оруулсан бүх өгөгдөл — багш, хуваарь, дүн — хамт устана. Буцаах боломжгүй.`
+                              )
+                            )
+                              run(() => deleteProfile(p.id), "Хэрэглэгч устлаа");
+                          }}
+                          className="btn-danger btn-sm"
+                        >
+                          Устгах
+                        </button>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
 
-      {/* Татгалзах шалтгаан */}
       {rejectFor && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-ink-900/40 p-5 backdrop-blur-sm">
           <div className="w-full max-w-md rounded-2xl border border-[#dbe6ea] bg-white p-6 shadow-lift">
-            <h3 className="text-lg font-bold text-ink-900">
-              Бүртгэлийг татгалзах
-            </h3>
+            <h3 className="text-lg font-bold text-ink-900">Бүртгэлийг татгалзах</h3>
             <p className="mt-1 text-sm text-ink-400">
               {rejectFor.last_name} {rejectFor.first_name} — {rejectFor.email}
             </p>
@@ -222,22 +401,16 @@ export default function AdminClient({
               onChange={(e) => setReason(e.target.value)}
             />
             <div className="mt-5 flex gap-2">
-              <button
-                className="btn-ghost flex-1"
-                onClick={() => setRejectFor(null)}
-              >
+              <button className="btn-ghost flex-1" onClick={() => setRejectFor(null)}>
                 Болих
               </button>
               <button
                 className="btn-danger flex-1"
-                disabled={pending}
+                disabled={busy}
                 onClick={() => {
                   const id = rejectFor.id;
                   setRejectFor(null);
-                  run(
-                    () => approveProfile(id, "rejected", reason),
-                    "Татгалзлаа"
-                  );
+                  run(() => approveProfile(id, "rejected", reason), "Татгалзлаа");
                 }}
               >
                 Татгалзах
@@ -247,6 +420,15 @@ export default function AdminClient({
         </div>
       )}
     </div>
+  );
+}
+
+function Chip({ n, l }: { n: number; l: string }) {
+  if (!n) return null;
+  return (
+    <span className="rounded bg-ink-100 px-1.5 py-0.5 font-semibold text-ink-600">
+      {n} {l}
+    </span>
   );
 }
 

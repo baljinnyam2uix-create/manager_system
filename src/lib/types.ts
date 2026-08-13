@@ -13,6 +13,7 @@ export interface Profile {
   position: string | null;
   role: UserRole;
   status: ApprovalStatus;
+  school_id: string | null;
   school_name: string | null;
   approved_at: string | null;
   reject_reason: string | null;
