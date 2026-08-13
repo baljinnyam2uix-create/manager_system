@@ -28,15 +28,15 @@ import {
 // Брэндийн өнгө (ARGB — ExcelJS-ийн формат)
 // ---------------------------------------------------------------------
 const C = {
-  head: "FF0E6393", // гарчгийн дэвсгэр — гүн цэнхэр
+  head: "FF045B5B", // гарчгийн дэвсгэр — гүн teal
   headText: "FFFFFFFF",
-  sub: "FF1B9AD6", // дэд гарчиг
-  title: "FF1C2A31",
-  border: "FFC8DBE1",
-  zebra: "FFF4F8F9",
-  elective: "FFFFE288", // сонгон судлах — алтан
-  electiveText: "FF7C390F",
-  total: "FFE3EDF0",
+  sub: "FF008080", // дэд гарчиг — Teal Green
+  title: "FF1A2C2C",
+  border: "FFC9DCDC",
+  zebra: "FFF4F8F8",
+  elective: "FFA8E6CF", // сонгон судлах — Bright Mint
+  electiveText: "FF195442",
+  total: "FFD2F5F3",
 };
 
 type Primitive = string | number | null;

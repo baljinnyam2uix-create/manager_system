@@ -380,7 +380,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
           ) : (
             <div className="table-wrap">
               <table className="w-full min-w-[1000px]">
-                <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
+                <thead className="border-b border-[#d7e8e6] bg-ink-50/50">
                   <tr>
                     <th className="th">№</th>
                     <th className="th">Багш</th>
@@ -393,7 +393,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
                     <th className="th text-right">Үйлдэл</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#e9f0f2]">
+                <tbody className="divide-y divide-[#e6f1ef]">
                   {filtered.map((t, i) => {
                     const h = hoursOf(t.id);
                     const myRooms = tRooms
@@ -418,7 +418,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
                         <td className="td text-xs">{t.department || "—"}</td>
                         <td className="td">
                           {t.rank !== "Байхгүй" && (
-                            <span className="badge bg-geo-100 text-geo-700">
+                            <span className="badge bg-teal-100 text-teal-700">
                               {t.rank}
                             </span>
                           )}
@@ -430,7 +430,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
                                 ? "bg-ink-100 text-ink-500"
                                 : h > 30
                                   ? "bg-red-100 text-red-700"
-                                  : "bg-aqua-100 text-aqua-800"
+                                  : "bg-seafoam-100 text-seafoam-800"
                             }`}
                           >
                             {h}
@@ -438,7 +438,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
                         </td>
                         <td className="td text-xs">
                           {t.is_homeroom ? (
-                            <span className="badge bg-sun-100 text-sun-800">
+                            <span className="badge bg-pink-100 text-pink-800">
                               {classes.find((c) => c.id === t.homeroom_class_id)?.name || "Анги сонгоогүй"}
                             </span>
                           ) : (
@@ -448,7 +448,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
                         <td className="td text-xs">
                           {myRooms.length ? (
                             <span title={`Эрэмбэ: ${myRooms.join(" → ")}`}>
-                              <b className="text-geo-600">{myRooms[0]}</b>
+                              <b className="text-teal-600">{myRooms[0]}</b>
                               {myRooms.length > 1 && (
                                 <span className="text-ink-400"> +{myRooms.length - 1}</span>
                               )}
@@ -548,7 +548,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
               <label className="flex items-center gap-2 text-sm font-semibold text-ink-700">
                 <input
                   type="checkbox"
-                  className="h-4 w-4 accent-geo-500"
+                  className="h-4 w-4 accent-teal-500"
                   checked={!!form.is_homeroom}
                   onChange={(e) => setForm({ ...form, is_homeroom: e.target.checked })}
                 />
@@ -571,7 +571,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
               <label className="ml-auto flex items-center gap-2 text-sm font-semibold text-ink-700">
                 <input
                   type="checkbox"
-                  className="h-4 w-4 accent-aqua-500"
+                  className="h-4 w-4 accent-seafoam-500"
                   checked={form.active !== false}
                   onChange={(e) => setForm({ ...form, active: e.target.checked })}
                 />
@@ -605,7 +605,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
                       className={`rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
                         on
                           ? "border-transparent text-white shadow-soft"
-                          : "border-[#dbe6ea] bg-white text-ink-500 hover:bg-ink-50"
+                          : "border-[#d7e8e6] bg-white text-ink-500 hover:bg-ink-50"
                       }`}
                       style={on ? { backgroundColor: s.color } : undefined}
                     >
@@ -623,7 +623,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
               Кабинетийн эрэмбэ (1–7)
             </h4>
             <p className="mb-3 text-[11px] text-ink-400">
-              <b className="text-geo-600">1-рт бичсэн кабинет</b> нь бусад багшаас
+              <b className="text-teal-600">1-рт бичсэн кабинет</b> нь бусад багшаас
               давуу эрхтэй — хуваарь зохиоход эхэлж энэ кабинетэд оруулна. Дараагийнх нь
               эрэмбийн дагуу нөөц болно.
             </p>
@@ -632,7 +632,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
                 <div key={i} className="flex items-center gap-2">
                   <span
                     className={`grid h-7 w-7 shrink-0 place-items-center rounded-lg text-[11px] font-black ${
-                      i === 0 ? "bg-geo-500 text-white" : "bg-ink-100 text-ink-500"
+                      i === 0 ? "bg-teal-500 text-white" : "bg-ink-100 text-ink-500"
                     }`}
                   >
                     {i + 1}
@@ -685,7 +685,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
             </div>
 
             {formLoads.length === 0 ? (
-              <p className="rounded-xl border border-dashed border-[#c9dbe0] px-4 py-6 text-center text-sm text-ink-400">
+              <p className="rounded-xl border border-dashed border-[#c2ded9] px-4 py-6 text-center text-sm text-ink-400">
                 Ачаалал оруулаагүй байна. Хуваарь зохиохын тулд заавал оруулна.
               </p>
             ) : (
@@ -767,7 +767,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
                 ))}
                 <div className="pt-2 text-right text-sm font-bold text-ink-700">
                   Нийт:{" "}
-                  <span className="text-geo-600">
+                  <span className="text-teal-600">
                     {formLoads.reduce((s, l) => s + Number(l.hours_per_week || 0), 0)}
                   </span>{" "}
                   цаг / 7 хоног

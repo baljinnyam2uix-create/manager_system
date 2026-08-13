@@ -88,14 +88,14 @@ export default function SettingsClient({ profile }: { profile: Profile }) {
     >
       {node}
 
-      <div className="mb-5 flex flex-wrap gap-1 rounded-xl border border-[#dbe6ea] bg-white p-1">
+      <div className="mb-5 flex flex-wrap gap-1 rounded-xl border border-[#d7e8e6] bg-white p-1">
         {TABS.map((t) => (
           <button
             key={t.k}
             onClick={() => setTab(t.k)}
             className={`flex items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-bold transition ${
               tab === t.k
-                ? "bg-geo-500 text-white shadow-soft"
+                ? "bg-teal-500 text-white shadow-soft"
                 : "text-ink-500 hover:bg-ink-50"
             }`}
           >
@@ -162,7 +162,7 @@ function SubjectsTab({
   const [f, setF] = useState({
     name: "",
     department: "",
-    color: "#1b9ad6",
+    color: "#008080",
     is_subgroup: false,
     allow_shared_room: false,
     is_elective: false,
@@ -203,15 +203,15 @@ function SubjectsTab({
         </div>
         <div className="mt-3 flex flex-wrap gap-5 rounded-xl bg-ink-50 p-4 text-sm font-semibold text-ink-700">
           <label className="flex items-center gap-2">
-            <input type="checkbox" className="h-4 w-4 accent-geo-500" checked={f.is_subgroup} onChange={(e) => setF({ ...f, is_subgroup: e.target.checked })} />
+            <input type="checkbox" className="h-4 w-4 accent-teal-500" checked={f.is_subgroup} onChange={(e) => setF({ ...f, is_subgroup: e.target.checked })} />
             Под группээр хуваагдана (зэрэгцэж орно)
           </label>
           <label className="flex items-center gap-2">
-            <input type="checkbox" className="h-4 w-4 accent-aqua-500" checked={f.allow_shared_room} onChange={(e) => setF({ ...f, allow_shared_room: e.target.checked })} />
+            <input type="checkbox" className="h-4 w-4 accent-seafoam-500" checked={f.allow_shared_room} onChange={(e) => setF({ ...f, allow_shared_room: e.target.checked })} />
             Нэг зааланд 2 анги зэрэг орж болно
           </label>
           <label className="flex items-center gap-2">
-            <input type="checkbox" className="h-4 w-4 accent-amber-500" checked={f.is_elective} onChange={(e) => setF({ ...f, is_elective: e.target.checked })} />
+            <input type="checkbox" className="h-4 w-4 accent-coral-500" checked={f.is_elective} onChange={(e) => setF({ ...f, is_elective: e.target.checked })} />
             Сонгон судлах
           </label>
         </div>
@@ -219,7 +219,7 @@ function SubjectsTab({
 
       <div className="table-wrap">
         <table className="w-full min-w-[760px]">
-          <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
+          <thead className="border-b border-[#d7e8e6] bg-ink-50/50">
             <tr>
               <th className="th">Өнгө</th>
               <th className="th">Хичээл</th>
@@ -230,7 +230,7 @@ function SubjectsTab({
               <th className="th text-right">Үйлдэл</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#e9f0f2]">
+          <tbody className="divide-y divide-[#e6f1ef]">
             {subjects.map((s) => (
               <tr key={s.id} className="hover:bg-ink-50/40">
                 <td className="td">
@@ -374,7 +374,7 @@ function ClassesTab({
 
       <div className="table-wrap">
         <table className="w-full min-w-[600px]">
-          <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
+          <thead className="border-b border-[#d7e8e6] bg-ink-50/50">
             <tr>
               <th className="th">Анги</th>
               <th className="th">Түвшин</th>
@@ -383,14 +383,14 @@ function ClassesTab({
               <th className="th text-right">Үйлдэл</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#e9f0f2]">
+          <tbody className="divide-y divide-[#e6f1ef]">
             {classes.map((c) => (
               <tr key={c.id} className="hover:bg-ink-50/40">
                 <td className="td font-semibold">{c.name}</td>
                 <td className="td">{c.grade}</td>
                 <td className="td">
                   <select
-                    className="rounded-lg border border-[#dbe6ea] px-2 py-1 text-xs font-semibold"
+                    className="rounded-lg border border-[#d7e8e6] px-2 py-1 text-xs font-semibold"
                     value={c.shift}
                     onChange={(e) =>
                       run(
@@ -464,7 +464,7 @@ function RoomsTab({
           </Field>
           <div className="flex items-end gap-3">
             <label className="mb-2.5 flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-ink-700">
-              <input type="checkbox" className="h-4 w-4 accent-aqua-500" checked={f.is_hall} onChange={(e) => setF({ ...f, is_hall: e.target.checked })} />
+              <input type="checkbox" className="h-4 w-4 accent-seafoam-500" checked={f.is_hall} onChange={(e) => setF({ ...f, is_hall: e.target.checked })} />
               Заал
             </label>
             <button
@@ -485,7 +485,7 @@ function RoomsTab({
 
       <div className="table-wrap">
         <table className="w-full min-w-[600px]">
-          <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
+          <thead className="border-b border-[#d7e8e6] bg-ink-50/50">
             <tr>
               <th className="th">Кабинет</th>
               <th className="th">Байрлал</th>
@@ -494,14 +494,14 @@ function RoomsTab({
               <th className="th text-right">Үйлдэл</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#e9f0f2]">
+          <tbody className="divide-y divide-[#e6f1ef]">
             {rooms.map((r) => (
               <tr key={r.id} className="hover:bg-ink-50/40">
                 <td className="td font-semibold">{r.name}</td>
                 <td className="td text-xs text-ink-500">{r.building || "—"}</td>
                 <td className="td">{r.capacity || "—"}</td>
                 <td className="td text-center">
-                  {r.is_hall && <span className="badge bg-aqua-100 text-aqua-800">Заал</span>}
+                  {r.is_hall && <span className="badge bg-seafoam-100 text-seafoam-800">Заал</span>}
                 </td>
                 <td className="td text-right">
                   <button
@@ -587,7 +587,7 @@ function ShiftsTab({
               <div className="flex items-center gap-3">
                 <span
                   className={`grid h-9 w-9 place-items-center rounded-xl text-sm font-black ${
-                    s.active ? "bg-geo-500 text-white" : "bg-ink-100 text-ink-400"
+                    s.active ? "bg-teal-500 text-white" : "bg-ink-100 text-ink-400"
                   }`}
                 >
                   {d.shift}
@@ -601,7 +601,7 @@ function ShiftsTab({
               <label className="flex items-center gap-2 text-sm font-semibold text-ink-700">
                 <input
                   type="checkbox"
-                  className="h-4 w-4 accent-geo-500"
+                  className="h-4 w-4 accent-teal-500"
                   checked={s.active}
                   onChange={(e) => upd({ active: e.target.checked })}
                 />
@@ -640,9 +640,9 @@ function ShiftsTab({
               {times.map((t) => (
                 <span
                   key={t.period}
-                  className="rounded-lg border border-[#dbe6ea] bg-ink-50 px-2.5 py-1 text-[11px] font-semibold text-ink-600"
+                  className="rounded-lg border border-[#d7e8e6] bg-ink-50 px-2.5 py-1 text-[11px] font-semibold text-ink-600"
                 >
-                  <b className="text-geo-600">{t.period}</b> · {t.start}–{t.end}
+                  <b className="text-teal-600">{t.period}</b> · {t.start}–{t.end}
                 </span>
               ))}
             </div>

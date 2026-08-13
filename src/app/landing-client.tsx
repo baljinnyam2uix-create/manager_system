@@ -13,43 +13,43 @@ const FEATURES = [
     icon: "🗓️",
     title: "Хичээлийн хуваарь",
     desc: "Багш, кабинет давхцахгүй, 7 хоногийн цаг яг таарсан хуваарийг автоматаар зохионо. Багшаар, ангиар, нэгдсэн харагдац.",
-    tint: "from-geo-500/12 to-geo-500/0",
+    tint: "from-teal-500/12 to-teal-500/0",
   },
   {
     icon: "✅",
     title: "Ажлын гүйцэтгэл",
     desc: "Багшийн гүйцэтгэх ажлыг төлөвлөгөөнөөс сонгож эсвэл шинээр нэмж чеклэн дүгнэж, оноо, тайлбар бичнэ.",
-    tint: "from-aqua-500/12 to-aqua-500/0",
+    tint: "from-seafoam-500/12 to-seafoam-500/0",
   },
   {
     icon: "📋",
     title: "Менежерийн төлөвлөгөө",
     desc: "Жил, улирал, сар, 7 хоногийн төлөвлөгөөг зорилго, хугацаа, хариуцагч, шалгуур үзүүлэлттэйгээр боловсруулна.",
-    tint: "from-sun-500/12 to-sun-500/0",
+    tint: "from-pink-500/12 to-pink-500/0",
   },
   {
     icon: "💰",
     title: "Цагийн тооцоо, цалин",
     desc: "Хичээл заасан, орлон заасан, илүү цаг, СХА, анги даалт, зэрэг, ур чадварын нэмэгдлээр цалинг бодно.",
-    tint: "from-amber-500/12 to-amber-500/0",
+    tint: "from-coral-500/12 to-coral-500/0",
   },
   {
     icon: "👩‍🏫",
     title: "Багшийн бүртгэл",
     desc: "Овог нэр, РД, утас, хаяг, ажилласан жил, судлагдахуун, ордог анги, долоо хоногийн цаг, анги даалт.",
-    tint: "from-geo-500/12 to-aqua-500/0",
+    tint: "from-teal-500/12 to-seafoam-500/0",
   },
   {
     icon: "🔍",
     title: "Ажиглалтын тэмдэглэл",
     desc: "Хичээлд суусан тэмдэглэл: багш, анги, цаг, сэдэв, ажиглалт, давуу тал, зөвлөмж.",
-    tint: "from-aqua-500/12 to-sun-500/0",
+    tint: "from-seafoam-500/12 to-pink-500/0",
   },
   {
     icon: "📊",
     title: "Дүнгийн матриц",
     desc: "Сургуулийн хэмжээний дүнгийн нэгдсэн матриц: анги, сурагч, судлагдахуун, улирлаар шүүж дүгнэнэ.",
-    tint: "from-sun-500/12 to-amber-500/0",
+    tint: "from-pink-500/12 to-coral-500/0",
   },
   {
     icon: "🛡️",
@@ -113,13 +113,13 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
   const aph = aphorisms[idx] || aphorisms[0];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#f6fafb]">
+    <div className="relative min-h-screen overflow-hidden bg-[#f4fbfa]">
       {/* Дэвсгэрийн гялбаа */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-40 -top-40 h-[36rem] w-[36rem] rounded-full bg-geo-400/25 blur-3xl animate-float" />
-        <div className="absolute -right-32 top-24 h-[30rem] w-[30rem] rounded-full bg-aqua-300/25 blur-3xl animate-float [animation-delay:2s]" />
-        <div className="absolute bottom-[-12rem] left-1/3 h-[32rem] w-[32rem] rounded-full bg-amber-300/25 blur-3xl animate-float [animation-delay:4s]" />
-        <div className="absolute -bottom-24 right-10 h-[24rem] w-[24rem] rounded-full bg-sun-300/20 blur-3xl animate-float [animation-delay:6s]" />
+        <div className="absolute -left-40 -top-40 h-[36rem] w-[36rem] rounded-full bg-teal-400/25 blur-3xl animate-float" />
+        <div className="absolute -right-32 top-24 h-[30rem] w-[30rem] rounded-full bg-seafoam-300/25 blur-3xl animate-float [animation-delay:2s]" />
+        <div className="absolute bottom-[-12rem] left-1/3 h-[32rem] w-[32rem] rounded-full bg-coral-300/25 blur-3xl animate-float [animation-delay:4s]" />
+        <div className="absolute -bottom-24 right-10 h-[24rem] w-[24rem] rounded-full bg-pink-300/20 blur-3xl animate-float [animation-delay:6s]" />
       </div>
 
       {/* ---------------- Толгой ---------------- */}
@@ -145,13 +145,14 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
         <div className="grid items-start gap-10 lg:grid-cols-[1.15fr_.85fr]">
           {/* Зүүн — тайлбар */}
           <div className="animate-fade-up pt-6">
-            <span className="badge bg-geo-100 text-geo-700">
+            <span className="badge bg-teal-100 text-teal-700">
               2025–2026 оны хичээлийн жил
             </span>
 
             <h1 className="mt-5 text-4xl font-black leading-[1.1] tracking-tight text-ink-900 sm:text-5xl lg:text-[3.4rem]">
               Сургуулийн сургалтын
-              <span className="block bg-gradient-to-r from-geo-600 via-aqua-500 to-sun-500 bg-clip-text text-transparent">
+              {/* Цайвар дэвсгэр дээрх текст тул гүн сүүдрүүдийг ашиглав */}
+              <span className="block bg-gradient-to-r from-teal-600 via-seafoam-600 to-pink-600 bg-clip-text text-transparent">
                 удирдлагыг нэг дороос
               </span>
             </h1>
@@ -164,9 +165,9 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
 
             {/* Афоризм */}
             <div className="relative mt-8 max-w-xl overflow-hidden rounded-3xl border border-white/70 bg-white/70 p-6 shadow-soft backdrop-blur-xl">
-              <div className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-geo-500 via-aqua-400 to-sun-400" />
+              <div className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-teal-500 via-seafoam-400 to-pink-400" />
               <div className="pl-3">
-                <div className="mb-2 text-2xl leading-none text-geo-400">❝</div>
+                <div className="mb-2 text-2xl leading-none text-teal-400">❝</div>
                 <p
                   key={idx}
                   className="animate-fade-up text-[17px] font-semibold leading-relaxed text-ink-800"
@@ -187,7 +188,7 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
                         onClick={() => setIdx(i)}
                         className={`h-1.5 rounded-full transition-all ${
                           i === idx
-                            ? "w-6 bg-geo-500"
+                            ? "w-6 bg-teal-500"
                             : "w-1.5 bg-ink-200 hover:bg-ink-300"
                         }`}
                       />
@@ -329,7 +330,7 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
         </section>
       </main>
 
-      <footer className="border-t border-[#dbe6ea] bg-white/50 py-6 backdrop-blur">
+      <footer className="border-t border-[#d7e8e6] bg-white/50 py-6 backdrop-blur">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-5 text-xs text-ink-400 sm:flex-row">
           <span>© {new Date().getFullYear()} Сургалтын менежерийн систем</span>
           <span>Next.js · Supabase · Vercel</span>

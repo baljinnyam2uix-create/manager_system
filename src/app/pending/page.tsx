@@ -22,16 +22,16 @@ export default async function PendingPage() {
   const rejected = profile?.status === "rejected";
 
   return (
-    <div className="relative grid min-h-screen place-items-center overflow-hidden bg-[#f6fafb] px-5">
+    <div className="relative grid min-h-screen place-items-center overflow-hidden bg-[#f4fbfa] px-5">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-32 top-0 h-[30rem] w-[30rem] rounded-full bg-geo-400/20 blur-3xl" />
-        <div className="absolute -right-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-amber-300/30 blur-3xl" />
+        <div className="absolute -left-32 top-0 h-[30rem] w-[30rem] rounded-full bg-teal-400/20 blur-3xl" />
+        <div className="absolute -right-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-coral-300/30 blur-3xl" />
       </div>
 
       <div className="w-full max-w-md rounded-3xl border border-white/70 bg-white/85 p-9 text-center shadow-lift backdrop-blur-xl">
         <div
           className={`mx-auto mb-5 grid h-16 w-16 place-items-center rounded-3xl text-3xl ${
-            rejected ? "bg-red-100" : "bg-amber-100"
+            rejected ? "bg-red-100" : "bg-coral-100"
           }`}
         >
           {rejected ? "✕" : "⏳"}
@@ -63,7 +63,7 @@ export default async function PendingPage() {
           )}
         </p>
 
-        <dl className="mt-6 space-y-2 rounded-2xl border border-[#dbe6ea] bg-ink-50/60 p-4 text-left text-[13px]">
+        <dl className="mt-6 space-y-2 rounded-2xl border border-[#d7e8e6] bg-ink-50/60 p-4 text-left text-[13px]">
           <Row label="И-мэйл" value={profile?.email || user.email || "—"} />
           <Row label="Сургууль" value={profile?.school_name || "—"} />
           <Row label="Утас" value={profile?.phone || "—"} />

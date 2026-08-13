@@ -322,9 +322,9 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                   : 0;
                 return (
                   <div key={tid} className="card">
-                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#dbe6ea] px-5 py-3.5">
+                    <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#d7e8e6] px-5 py-3.5">
                       <div className="flex items-center gap-3">
-                        <div className="grid h-9 w-9 place-items-center rounded-xl bg-geo-100 text-sm font-black text-geo-700">
+                        <div className="grid h-9 w-9 place-items-center rounded-xl bg-teal-100 text-sm font-black text-teal-700">
                           {(tc?.first_name || "?").charAt(0)}
                         </div>
                         <div>
@@ -338,18 +338,18 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                         <span className="text-ink-500">
                           Гүйцэтгэсэн: <b className="text-ink-800">{done}/{list.length}</b>
                         </span>
-                        <span className="badge bg-aqua-100 text-aqua-800">{pct}%</span>
+                        <span className="badge bg-seafoam-100 text-seafoam-800">{pct}%</span>
                       </div>
                     </div>
 
-                    <div className="divide-y divide-[#e9f0f2]">
+                    <div className="divide-y divide-[#e6f1ef]">
                       {list.map((t) => (
                         <div key={t.id} className="flex flex-wrap items-start gap-3 px-5 py-3">
                           <input
                             type="checkbox"
                             checked={t.is_done}
                             onChange={() => toggleDone(t)}
-                            className="mt-1 h-5 w-5 shrink-0 accent-aqua-500"
+                            className="mt-1 h-5 w-5 shrink-0 accent-seafoam-500"
                           />
                           <div className="min-w-[200px] flex-1">
                             <div
@@ -365,7 +365,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                               )}
                               {t.due_date && <span>⏱ {t.due_date}</span>}
                               {t.plan_item_id && (
-                                <span className="badge bg-sun-100 text-sun-700">
+                                <span className="badge bg-pink-100 text-pink-700">
                                   Төлөвлөгөөнөөс
                                 </span>
                               )}
@@ -386,7 +386,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                               onChange={(e) =>
                                 setScore(t, e.target.value === "" ? 0 : Number(e.target.value))
                               }
-                              className="w-16 rounded-lg border border-[#dbe6ea] px-2 py-1 text-center text-sm font-bold"
+                              className="w-16 rounded-lg border border-[#d7e8e6] px-2 py-1 text-center text-sm font-bold"
                             />
                             <span className="text-xs text-ink-400">/ {t.max_score || 10}</span>
                           </div>
@@ -541,7 +541,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                 <label className="flex items-center gap-2 text-sm font-semibold text-ink-700">
                   <input
                     type="checkbox"
-                    className="h-4 w-4 accent-aqua-500"
+                    className="h-4 w-4 accent-seafoam-500"
                     checked={!!modal.is_done}
                     onChange={(e) => setModal({ ...modal, is_done: e.target.checked })}
                   />
@@ -627,7 +627,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
             <SectionHead title="Ажлууд" />
-            <div className="max-h-72 space-y-1.5 overflow-y-auto rounded-xl border border-[#dbe6ea] p-2">
+            <div className="max-h-72 space-y-1.5 overflow-y-auto rounded-xl border border-[#d7e8e6] p-2">
               {planItems.map((p) => (
                 <label
                   key={p.id}
@@ -635,7 +635,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                 >
                   <input
                     type="checkbox"
-                    className="mt-0.5 h-4 w-4 accent-geo-500"
+                    className="mt-0.5 h-4 w-4 accent-teal-500"
                     checked={bulkPick.includes(p.id)}
                     onChange={(e) =>
                       setBulkPick((v) =>
@@ -664,7 +664,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                 </button>
               }
             />
-            <div className="max-h-72 space-y-1.5 overflow-y-auto rounded-xl border border-[#dbe6ea] p-2">
+            <div className="max-h-72 space-y-1.5 overflow-y-auto rounded-xl border border-[#d7e8e6] p-2">
               {teachers.map((t) => (
                 <label
                   key={t.id}
@@ -672,7 +672,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                 >
                   <input
                     type="checkbox"
-                    className="h-4 w-4 accent-aqua-500"
+                    className="h-4 w-4 accent-seafoam-500"
                     checked={bulkTeachers.includes(t.id)}
                     onChange={(e) =>
                       setBulkTeachers((v) =>

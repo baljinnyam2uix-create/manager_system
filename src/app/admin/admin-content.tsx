@@ -27,16 +27,16 @@ export function Stat({
   sub?: string;
 }) {
   const tones = {
-    amber: "from-amber-100 to-amber-50 text-amber-800",
-    aqua: "from-aqua-100 to-aqua-50 text-aqua-800",
+    amber: "from-coral-100 to-coral-50 text-coral-800",
+    aqua: "from-seafoam-100 to-seafoam-50 text-seafoam-800",
     red: "from-red-100 to-red-50 text-red-700",
     ink: "from-ink-100 to-ink-50 text-ink-800",
-    geo: "from-geo-100 to-geo-50 text-geo-800",
-    sun: "from-sun-100 to-sun-50 text-sun-800",
+    geo: "from-teal-100 to-teal-50 text-teal-800",
+    sun: "from-pink-100 to-pink-50 text-pink-800",
   };
   return (
     <div
-      className={`rounded-2xl border border-[#dbe6ea] bg-gradient-to-br ${tones[tone]} p-5 shadow-soft`}
+      className={`rounded-2xl border border-[#d7e8e6] bg-gradient-to-br ${tones[tone]} p-5 shadow-soft`}
     >
       <div className="text-3xl font-black">{value}</div>
       <div className="mt-0.5 text-xs font-bold uppercase tracking-wide opacity-70">
@@ -115,7 +115,7 @@ export function AphorismsTab({
             <label className="flex items-end gap-2 pb-2.5 text-sm font-semibold text-ink-700">
               <input
                 type="checkbox"
-                className="h-4 w-4 accent-aqua-500"
+                className="h-4 w-4 accent-seafoam-500"
                 checked={form.active !== false}
                 onChange={(e) => setForm({ ...form, active: e.target.checked })}
               />
@@ -156,7 +156,7 @@ export function AphorismsTab({
 
       <div className="space-y-2">
         {items.length === 0 && (
-          <p className="rounded-2xl border border-dashed border-[#c9dbe0] bg-white/60 px-6 py-12 text-center text-sm text-ink-400">
+          <p className="rounded-2xl border border-dashed border-[#c2ded9] bg-white/60 px-6 py-12 text-center text-sm text-ink-400">
             Афоризм бүртгээгүй байна
           </p>
         )}
@@ -164,10 +164,10 @@ export function AphorismsTab({
           <div
             key={a.id}
             className={`flex flex-wrap items-start gap-3 rounded-2xl border p-4 ${
-              a.active ? "border-[#dbe6ea] bg-white" : "border-[#e9f0f2] bg-ink-50/60 opacity-70"
+              a.active ? "border-[#d7e8e6] bg-white" : "border-[#e6f1ef] bg-ink-50/60 opacity-70"
             }`}
           >
-            <span className="text-xl leading-none text-geo-300">❝</span>
+            <span className="text-xl leading-none text-teal-300">❝</span>
             <div className="min-w-[220px] flex-1">
               <p className="text-[15px] font-semibold leading-relaxed text-ink-800">
                 {a.text}
@@ -180,7 +180,7 @@ export function AphorismsTab({
               <label className="flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-ink-500">
                 <input
                   type="checkbox"
-                  className="h-4 w-4 accent-aqua-500"
+                  className="h-4 w-4 accent-seafoam-500"
                   checked={a.active}
                   disabled={busy}
                   onChange={(e) =>
@@ -344,7 +344,7 @@ export function SchoolsTab({
 
       <div className="table-wrap">
         <table className="w-full min-w-[700px]">
-          <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
+          <thead className="border-b border-[#d7e8e6] bg-ink-50/50">
             <tr>
               <th className="th">Сургууль</th>
               <th className="th">Байршил</th>
@@ -352,7 +352,7 @@ export function SchoolsTab({
               <th className="th text-right">Үйлдэл</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#e9f0f2]">
+          <tbody className="divide-y divide-[#e6f1ef]">
             {items.length === 0 && (
               <tr>
                 <td colSpan={4} className="td py-12 text-center text-ink-400">
@@ -374,7 +374,7 @@ export function SchoolsTab({
                         {mgrs.map((m) => (
                           <span
                             key={m.id}
-                            className="badge bg-geo-100 text-geo-700"
+                            className="badge bg-teal-100 text-teal-700"
                             title={m.email}
                           >
                             {m.last_name} {m.first_name}
@@ -528,14 +528,14 @@ export function SystemTab({
           <div className="mt-4 max-h-[420px] overflow-y-auto">
             <table className="w-full min-w-[560px]">
               <thead className="sticky top-0 bg-white">
-                <tr className="border-b border-[#dbe6ea]">
+                <tr className="border-b border-[#d7e8e6]">
                   <th className="th">Хэзээ</th>
                   <th className="th">Хэн</th>
                   <th className="th">Юу хийсэн</th>
                   <th className="th">Дэлгэрэнгүй</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#e9f0f2]">
+              <tbody className="divide-y divide-[#e6f1ef]">
                 {audit.map((a) => (
                   <tr key={a.id} className="hover:bg-ink-50/40">
                     <td className="td whitespace-nowrap text-xs text-ink-400">

@@ -21,10 +21,11 @@ function letterOf(score: number | null | undefined) {
 
 function scoreColor(score: number | null | undefined) {
   if (score == null) return "";
-  if (score >= 90) return "bg-aqua-100 text-aqua-800";
-  if (score >= 80) return "bg-geo-100 text-geo-700";
-  if (score >= 70) return "bg-amber-100 text-amber-800";
-  if (score >= 60) return "bg-sun-100 text-sun-800";
+  // Ногооноос улаан руу: сайн → муу
+  if (score >= 90) return "bg-mint-300 text-mint-900";
+  if (score >= 80) return "bg-seafoam-100 text-seafoam-800";
+  if (score >= 70) return "bg-teal-100 text-teal-800";
+  if (score >= 60) return "bg-coral-100 text-coral-800";
   return "bg-red-100 text-red-700";
 }
 
@@ -411,7 +412,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
               ))}
             </select>
 
-            <div className="flex gap-1 rounded-xl border border-[#dbe6ea] bg-white p-1">
+            <div className="flex gap-1 rounded-xl border border-[#d7e8e6] bg-white p-1">
               {QUARTERS.map((q) => (
                 <button
                   key={q}
@@ -421,7 +422,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                     setQuarter(q);
                   }}
                   className={`rounded-lg px-3.5 py-1.5 text-xs font-bold transition ${
-                    quarter === q ? "bg-geo-500 text-white shadow-soft" : "text-ink-500 hover:bg-ink-50"
+                    quarter === q ? "bg-teal-500 text-white shadow-soft" : "text-ink-500 hover:bg-ink-50"
                   }`}
                 >
                   {q}-р улирал
@@ -453,13 +454,13 @@ export default function GradesClient({ profile }: { profile: Profile }) {
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-ink-50/60">
-                    <th className="sticky left-0 z-10 border-b border-r border-[#dbe6ea] bg-ink-50 px-3 py-2 text-left text-[11px] font-bold uppercase text-ink-500">
+                    <th className="sticky left-0 z-10 border-b border-r border-[#d7e8e6] bg-ink-50 px-3 py-2 text-left text-[11px] font-bold uppercase text-ink-500">
                       Сурагч
                     </th>
                     {subjects.map((s) => (
                       <th
                         key={s.id}
-                        className="border-b border-[#dbe6ea] px-1 py-2 text-center text-[10px] font-bold text-ink-500"
+                        className="border-b border-[#d7e8e6] px-1 py-2 text-center text-[10px] font-bold text-ink-500"
                         title={s.name}
                       >
                         <div
@@ -469,12 +470,12 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                         <span className="block max-w-[64px] truncate">{s.name}</span>
                       </th>
                     ))}
-                    <th className="border-b border-l border-[#dbe6ea] px-2 py-2 text-center text-[10px] font-bold text-ink-500">
+                    <th className="border-b border-l border-[#d7e8e6] px-2 py-2 text-center text-[10px] font-bold text-ink-500">
                       Дундаж
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#e9f0f2]">
+                <tbody className="divide-y divide-[#e6f1ef]">
                   {classStudents.map((st, i) => {
                     const vals = subjects
                       .map((s) => valueOf(st.id, s.id))
@@ -483,8 +484,8 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                       ? Math.round((vals.reduce((a, b) => a + b, 0) / vals.length) * 10) / 10
                       : null;
                     return (
-                      <tr key={st.id} className="hover:bg-geo-50/30">
-                        <td className="sticky left-0 z-10 border-r border-[#dbe6ea] bg-white px-3 py-1.5">
+                      <tr key={st.id} className="hover:bg-teal-50/30">
+                        <td className="sticky left-0 z-10 border-r border-[#d7e8e6] bg-white px-3 py-1.5">
                           <div className="flex items-center gap-2">
                             <span className="text-[10px] text-ink-300">{i + 1}</span>
                             <div className="min-w-0">
@@ -495,7 +496,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                             </div>
                             <button
                               onClick={() => setStuModal(st)}
-                              className="ml-auto text-[10px] text-ink-300 hover:text-geo-600"
+                              className="ml-auto text-[10px] text-ink-300 hover:text-teal-600"
                             >
                               ✎
                             </button>
@@ -512,18 +513,18 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                                 max={100}
                                 value={v ?? ""}
                                 onChange={(e) => setCell(st.id, s.id, e.target.value)}
-                                className={`h-8 w-14 rounded-md border text-center text-xs font-bold outline-none transition focus:ring-2 focus:ring-geo-200 ${
+                                className={`h-8 w-14 rounded-md border text-center text-xs font-bold outline-none transition focus:ring-2 focus:ring-teal-200 ${
                                   dirty.has(k)
-                                    ? "border-geo-400 bg-geo-50"
+                                    ? "border-teal-400 bg-teal-50"
                                     : v != null
                                       ? `border-transparent ${scoreColor(v)}`
-                                      : "border-[#e2edf0] bg-white"
+                                      : "border-[#dcefeb] bg-white"
                                 }`}
                               />
                             </td>
                           );
                         })}
-                        <td className="border-l border-[#dbe6ea] px-2 py-1.5 text-center">
+                        <td className="border-l border-[#d7e8e6] px-2 py-1.5 text-center">
                           {avg != null && (
                             <span className={`badge ${scoreColor(avg)}`}>
                               {avg} · {letterOf(avg)}
@@ -534,9 +535,9 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                     );
                   })}
                 </tbody>
-                <tfoot className="border-t-2 border-[#c9dbe0] bg-ink-50/60">
+                <tfoot className="border-t-2 border-[#c2ded9] bg-ink-50/60">
                   <tr>
-                    <td className="sticky left-0 z-10 border-r border-[#dbe6ea] bg-ink-50 px-3 py-2 text-[11px] font-black text-ink-700">
+                    <td className="sticky left-0 z-10 border-r border-[#d7e8e6] bg-ink-50 px-3 py-2 text-[11px] font-black text-ink-700">
                       Хичээлийн дундаж
                     </td>
                     {subjects.map((s) => {
@@ -552,7 +553,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                         </td>
                       );
                     })}
-                    <td className="border-l border-[#dbe6ea]" />
+                    <td className="border-l border-[#d7e8e6]" />
                   </tr>
                 </tfoot>
               </table>
@@ -575,7 +576,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
             />
             <div className="table-wrap">
               <table className="w-full min-w-[600px]">
-                <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
+                <thead className="border-b border-[#d7e8e6] bg-ink-50/50">
                   <tr>
                     <th className="th">Анги</th>
                     <th className="th text-center">Сурагч</th>
@@ -585,7 +586,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                     <th className="th text-center">Амжилт</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#e9f0f2]">
+                <tbody className="divide-y divide-[#e6f1ef]">
                   {classes.map((c) => {
                     const sts = students.filter((s) => s.class_id === c.id);
                     const gs = grades.filter(
@@ -604,7 +605,7 @@ export default function GradesClient({ profile }: { profile: Profile }) {
                     return (
                       <tr
                         key={c.id}
-                        className={`cursor-pointer hover:bg-ink-50/40 ${c.id === selClass ? "bg-geo-50/50" : ""}`}
+                        className={`cursor-pointer hover:bg-ink-50/40 ${c.id === selClass ? "bg-teal-50/50" : ""}`}
                         onClick={() => setSelClass(c.id)}
                       >
                         <td className="td font-semibold">{c.name}</td>

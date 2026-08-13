@@ -316,14 +316,14 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
 
           {/* ---------- Зөрчлийн жагсаалт ---------- */}
           {conflicts.length > 0 && (
-            <details className="rounded-2xl border border-amber-300 bg-amber-50 p-4">
-              <summary className="cursor-pointer text-sm font-bold text-amber-900">
+            <details className="rounded-2xl border border-coral-300 bg-coral-50 p-4">
+              <summary className="cursor-pointer text-sm font-bold text-coral-900">
                 ⚠️ {conflicts.length} зөрчил илэрлээ — дэлгэрэнгүй харах
               </summary>
-              <ul className="mt-3 max-h-64 space-y-1.5 overflow-y-auto text-[13px] text-amber-900">
+              <ul className="mt-3 max-h-64 space-y-1.5 overflow-y-auto text-[13px] text-coral-900">
                 {conflicts.slice(0, 60).map((c, i) => (
                   <li key={i} className="rounded-lg bg-white/70 px-3 py-1.5">
-                    <b className="uppercase text-[10px] text-amber-600">
+                    <b className="uppercase text-[10px] text-coral-600">
                       {c.type === "teacher" ? "багш" : c.type === "class" ? "анги" : c.type === "room" ? "кабинет" : "цаг"}
                     </b>{" "}
                     {c.message}
@@ -353,7 +353,7 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
             <>
               {/* ---------- Харагдац сонгох ---------- */}
               <div className="flex flex-wrap items-center gap-3">
-                <div className="flex gap-1 rounded-xl border border-[#dbe6ea] bg-white p-1">
+                <div className="flex gap-1 rounded-xl border border-[#d7e8e6] bg-white p-1">
                   {(
                     [
                       ["school", "Нэгдсэн"],
@@ -366,7 +366,7 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
                       onClick={() => setView(k)}
                       className={`rounded-lg px-3.5 py-1.5 text-xs font-bold transition ${
                         view === k
-                          ? "bg-geo-500 text-white shadow-soft"
+                          ? "bg-teal-500 text-white shadow-soft"
                           : "text-ink-500 hover:bg-ink-50"
                       }`}
                     >
@@ -463,15 +463,15 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
                       key={v.id}
                       className={`flex flex-wrap items-center gap-3 rounded-xl border px-4 py-3 ${
                         v.id === versionId
-                          ? "border-geo-300 bg-geo-50"
-                          : "border-[#dbe6ea] bg-white"
+                          ? "border-teal-300 bg-teal-50"
+                          : "border-[#d7e8e6] bg-white"
                       }`}
                     >
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2 text-sm font-bold text-ink-800">
                           {v.name}
                           {v.is_active && (
-                            <span className="badge bg-aqua-100 text-aqua-800">Идэвхтэй</span>
+                            <span className="badge bg-seafoam-100 text-seafoam-800">Идэвхтэй</span>
                           )}
                         </div>
                         <div className="truncate text-[11px] text-ink-400">
@@ -526,7 +526,7 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
             <label className="flex items-start gap-3 text-sm">
               <input
                 type="checkbox"
-                className="mt-0.5 h-4 w-4 accent-aqua-500"
+                className="mt-0.5 h-4 w-4 accent-seafoam-500"
                 checked={genOpts.peSharedHall}
                 onChange={(e) => setGenOpts({ ...genOpts, peSharedHall: e.target.checked })}
               />
@@ -542,7 +542,7 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
             <label className="flex items-start gap-3 text-sm">
               <input
                 type="checkbox"
-                className="mt-0.5 h-4 w-4 accent-geo-500"
+                className="mt-0.5 h-4 w-4 accent-teal-500"
                 checked={genOpts.keepLocked}
                 onChange={(e) => setGenOpts({ ...genOpts, keepLocked: e.target.checked })}
               />
@@ -562,12 +562,12 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
                 max={40}
                 value={genOpts.attempts}
                 onChange={(e) => setGenOpts({ ...genOpts, attempts: Number(e.target.value) })}
-                className="w-full accent-geo-500"
+                className="w-full accent-teal-500"
               />
             </Field>
           </div>
 
-          <div className="rounded-xl border border-[#dbe6ea] p-4 text-[13px]">
+          <div className="rounded-xl border border-[#d7e8e6] p-4 text-[13px]">
             <h4 className="mb-2 font-bold text-ink-800">Дагаж мөрдөх хязгаарлалт</h4>
             <ul className="space-y-1 text-ink-500">
               <li>✓ Багшийн цаг давхцахгүй</li>
@@ -589,7 +589,7 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
           </div>
 
           {result && (
-            <div className="rounded-xl border border-[#dbe6ea] bg-white p-4 text-[13px]">
+            <div className="rounded-xl border border-[#d7e8e6] bg-white p-4 text-[13px]">
               <h4 className="mb-2 font-bold text-ink-800">Үр дүн</h4>
               <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                 <MiniStat label="Байрлав" value={result.stats.totalPlaced} />
@@ -598,9 +598,9 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
                 <MiniStat label="Хугацаа" value={`${result.stats.elapsedMs}мс`} />
               </div>
               {result.unplaced.length > 0 && (
-                <ul className="mt-3 max-h-40 space-y-1 overflow-y-auto text-xs text-amber-800">
+                <ul className="mt-3 max-h-40 space-y-1 overflow-y-auto text-xs text-coral-800">
                   {result.unplaced.slice(0, 20).map((u, i) => (
-                    <li key={i} className="rounded bg-amber-50 px-2 py-1">
+                    <li key={i} className="rounded bg-coral-50 px-2 py-1">
                       {u.teacherName} · {u.subjectName} · {u.className} — {u.reason}
                     </li>
                   ))}
@@ -648,7 +648,7 @@ function TeacherSummary({
       <SectionHead title="Ачаалал ба гүйцэтгэл" desc="Төлөвлөсөн цаг ба хуваарилагдсан цагийн тулгалт" />
       <div className="table-wrap">
         <table className="w-full min-w-[520px]">
-          <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
+          <thead className="border-b border-[#d7e8e6] bg-ink-50/50">
             <tr>
               <th className="th">Хичээл</th>
               <th className="th">Анги</th>
@@ -657,7 +657,7 @@ function TeacherSummary({
               <th className="th text-center">Төлөв</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#e9f0f2]">
+          <tbody className="divide-y divide-[#e6f1ef]">
             {mine.map((l) => {
               const got = slots.filter(
                 (s) =>
@@ -676,7 +676,7 @@ function TeacherSummary({
                   <td className="td text-center">
                     <span
                       className={`badge ${
-                        ok ? "bg-aqua-100 text-aqua-800" : "bg-amber-100 text-amber-800"
+                        ok ? "bg-seafoam-100 text-seafoam-800" : "bg-coral-100 text-coral-800"
                       }`}
                     >
                       {ok ? "Таарсан" : got > need ? `+${got - need}` : `-${need - got}`}

@@ -70,7 +70,7 @@ export default function RegisterPage() {
     return (
       <Shell>
         <div className="text-center">
-          <div className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-3xl bg-aqua-100 text-3xl">
+          <div className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-3xl bg-seafoam-100 text-3xl">
             ✓
           </div>
           <h1 className="text-2xl font-black tracking-tight text-ink-900">
@@ -159,7 +159,7 @@ export default function RegisterPage() {
 
         <p className="text-center text-sm text-ink-400">
           Бүртгэлтэй юу?{" "}
-          <Link href="/" className="font-semibold text-geo-600 hover:underline">
+          <Link href="/" className="font-semibold text-teal-600 hover:underline">
             Нэвтрэх
           </Link>
         </p>
@@ -170,10 +170,10 @@ export default function RegisterPage() {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative grid min-h-screen place-items-center overflow-hidden bg-[#f6fafb] px-5 py-12">
+    <div className="relative grid min-h-screen place-items-center overflow-hidden bg-[#f4fbfa] px-5 py-12">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-32 top-0 h-[30rem] w-[30rem] rounded-full bg-geo-400/25 blur-3xl" />
-        <div className="absolute -right-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-sun-300/30 blur-3xl" />
+        <div className="absolute -left-32 top-0 h-[30rem] w-[30rem] rounded-full bg-teal-400/25 blur-3xl" />
+        <div className="absolute -right-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-pink-300/30 blur-3xl" />
       </div>
       <div className="w-full max-w-lg">
         <Link href="/" className="mb-6 flex items-center justify-center gap-3">

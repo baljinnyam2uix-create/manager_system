@@ -213,7 +213,7 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
           ) : (
             <div className="table-wrap">
               <table className="w-full min-w-[900px]">
-                <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
+                <thead className="border-b border-[#d7e8e6] bg-ink-50/50">
                   <tr>
                     <th className="th">Огноо</th>
                     <th className="th">Багшийн нэр</th>
@@ -225,7 +225,7 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
                     <th className="th text-right">Үйлдэл</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#e9f0f2]">
+                <tbody className="divide-y divide-[#e6f1ef]">
                   {filtered.map((r) => (
                     <tr
                       key={r.id}
@@ -237,7 +237,7 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
                       </td>
                       <td className="td font-semibold">{tName(r.teacher_id)}</td>
                       <td className="td">
-                        <span className="badge bg-geo-100 text-geo-700">
+                        <span className="badge bg-teal-100 text-teal-700">
                           {cName(r.class_id)}
                         </span>
                         <div className="mt-0.5 text-[11px] text-ink-400">
@@ -256,7 +256,7 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
                       </td>
                       <td className="td text-center">
                         {r.score != null && (
-                          <span className="badge bg-aqua-100 text-aqua-800">{r.score}</span>
+                          <span className="badge bg-seafoam-100 text-seafoam-800">{r.score}</span>
                         )}
                       </td>
                       <td className="td" onClick={(e) => e.stopPropagation()}>
@@ -482,9 +482,9 @@ function Block({
 }) {
   if (!text) return null;
   const tones = {
-    ink: "border-[#dbe6ea] bg-white",
-    aqua: "border-aqua-200 bg-aqua-50",
-    amber: "border-amber-200 bg-amber-50",
+    ink: "border-[#d7e8e6] bg-white",
+    aqua: "border-seafoam-200 bg-seafoam-50",
+    amber: "border-coral-200 bg-coral-50",
   };
   return (
     <div className={`rounded-xl border p-4 ${tones[tone]}`}>

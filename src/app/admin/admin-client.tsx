@@ -55,8 +55,8 @@ export default function AdminClient({
   const pending = profiles.filter((p) => p.status === "pending").length;
 
   return (
-    <div className="min-h-screen bg-[#f6fafb]">
-      <header className="sticky top-0 z-20 border-b border-[#dbe6ea] bg-white/85 backdrop-blur-xl">
+    <div className="min-h-screen bg-[#f4fbfa]">
+      <header className="sticky top-0 z-20 border-b border-[#d7e8e6] bg-white/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4">
           <div className="flex items-center gap-3">
             <LogoMark size={42} />
@@ -85,14 +85,14 @@ export default function AdminClient({
               onClick={() => setTab(t.k)}
               className={`flex shrink-0 items-center gap-2 rounded-lg px-3.5 py-2 text-xs font-bold transition ${
                 tab === t.k
-                  ? "bg-geo-500 text-white shadow-soft"
+                  ? "bg-teal-500 text-white shadow-soft"
                   : "text-ink-500 hover:bg-ink-50"
               }`}
             >
               <span>{t.icon}</span>
               {t.label}
               {t.k === "managers" && pending > 0 && (
-                <span className="rounded-md bg-sun-500 px-1.5 text-[10px] text-white">
+                <span className="rounded-md bg-pink-700 px-1.5 text-[10px] font-bold text-white">
                   {pending}
                 </span>
               )}
@@ -106,7 +106,7 @@ export default function AdminClient({
           <div
             className={`rounded-xl border px-4 py-3 text-sm font-medium ${
               msg.ok
-                ? "border-aqua-200 bg-aqua-50 text-aqua-800"
+                ? "border-seafoam-200 bg-seafoam-50 text-seafoam-800"
                 : "border-red-200 bg-red-50 text-red-700"
             }`}
           >
@@ -208,14 +208,14 @@ function ManagersTab({
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
-        <div className="flex gap-1 rounded-xl border border-[#dbe6ea] bg-white p-1">
+        <div className="flex gap-1 rounded-xl border border-[#d7e8e6] bg-white p-1">
           {STATUS_TABS.map((t) => (
             <button
               key={t.key}
               onClick={() => setStatusTab(t.key)}
               className={`rounded-lg px-3 py-1.5 text-xs font-bold transition ${
                 statusTab === t.key
-                  ? "bg-geo-500 text-white shadow-soft"
+                  ? "bg-teal-500 text-white shadow-soft"
                   : "text-ink-500 hover:bg-ink-50"
               }`}
             >
@@ -238,7 +238,7 @@ function ManagersTab({
 
       <div className="table-wrap">
         <table className="w-full min-w-[1050px]">
-          <thead className="border-b border-[#dbe6ea] bg-ink-50/50">
+          <thead className="border-b border-[#d7e8e6] bg-ink-50/50">
             <tr>
               <th className="th">Хэрэглэгч</th>
               <th className="th">Сургууль</th>
@@ -248,7 +248,7 @@ function ManagersTab({
               <th className="th text-right">Үйлдэл</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#e9f0f2]">
+          <tbody className="divide-y divide-[#e6f1ef]">
             {filtered.length === 0 && (
               <tr>
                 <td colSpan={6} className="td py-12 text-center text-ink-400">
@@ -264,7 +264,7 @@ function ManagersTab({
                     <div className="font-semibold text-ink-900">
                       {p.last_name} {p.first_name}
                       {p.id === meId && (
-                        <span className="badge ml-2 bg-geo-100 text-geo-700">Та</span>
+                        <span className="badge ml-2 bg-teal-100 text-teal-700">Та</span>
                       )}
                     </div>
                     <div className="text-xs text-ink-400">{p.email}</div>
@@ -284,7 +284,7 @@ function ManagersTab({
                           "Сургууль оноогдлоо"
                         )
                       }
-                      className="mt-1 rounded-lg border border-[#dbe6ea] bg-white px-2 py-1 text-[11px]"
+                      className="mt-1 rounded-lg border border-[#d7e8e6] bg-white px-2 py-1 text-[11px]"
                     >
                       <option value="">— бүртгэлд холбоогүй —</option>
                       {schools.map((s) => (
@@ -318,7 +318,7 @@ function ManagersTab({
                       className={`rounded-lg border px-2 py-1 text-xs font-bold disabled:opacity-50 ${
                         p.role === "admin"
                           ? "border-ink-800 bg-ink-900 text-white"
-                          : "border-[#dbe6ea] bg-white"
+                          : "border-[#d7e8e6] bg-white"
                       }`}
                     >
                       <option value="manager">Менежер</option>
@@ -344,7 +344,7 @@ function ManagersTab({
                               `${p.first_name || p.email} батлагдлаа`
                             )
                           }
-                          className="btn btn-sm bg-aqua-100 text-aqua-800 hover:bg-aqua-200"
+                          className="btn btn-sm bg-seafoam-100 text-seafoam-800 hover:bg-seafoam-200"
                         >
                           Батлах
                         </button>
@@ -356,7 +356,7 @@ function ManagersTab({
                             setRejectFor(p);
                             setReason("");
                           }}
-                          className="btn btn-sm bg-amber-100 text-amber-800 hover:bg-amber-200"
+                          className="btn btn-sm bg-coral-100 text-coral-800 hover:bg-coral-200"
                         >
                           Татгалзах
                         </button>
@@ -388,7 +388,7 @@ function ManagersTab({
 
       {rejectFor && (
         <div className="fixed inset-0 z-50 grid place-items-center bg-ink-900/40 p-5 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-2xl border border-[#dbe6ea] bg-white p-6 shadow-lift">
+          <div className="w-full max-w-md rounded-2xl border border-[#d7e8e6] bg-white p-6 shadow-lift">
             <h3 className="text-lg font-bold text-ink-900">Бүртгэлийг татгалзах</h3>
             <p className="mt-1 text-sm text-ink-400">
               {rejectFor.last_name} {rejectFor.first_name} — {rejectFor.email}
@@ -434,8 +434,8 @@ function Chip({ n, l }: { n: number; l: string }) {
 
 function StatusBadge({ s }: { s: ApprovalStatus }) {
   const map = {
-    pending: ["bg-amber-100 text-amber-800", "Хүлээгдэж буй"],
-    approved: ["bg-aqua-100 text-aqua-800", "Батлагдсан"],
+    pending: ["bg-coral-100 text-coral-800", "Хүлээгдэж буй"],
+    approved: ["bg-seafoam-100 text-seafoam-800", "Батлагдсан"],
     rejected: ["bg-red-100 text-red-700", "Татгалзсан"],
   } as const;
   const [cls, label] = map[s];

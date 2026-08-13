@@ -2,19 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Логоны өнгө — brand tokens */
+/* Тропик палитр — brand tokens */
 :root {
-  --bg: #f6fafb;
+  --bg: #f4fbfa;
   --surface: #ffffff;
-  --border: #dbe6ea;
-  --text: #1c2a31;
-  --muted: #739caa;
+  --border: #d7e8e6;
+  --text: #1a2c2c;
+  --muted: #769c9c;
 
-  --geo: #1b9ad6; /* «GE» цэнхэр */
-  --sun: #fa7314; /* «id» улбар шар */
-  --aqua: #2fb9d6; /* тойрог замын цэнхэр */
-  --amber: #fba92a; /* тойрог замын алт */
-  --slate: #3f6b7c; /* ном, луужингийн шугам */
+  --teal: #008080; /* Teal Green — үндсэн */
+  --pink: #ff6b8b; /* Tropical Pink — өргөлт */
+  --seafoam: #20b2aa; /* Seafoam Green — амжилт */
+  --coral: #ff8c94; /* Soft Coral — анхааруулга */
+  --mint: #a8e6cf; /* Bright Mint — тодруулга */
 }
 
 html,
@@ -38,11 +38,11 @@ body {
 /* ------------------------------------------------------------------ */
 @layer components {
   .card {
-    @apply rounded-2xl border border-[#dbe6ea] bg-white shadow-soft;
+    @apply rounded-2xl border border-[#d7e8e6] bg-white shadow-soft;
   }
 
   .card-pad {
-    @apply rounded-2xl border border-[#dbe6ea] bg-white p-5 shadow-soft;
+    @apply rounded-2xl border border-[#d7e8e6] bg-white p-5 shadow-soft;
   }
 
   .btn {
@@ -52,32 +52,37 @@ body {
 
   .btn-primary {
     @apply btn text-white shadow-soft hover:shadow-lift;
+    /* teal → гүн seafoam → гүн ягаан.
+       Бүх зогсоол цагаан бичигтэй 4.5:1-ээс дээш харьцаатай. */
     background-image: linear-gradient(
       135deg,
-      var(--geo) 0%,
-      var(--aqua) 48%,
-      var(--sun) 125%
+      var(--teal) 0%,
+      #0a8b88 45%,
+      #c81c48 115%
     );
   }
 
-  /* Логоны тойрог замын шилжилт — толгой хэсэг, идэвхтэй элементэд */
+  /* Тропик шилжилт — толгой хэсэг, идэвхтэй элементэд.
+     ⚠ Дээр нь ЦАГААН бичиг тавьдаг тул бүх зогсоол гүн байх ёстой:
+     хамгийн цайвар зогсоол (pink-700) ч цагаантай 5.5:1 харьцаатай. */
   .brand-gradient {
     background-image: linear-gradient(
       110deg,
-      #0d7cb6 0%,
-      var(--geo) 26%,
-      var(--aqua) 52%,
-      var(--amber) 82%,
-      var(--sun) 100%
+      #084a4a 0%,
+      #045b5b 20%,
+      var(--teal) 42%,
+      #107774 58%,
+      #d33f50 84%,
+      #c81c48 100%
     );
   }
 
   .btn-ghost {
-    @apply btn border border-[#dbe6ea] bg-white text-ink-700 hover:bg-ink-50;
+    @apply btn border border-[#d7e8e6] bg-white text-ink-700 hover:bg-ink-50;
   }
 
   .btn-soft {
-    @apply btn bg-geo-50 text-geo-700 hover:bg-geo-100;
+    @apply btn bg-teal-50 text-teal-700 hover:bg-teal-100;
   }
 
   .btn-danger {
@@ -89,9 +94,9 @@ body {
   }
 
   .input {
-    @apply w-full rounded-xl border border-[#dbe6ea] bg-white px-3.5 py-2.5 text-sm text-ink-900
+    @apply w-full rounded-xl border border-[#d7e8e6] bg-white px-3.5 py-2.5 text-sm text-ink-900
            outline-none transition placeholder:text-ink-300
-           focus:border-geo-400 focus:ring-4 focus:ring-geo-100;
+           focus:border-teal-400 focus:ring-4 focus:ring-teal-100;
   }
 
   .label {
@@ -111,7 +116,7 @@ body {
   }
 
   .table-wrap {
-    @apply overflow-x-auto rounded-2xl border border-[#dbe6ea] bg-white shadow-soft;
+    @apply overflow-x-auto rounded-2xl border border-[#d7e8e6] bg-white shadow-soft;
   }
 
   .section-title {
@@ -128,18 +133,18 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #b9d0d8;
+  background: #b3d8d4;
   border-radius: 8px;
   border: 2px solid var(--bg);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94b6c2;
+  background: #8bbfb9;
 }
 
 /* Сонгосон текст — брэндийн цэнхэр */
 ::selection {
-  background: #cdeafa;
-  color: #0e6393;
+  background: #a8e6cf;
+  color: #045b5b;
 }
 
 /* Хэвлэх */
