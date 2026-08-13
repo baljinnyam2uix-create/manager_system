@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import SignOutButton from "./sign-out-button";
-import { LogoMark } from "./logo";
+import { LogoMark, BackgroundIcons } from "./logo";
 
 export const NAV = [
   { href: "/dashboard", icon: "🏠", label: "Хяналтын самбар" },
@@ -38,7 +38,8 @@ export default function Shell({
     href === "/dashboard" ? path === href : path.startsWith(href);
 
   return (
-    <div className="min-h-screen bg-[#f4fbfa]">
+    <div className="min-h-screen">
+      <BackgroundIcons />
       {/* ---------- Хажуугийн цэс ---------- */}
       <aside
         className={`no-print fixed inset-y-0 left-0 z-40 w-64 border-r border-[#d7e8e6] bg-white transition-transform lg:translate-x-0 ${
@@ -48,11 +49,11 @@ export default function Shell({
         <div className="flex h-full flex-col">
           <Link
             href="/dashboard"
-            className="flex items-center gap-3 border-b border-[#d7e8e6] px-5 py-5"
+            className="block border-b border-[#d7e8e6] px-5 py-4"
           >
-            <LogoMark size={42} className="shrink-0" />
-            <div className="min-w-0 leading-tight">
-              <div className="truncate text-[13px] font-extrabold text-ink-900">
+            <LogoMark width={142} priority />
+            <div className="mt-1 min-w-0 leading-tight">
+              <div className="truncate text-[11px] font-semibold text-ink-500">
                 Сургалтын менежер
               </div>
               <div className="truncate text-[11px] text-ink-400">

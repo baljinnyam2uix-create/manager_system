@@ -207,11 +207,11 @@ function SubjectsTab({
             Под группээр хуваагдана (зэрэгцэж орно)
           </label>
           <label className="flex items-center gap-2">
-            <input type="checkbox" className="h-4 w-4 accent-seafoam-500" checked={f.allow_shared_room} onChange={(e) => setF({ ...f, allow_shared_room: e.target.checked })} />
+            <input type="checkbox" className="h-4 w-4 accent-aqua-500" checked={f.allow_shared_room} onChange={(e) => setF({ ...f, allow_shared_room: e.target.checked })} />
             Нэг зааланд 2 анги зэрэг орж болно
           </label>
           <label className="flex items-center gap-2">
-            <input type="checkbox" className="h-4 w-4 accent-coral-500" checked={f.is_elective} onChange={(e) => setF({ ...f, is_elective: e.target.checked })} />
+            <input type="checkbox" className="h-4 w-4 accent-gold-500" checked={f.is_elective} onChange={(e) => setF({ ...f, is_elective: e.target.checked })} />
             Сонгон судлах
           </label>
         </div>
@@ -464,7 +464,7 @@ function RoomsTab({
           </Field>
           <div className="flex items-end gap-3">
             <label className="mb-2.5 flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-ink-700">
-              <input type="checkbox" className="h-4 w-4 accent-seafoam-500" checked={f.is_hall} onChange={(e) => setF({ ...f, is_hall: e.target.checked })} />
+              <input type="checkbox" className="h-4 w-4 accent-aqua-500" checked={f.is_hall} onChange={(e) => setF({ ...f, is_hall: e.target.checked })} />
               Заал
             </label>
             <button
@@ -501,7 +501,7 @@ function RoomsTab({
                 <td className="td text-xs text-ink-500">{r.building || "—"}</td>
                 <td className="td">{r.capacity || "—"}</td>
                 <td className="td text-center">
-                  {r.is_hall && <span className="badge bg-seafoam-100 text-seafoam-800">Заал</span>}
+                  {r.is_hall && <span className="badge bg-aqua-100 text-aqua-800">Заал</span>}
                 </td>
                 <td className="td text-right">
                   <button

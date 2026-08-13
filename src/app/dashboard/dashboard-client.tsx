@@ -77,11 +77,11 @@ export default function DashboardClient({
 
         {/* Тохиргоо шаардлагатай */}
         {setupNeeded && (
-          <div className="rounded-2xl border border-coral-300 bg-coral-50 p-5">
-            <h3 className="text-sm font-bold text-coral-900">
+          <div className="rounded-2xl border border-gold-300 bg-gold-50 p-5">
+            <h3 className="text-sm font-bold text-gold-900">
               🚀 Системийг ашиглаж эхлэхийн тулд
             </h3>
-            <ol className="mt-3 space-y-2 text-[13px] text-coral-900">
+            <ol className="mt-3 space-y-2 text-[13px] text-gold-900">
               <Step done={stats.subjects > 0} n={1}>
                 <Link href="/settings" className="font-semibold underline">
                   Тохиргоо
@@ -106,10 +106,10 @@ export default function DashboardClient({
 
         {/* Үзүүлэлтүүд */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard label="Багш" value={stats.teachers} sub={`${stats.homeroom} анги даасан`} icon="👩‍🏫" tone="geo" />
+          <StatCard label="Багш" value={stats.teachers} sub={`${stats.homeroom} анги даасан`} icon="👩‍🏫" tone="teal" />
           <StatCard label="Анги" value={stats.classes} sub={`${stats.students} сурагч`} icon="🏫" tone="aqua" />
-          <StatCard label="Хуваарийн цаг" value={stats.slots} sub="7 хоногт" icon="🗓️" tone="sun" />
-          <StatCard label="Судлагдахуун" value={stats.subjects} icon="📚" tone="amber" />
+          <StatCard label="Хуваарийн цаг" value={stats.slots} sub="7 хоногт" icon="🗓️" tone="orange" />
+          <StatCard label="Судлагдахуун" value={stats.subjects} icon="📚" tone="gold" />
         </div>
 
         <div className="grid gap-5 lg:grid-cols-3">
@@ -124,7 +124,7 @@ export default function DashboardClient({
             </div>
             <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-ink-100">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-teal-500 to-seafoam-400 transition-all"
+                className="h-full rounded-full bg-gradient-to-r from-teal-500 to-aqua-400 transition-all"
                 style={{ width: `${stats.planProgress}%` }}
               />
             </div>
@@ -140,12 +140,12 @@ export default function DashboardClient({
           <div className="card-pad">
             <h3 className="text-sm font-bold text-ink-800">Багшийн ажлын гүйцэтгэл</h3>
             <div className="mt-4 flex items-end gap-2">
-              <span className="text-4xl font-black text-seafoam-600">{stats.perfScore}%</span>
+              <span className="text-4xl font-black text-aqua-600">{stats.perfScore}%</span>
               <span className="pb-1.5 text-xs text-ink-400">дундаж оноо</span>
             </div>
             <div className="mt-3 h-2.5 overflow-hidden rounded-full bg-ink-100">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-seafoam-500 to-teal-400 transition-all"
+                className="h-full rounded-full bg-gradient-to-r from-aqua-500 to-teal-400 transition-all"
                 style={{ width: `${stats.perfScore}%` }}
               />
             </div>
@@ -221,7 +221,7 @@ function Step({
     <li className="flex items-start gap-3">
       <span
         className={`grid h-5 w-5 shrink-0 place-items-center rounded-full text-[10px] font-black ${
-          done ? "bg-seafoam-700 text-white" : "bg-coral-300 text-coral-900"
+          done ? "bg-aqua-700 text-white" : "bg-gold-300 text-gold-900"
         }`}
       >
         {done ? "✓" : n}

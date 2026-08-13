@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { LogoMark } from "@/components/logo";
+import { LogoMark, BackgroundIcons } from "@/components/logo";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -70,7 +70,7 @@ export default function RegisterPage() {
     return (
       <Shell>
         <div className="text-center">
-          <div className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-3xl bg-seafoam-100 text-3xl">
+          <div className="mx-auto mb-5 grid h-16 w-16 place-items-center rounded-3xl bg-aqua-100 text-3xl">
             ✓
           </div>
           <h1 className="text-2xl font-black tracking-tight text-ink-900">
@@ -170,15 +170,12 @@ export default function RegisterPage() {
 
 function Shell({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative grid min-h-screen place-items-center overflow-hidden bg-[#f4fbfa] px-5 py-12">
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-32 top-0 h-[30rem] w-[30rem] rounded-full bg-teal-400/25 blur-3xl" />
-        <div className="absolute -right-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-pink-300/30 blur-3xl" />
-      </div>
+    <div className="relative grid min-h-screen place-items-center px-5 py-12">
+      <BackgroundIcons />
       <div className="w-full max-w-lg">
-        <Link href="/" className="mb-6 flex items-center justify-center gap-3">
-          <LogoMark size={46} />
-          <span className="text-[15px] font-extrabold tracking-tight text-ink-900">
+        <Link href="/" className="mb-6 flex flex-col items-center gap-1">
+          <LogoMark width={168} priority />
+          <span className="text-[12px] font-semibold tracking-tight text-ink-500">
             Сургалтын менежер
           </span>
         </Link>

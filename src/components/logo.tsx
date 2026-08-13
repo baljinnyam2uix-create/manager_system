@@ -1,175 +1,116 @@
+/* eslint-disable @next/next/no-img-element */
+
 /**
- * GEOid лого — вектор хувилбар.
- * Нээлттэй ном + солонгон бөмбөрцөг + луужин + тойрог зам.
- * Өнгө нь брэндийн палитрын эх сурвалж (tailwind.config.ts дахь geo/sun/aqua/amber/ink).
+ * GEid лого — /public/logo.png (эх SVG-ээс задалж, тайрч бэлдсэн).
+ * Хэвтээ бүтэцтэй (харьцаа 1.15:1) тул `width`-ээр хэмжинэ.
  */
 export function LogoMark({
-  size = 40,
+  width = 132,
   className = "",
-  title = "GEOid",
+  priority = false,
 }: {
-  size?: number;
+  width?: number;
   className?: string;
-  title?: string;
+  priority?: boolean;
 }) {
-  // Нэг хуудсан дээр олон лого байвал gradient id давхцахгүй байх ёстой
-  const uid = `lg${Math.abs(hash(`${size}-${title}`))}`;
-
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 120 120"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      role="img"
-      aria-label={title}
-    >
-      <title>{title}</title>
-      <defs>
-        {/* Тойрог зам: улбар шар → эрдэнэ шиш → цэнхэр */}
-        <linearGradient id={`${uid}-orbit`} x1="0" y1="0.5" x2="1" y2="0.5">
-          <stop offset="0" stopColor="#E14E0C" />
-          <stop offset="0.2" stopColor="#F8891A" />
-          <stop offset="0.4" stopColor="#FBA92A" />
-          <stop offset="0.58" stopColor="#8ED3DE" />
-          <stop offset="0.78" stopColor="#2FB9D6" />
-          <stop offset="1" stopColor="#1E9BC4" />
-        </linearGradient>
-
-        {/* Бөмбөрцөг: солонгон шилжилт */}
-        <linearGradient id={`${uid}-globe`} x1="0.08" y1="0.15" x2="0.92" y2="0.9">
-          <stop offset="0" stopColor="#63CFC4" />
-          <stop offset="0.17" stopColor="#86D9A6" />
-          <stop offset="0.35" stopColor="#F0E27A" />
-          <stop offset="0.52" stopColor="#F4949E" />
-          <stop offset="0.68" stopColor="#F0A054" />
-          <stop offset="0.85" stopColor="#3D82D6" />
-          <stop offset="1" stopColor="#2FB9D6" />
-        </linearGradient>
-
-        {/* Гялбаа */}
-        <radialGradient id={`${uid}-shine`} cx="0.34" cy="0.28" r="0.62">
-          <stop offset="0" stopColor="#ffffff" stopOpacity="0.55" />
-          <stop offset="0.55" stopColor="#ffffff" stopOpacity="0.1" />
-          <stop offset="1" stopColor="#ffffff" stopOpacity="0" />
-        </radialGradient>
-
-        {/* Номын хуудасны сүүдэр */}
-        <linearGradient id={`${uid}-page`} x1="0.5" y1="0" x2="0.5" y2="1">
-          <stop offset="0" stopColor="#ffffff" />
-          <stop offset="1" stopColor="#EAF3F6" />
-        </linearGradient>
-      </defs>
-
-      {/* ---- Тойрог зам (номын ард) ---- */}
-      <ellipse
-        cx="60"
-        cy="75"
-        rx="52"
-        ry="20"
-        transform="rotate(-6 60 75)"
-        stroke={`url(#${uid}-orbit)`}
-        strokeWidth="7.5"
-        strokeLinecap="round"
-        fill="none"
-      />
-
-      {/* ---- Бөмбөрцөг ---- */}
-      <circle cx="60" cy="50" r="26" fill={`url(#${uid}-globe)`} />
-      <circle cx="60" cy="50" r="26" fill={`url(#${uid}-shine)`} />
-
-      {/* ---- Луужин ---- */}
-      <circle
-        cx="60"
-        cy="50"
-        r="18.5"
-        stroke="#3F6B7C"
-        strokeWidth="1.6"
-        fill="none"
-        opacity="0.9"
-      />
-      <polygon
-        points="60,33 61.99,45.2 72.02,37.98 64.8,48.01 77,50 64.8,51.99 72.02,62.02 61.99,54.8 60,67 58.01,54.8 47.98,62.02 55.2,51.99 43,50 55.2,48.01 47.98,37.98 58.01,45.2"
-        fill="#3F6B7C"
-      />
-      <circle cx="60" cy="50" r="3.1" fill="#ffffff" />
-      <circle cx="60" cy="50" r="1.5" fill="#FA7314" />
-
-      {/* ---- Нээлттэй ном ---- */}
-      {/* зүүн хуудас */}
-      <path
-        d="M60 84 C 47 74.5 31 70.5 14.5 72.5 L 14.5 60.5 C 31 58.5 47 62.5 60 72 Z"
-        fill={`url(#${uid}-page)`}
-        stroke="#3F6B7C"
-        strokeWidth="2.6"
-        strokeLinejoin="round"
-      />
-      {/* баруун хуудас */}
-      <path
-        d="M60 84 C 73 74.5 89 70.5 105.5 72.5 L 105.5 60.5 C 89 58.5 73 62.5 60 72 Z"
-        fill={`url(#${uid}-page)`}
-        stroke="#3F6B7C"
-        strokeWidth="2.6"
-        strokeLinejoin="round"
-      />
-      {/* хуудасны нугалаа */}
-      <path
-        d="M60 72 L 60 84"
-        stroke="#3F6B7C"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-      />
-      <path
-        d="M22 64.5 C 36 64 48 67.5 57 73.5 M98 64.5 C 84 64 72 67.5 63 73.5"
-        stroke="#3F6B7C"
-        strokeWidth="1.3"
-        strokeLinecap="round"
-        opacity="0.5"
-        fill="none"
-      />
-    </svg>
+    <img
+      src="/logo.png"
+      alt="GEid"
+      width={width}
+      height={Math.round(width / 1.152)}
+      className={`select-none object-contain ${className}`}
+      style={{ width, height: "auto" }}
+      loading={priority ? "eager" : "lazy"}
+      decoding="async"
+      draggable={false}
+    />
   );
 }
 
 /**
- * Лого + бичээс. Хажуугийн цэс, нүүр хуудасны толгойд ашиглана.
+ * Лого + бичээс — хажуугийн цэс, толгой хэсэгт.
  */
 export function LogoLockup({
-  size = 40,
-  title = "Сургалтын менежер",
+  width = 132,
   subtitle,
   className = "",
-  compact = false,
 }: {
-  size?: number;
-  title?: string;
+  width?: number;
   subtitle?: string;
   className?: string;
-  compact?: boolean;
 }) {
   return (
-    <span className={`flex items-center gap-3 ${className}`}>
-      <LogoMark size={size} className="shrink-0" />
-      {!compact && (
-        <span className="min-w-0 leading-tight">
-          <span className="block truncate text-[15px] font-extrabold tracking-tight text-ink-900">
-            {title}
-          </span>
-          {subtitle && (
-            <span className="block truncate text-[11px] font-medium text-ink-400">
-              {subtitle}
-            </span>
-          )}
+    <span className={`flex min-w-0 flex-col gap-1 ${className}`}>
+      <LogoMark width={width} priority />
+      {subtitle && (
+        <span className="truncate text-[11px] font-medium text-ink-400">
+          {subtitle}
         </span>
       )}
     </span>
   );
 }
 
-function hash(s: string) {
-  let h = 0;
-  for (let i = 0; i < s.length; i++) h = (h << 5) - h + s.charCodeAt(i);
-  return h;
+/**
+ * Дэвсгэрийн хөдөлгөөнт дүрс тэмдэгүүд.
+ * Боловсролын сэдэвт тэмдэгүүд удаан хөвж, дэвсгэрт амьд байдал өгнө.
+ * Уншихад саад болохгүйн тулд маш бүдэг, товчлууртай харилцахгүй.
+ */
+const ICONS = [
+  { c: "📐", top: "8%", left: "4%", size: 40, delay: "0s", dur: "26s" },
+  { c: "📚", top: "18%", left: "91%", size: 46, delay: "3s", dur: "31s" },
+  { c: "🗓️", top: "62%", left: "2%", size: 42, delay: "6s", dur: "28s" },
+  { c: "✏️", top: "78%", left: "88%", size: 38, delay: "1.5s", dur: "24s" },
+  { c: "🧭", top: "42%", left: "95%", size: 44, delay: "8s", dur: "34s" },
+  { c: "🌍", top: "88%", left: "46%", size: 40, delay: "4s", dur: "30s" },
+  { c: "📊", top: "34%", left: "8%", size: 36, delay: "10s", dur: "27s" },
+  { c: "🎓", top: "6%", left: "58%", size: 42, delay: "2s", dur: "33s" },
+];
+
+export function BackgroundIcons({ dense = false }: { dense?: boolean }) {
+  const list = dense ? ICONS : ICONS.slice(0, 5);
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+    >
+      {list.map((i, n) => (
+        <span
+          key={n}
+          className="bg-icon animate-drift"
+          style={{
+            top: i.top,
+            left: i.left,
+            fontSize: i.size,
+            opacity: 0.12,
+            animationDelay: i.delay,
+            animationDuration: i.dur,
+          }}
+        >
+          {i.c}
+        </span>
+      ))}
+
+      {/* Зөөлөн өнгөт бөмбөлгүүд — логоны өнгөөр */}
+      <span
+        className="animate-pulse-soft absolute -left-32 top-10 h-[26rem] w-[26rem] rounded-full blur-3xl"
+        style={{ background: "radial-gradient(circle, rgba(36,158,160,.30), transparent 70%)" }}
+      />
+      <span
+        className="animate-pulse-soft absolute -right-28 top-1/3 h-[22rem] w-[22rem] rounded-full blur-3xl"
+        style={{
+          background: "radial-gradient(circle, rgba(250,171,54,.28), transparent 70%)",
+          animationDelay: "2.5s",
+        }}
+      />
+      <span
+        className="animate-pulse-soft absolute bottom-[-8rem] left-1/3 h-[24rem] w-[24rem] rounded-full blur-3xl"
+        style={{
+          background: "radial-gradient(circle, rgba(247,129,4,.22), transparent 70%)",
+          animationDelay: "5s",
+        }}
+      />
+    </div>
+  );
 }

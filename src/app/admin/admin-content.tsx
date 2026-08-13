@@ -23,16 +23,16 @@ export function Stat({
 }: {
   label: string;
   value: number | string;
-  tone: "amber" | "aqua" | "red" | "ink" | "geo" | "sun";
+  tone: "gold" | "aqua" | "red" | "ink" | "teal" | "orange";
   sub?: string;
 }) {
   const tones = {
-    amber: "from-coral-100 to-coral-50 text-coral-800",
-    aqua: "from-seafoam-100 to-seafoam-50 text-seafoam-800",
+    gold: "from-gold-100 to-gold-50 text-gold-800",
+    aqua: "from-aqua-100 to-aqua-50 text-aqua-800",
     red: "from-red-100 to-red-50 text-red-700",
     ink: "from-ink-100 to-ink-50 text-ink-800",
-    geo: "from-teal-100 to-teal-50 text-teal-800",
-    sun: "from-pink-100 to-pink-50 text-pink-800",
+    teal: "from-teal-100 to-teal-50 text-teal-800",
+    orange: "from-orange-100 to-orange-50 text-orange-800",
   };
   return (
     <div
@@ -79,7 +79,7 @@ export function AphorismsTab({
   return (
     <div className="space-y-5">
       <div className="grid gap-4 sm:grid-cols-3">
-        <Stat label="Нийт афоризм" value={items.length} tone="geo" />
+        <Stat label="Нийт афоризм" value={items.length} tone="teal" />
         <Stat label="Идэвхтэй" value={active} tone="aqua" sub="нүүр хуудсанд эргэлдэнэ" />
         <Stat label="Нуусан" value={items.length - active} tone="ink" />
       </div>
@@ -115,7 +115,7 @@ export function AphorismsTab({
             <label className="flex items-end gap-2 pb-2.5 text-sm font-semibold text-ink-700">
               <input
                 type="checkbox"
-                className="h-4 w-4 accent-seafoam-500"
+                className="h-4 w-4 accent-aqua-500"
                 checked={form.active !== false}
                 onChange={(e) => setForm({ ...form, active: e.target.checked })}
               />
@@ -180,7 +180,7 @@ export function AphorismsTab({
               <label className="flex cursor-pointer items-center gap-1.5 text-xs font-semibold text-ink-500">
                 <input
                   type="checkbox"
-                  className="h-4 w-4 accent-seafoam-500"
+                  className="h-4 w-4 accent-aqua-500"
                   checked={a.active}
                   disabled={busy}
                   onChange={(e) =>
@@ -256,7 +256,7 @@ export function SchoolsTab({
   return (
     <div className="space-y-5">
       <div className="grid gap-4 sm:grid-cols-3">
-        <Stat label="Бүртгэлтэй сургууль" value={items.length} tone="geo" />
+        <Stat label="Бүртгэлтэй сургууль" value={items.length} tone="teal" />
         <Stat
           label="Холбогдсон менежер"
           value={
@@ -271,7 +271,7 @@ export function SchoolsTab({
             profiles.filter((p) => !p.school_id)
               .length
           }
-          tone="amber"
+          tone="gold"
         />
       </div>
 
@@ -464,12 +464,12 @@ export function SystemTab({
       <div>
         <h3 className="mb-3 section-title">Системийн нийт өгөгдөл</h3>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
-          <Stat label="Багш" value={totals.teachers} tone="geo" />
+          <Stat label="Багш" value={totals.teachers} tone="teal" />
           <Stat label="Анги" value={totals.classes} tone="aqua" />
-          <Stat label="Сурагч" value={totals.students} tone="sun" />
-          <Stat label="Хуваарийн цаг" value={totals.slots} tone="amber" />
+          <Stat label="Сурагч" value={totals.students} tone="orange" />
+          <Stat label="Хуваарийн цаг" value={totals.slots} tone="gold" />
           <Stat label="Ажиглалт" value={totals.observations} tone="ink" />
-          <Stat label="Төлөвлөгөө" value={totals.plans} tone="geo" />
+          <Stat label="Төлөвлөгөө" value={totals.plans} tone="teal" />
         </div>
       </div>
 

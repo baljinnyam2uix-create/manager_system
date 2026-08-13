@@ -124,21 +124,21 @@ export function StatCard({
   label,
   value,
   sub,
-  tone = "geo",
+  tone = "teal",
   icon,
 }: {
   label: string;
   value: string | number;
   sub?: string;
   /** Логоны өнгөнүүд: geo=цэнхэр, aqua=номин, sun=улбар шар, amber=алт, ink=саарал */
-  tone?: "geo" | "aqua" | "sun" | "amber" | "ink";
+  tone?: "teal" | "aqua" | "orange" | "gold" | "ink";
   icon?: string;
 }) {
   const tones: Record<string, string> = {
-    geo: "from-teal-100 to-teal-50 text-teal-800",
-    aqua: "from-seafoam-100 to-seafoam-50 text-seafoam-800",
-    sun: "from-pink-100 to-pink-50 text-pink-800",
-    amber: "from-coral-100 to-coral-50 text-coral-800",
+    teal: "from-teal-100 to-teal-50 text-teal-800",
+    aqua: "from-aqua-100 to-aqua-50 text-aqua-800",
+    orange: "from-orange-100 to-orange-50 text-orange-800",
+    gold: "from-gold-100 to-gold-50 text-gold-800",
     ink: "from-ink-100 to-ink-50 text-ink-800",
   };
   return (
@@ -174,7 +174,7 @@ export function useToast() {
     <div
       className={`fixed bottom-5 left-1/2 z-[60] -translate-x-1/2 animate-fade-up rounded-xl border px-5 py-3 text-sm font-semibold shadow-lift ${
         toast.ok
-          ? "border-seafoam-200 bg-seafoam-50 text-seafoam-800"
+          ? "border-aqua-200 bg-aqua-50 text-aqua-800"
           : "border-red-200 bg-red-50 text-red-700"
       }`}
     >

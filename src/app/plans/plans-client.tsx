@@ -22,7 +22,7 @@ const STATUSES: PlanStatus[] = ["planned", "in_progress", "done", "cancelled"];
 const STATUS_STYLE: Record<PlanStatus, string> = {
   planned: "bg-ink-100 text-ink-600",
   in_progress: "bg-teal-100 text-teal-700",
-  done: "bg-seafoam-100 text-seafoam-800",
+  done: "bg-aqua-100 text-aqua-800",
   cancelled: "bg-red-100 text-red-700",
 };
 
@@ -196,10 +196,10 @@ export default function PlansClient({ profile }: { profile: Profile }) {
       ) : (
         <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Төлөвлөгөө" value={plans.length} icon="📋" tone="geo" />
-            <StatCard label="Нийт ажил" value={currentItems.length} icon="📌" tone="sun" />
+            <StatCard label="Төлөвлөгөө" value={plans.length} icon="📋" tone="teal" />
+            <StatCard label="Нийт ажил" value={currentItems.length} icon="📌" tone="orange" />
             <StatCard label="Дууссан" value={doneCount} icon="✅" tone="aqua" />
-            <StatCard label="Дундаж явц" value={`${avgProgress}%`} icon="📈" tone="amber" />
+            <StatCard label="Дундаж явц" value={`${avgProgress}%`} icon="📈" tone="gold" />
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -279,7 +279,7 @@ export default function PlansClient({ profile }: { profile: Profile }) {
 
                 <div className="mt-4 h-2.5 overflow-hidden rounded-full bg-ink-100">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-teal-500 to-seafoam-400"
+                    className="h-full rounded-full bg-gradient-to-r from-teal-500 to-aqua-400"
                     style={{ width: `${avgProgress}%` }}
                   />
                 </div>

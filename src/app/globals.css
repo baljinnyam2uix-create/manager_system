@@ -2,19 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Тропик палитр — brand tokens */
+/* GEid логоны албан ёсны палитр */
 :root {
-  --bg: #f4fbfa;
-  --surface: #ffffff;
-  --border: #d7e8e6;
-  --text: #1a2c2c;
-  --muted: #769c9c;
+  --flame: #fd5901; /* Тод улбар шар */
+  --orange: #f78104; /* Улбар шар */
+  --gold: #faab36; /* Алтан шар */
+  --aqua: #249ea0; /* Цэнхэр-ногоон */
+  --teal: #008083; /* Гүн turquoise — ҮНДСЭН */
+  --deep: #005f60; /* Хар ногоовтор teal */
 
-  --teal: #008080; /* Teal Green — үндсэн */
-  --pink: #ff6b8b; /* Tropical Pink — өргөлт */
-  --seafoam: #20b2aa; /* Seafoam Green — амжилт */
-  --coral: #ff8c94; /* Soft Coral — анхааруулга */
-  --mint: #a8e6cf; /* Bright Mint — тодруулга */
+  --surface: #ffffff;
+  --border: #d3e6e5;
+  --text: #182c2c;
+  --muted: #6f9b9c;
 }
 
 html,
@@ -23,10 +23,38 @@ body {
   overflow-x: hidden;
 }
 
+/* ------------------------------------------------------------------ */
+/* ДЭВСГЭР — цагаан биш, өнгө уусалттай                                */
+/* ------------------------------------------------------------------ */
 body {
-  background: var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  background-color: #eef7f6;
+  /* Логоны өнгөнүүд зөөлөн уусаж, буланд дулаан аяс өгнө */
+  background-image:
+    radial-gradient(
+      54rem 40rem at 8% -6%,
+      rgba(36, 158, 160, 0.26) 0%,
+      rgba(36, 158, 160, 0) 62%
+    ),
+    radial-gradient(
+      46rem 34rem at 98% 4%,
+      rgba(250, 171, 54, 0.24) 0%,
+      rgba(250, 171, 54, 0) 60%
+    ),
+    radial-gradient(
+      52rem 40rem at 88% 96%,
+      rgba(247, 129, 4, 0.18) 0%,
+      rgba(247, 129, 4, 0) 58%
+    ),
+    radial-gradient(
+      60rem 46rem at 2% 100%,
+      rgba(0, 128, 131, 0.22) 0%,
+      rgba(0, 128, 131, 0) 60%
+    ),
+    linear-gradient(168deg, #f2fbfa 0%, #eaf6f5 46%, #f6f2e9 100%);
+  background-attachment: fixed;
 }
 
 * {
@@ -38,11 +66,11 @@ body {
 /* ------------------------------------------------------------------ */
 @layer components {
   .card {
-    @apply rounded-2xl border border-[#d7e8e6] bg-white shadow-soft;
+    @apply rounded-2xl border border-white/70 bg-white/85 shadow-soft backdrop-blur-sm;
   }
 
   .card-pad {
-    @apply rounded-2xl border border-[#d7e8e6] bg-white p-5 shadow-soft;
+    @apply rounded-2xl border border-white/70 bg-white/85 p-5 shadow-soft backdrop-blur-sm;
   }
 
   .btn {
@@ -50,35 +78,14 @@ body {
            transition-all duration-150 active:scale-[.98] disabled:cursor-not-allowed disabled:opacity-50;
   }
 
+  /* Бүх үндсэн товч НЭГ өнгөтэй — логоны гүн turquoise.
+     Дэвсгэрийн teal аястай зохицож, цагаан бичигтэй 4.8:1 харьцаатай. */
   .btn-primary {
-    @apply btn text-white shadow-soft hover:shadow-lift;
-    /* teal → гүн seafoam → гүн ягаан.
-       Бүх зогсоол цагаан бичигтэй 4.5:1-ээс дээш харьцаатай. */
-    background-image: linear-gradient(
-      135deg,
-      var(--teal) 0%,
-      #0a8b88 45%,
-      #c81c48 115%
-    );
-  }
-
-  /* Тропик шилжилт — толгой хэсэг, идэвхтэй элементэд.
-     ⚠ Дээр нь ЦАГААН бичиг тавьдаг тул бүх зогсоол гүн байх ёстой:
-     хамгийн цайвар зогсоол (pink-700) ч цагаантай 5.5:1 харьцаатай. */
-  .brand-gradient {
-    background-image: linear-gradient(
-      110deg,
-      #084a4a 0%,
-      #045b5b 20%,
-      var(--teal) 42%,
-      #107774 58%,
-      #d33f50 84%,
-      #c81c48 100%
-    );
+    @apply btn bg-teal-500 text-white shadow-soft hover:bg-teal-600 hover:shadow-lift;
   }
 
   .btn-ghost {
-    @apply btn border border-[#d7e8e6] bg-white text-ink-700 hover:bg-ink-50;
+    @apply btn border border-[#cfe3e2] bg-white/80 text-ink-700 backdrop-blur-sm hover:bg-white;
   }
 
   .btn-soft {
@@ -93,8 +100,22 @@ body {
     @apply px-3 py-1.5 text-xs;
   }
 
+  /* Логоны өнгөний шилжилт — толгой самбар.
+     Бүх зогсоол цагаан бичигтэй 4.5:1-ээс дээш. */
+  .brand-gradient {
+    background-image: linear-gradient(
+      112deg,
+      #043f40 0%,
+      var(--deep) 24%,
+      var(--teal) 50%,
+      #188082 68%,
+      #bb560d 88%,
+      #b94506 100%
+    );
+  }
+
   .input {
-    @apply w-full rounded-xl border border-[#d7e8e6] bg-white px-3.5 py-2.5 text-sm text-ink-900
+    @apply w-full rounded-xl border border-[#cfe3e2] bg-white px-3.5 py-2.5 text-sm text-ink-900
            outline-none transition placeholder:text-ink-300
            focus:border-teal-400 focus:ring-4 focus:ring-teal-100;
   }
@@ -116,11 +137,17 @@ body {
   }
 
   .table-wrap {
-    @apply overflow-x-auto rounded-2xl border border-[#d7e8e6] bg-white shadow-soft;
+    @apply overflow-x-auto rounded-2xl border border-white/70 bg-white/90 shadow-soft backdrop-blur-sm;
   }
 
   .section-title {
     @apply text-lg font-bold text-ink-900;
+  }
+
+  /* Дэвсгэрийн хөвөгч дүрс тэмдэг */
+  .bg-icon {
+    @apply pointer-events-none absolute select-none;
+    filter: blur(0.2px);
   }
 }
 
@@ -133,18 +160,29 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #b3d8d4;
+  background: #aed3d1;
   border-radius: 8px;
-  border: 2px solid var(--bg);
+  border: 2px solid transparent;
+  background-clip: content-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #8bbfb9;
+  background: #86bab7;
+  background-clip: content-box;
 }
 
-/* Сонгосон текст — брэндийн цэнхэр */
+/* Сонгосон текст */
 ::selection {
-  background: #a8e6cf;
-  color: #045b5b;
+  background: #ffe0a8;
+  color: #005f60;
+}
+
+/* Хөдөлгөөн багасгах тохиргоотой хэрэглэгчид */
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift,
+  .animate-float,
+  .animate-pulse-soft {
+    animation: none !important;
+  }
 }
 
 /* Хэвлэх */
@@ -154,10 +192,14 @@ body {
   }
   body {
     background: #fff;
+    background-image: none;
   }
   .card,
+  .card-pad,
   .table-wrap {
     box-shadow: none !important;
     border-color: #ccc !important;
+    background: #fff !important;
+    backdrop-filter: none !important;
   }
 }

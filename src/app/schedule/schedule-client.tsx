@@ -297,7 +297,7 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
         <div className="space-y-5">
           {/* ---------- Тоон үзүүлэлт ---------- */}
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Байрласан цаг" value={slots.length} icon="🗓️" tone="geo" />
+            <StatCard label="Байрласан цаг" value={slots.length} icon="🗓️" tone="teal" />
             <StatCard
               label="Шаардлагатай цаг"
               value={requiredHours}
@@ -309,21 +309,21 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
               label="Зөрчил"
               value={conflicts.length}
               icon={conflicts.length ? "⚠️" : "✅"}
-              tone={conflicts.length ? "amber" : "aqua"}
+              tone={conflicts.length ? "gold" : "aqua"}
             />
-            <StatCard label="Хувилбар" value={versions.length} icon="📚" tone="sun" />
+            <StatCard label="Хувилбар" value={versions.length} icon="📚" tone="orange" />
           </div>
 
           {/* ---------- Зөрчлийн жагсаалт ---------- */}
           {conflicts.length > 0 && (
-            <details className="rounded-2xl border border-coral-300 bg-coral-50 p-4">
-              <summary className="cursor-pointer text-sm font-bold text-coral-900">
+            <details className="rounded-2xl border border-gold-300 bg-gold-50 p-4">
+              <summary className="cursor-pointer text-sm font-bold text-gold-900">
                 ⚠️ {conflicts.length} зөрчил илэрлээ — дэлгэрэнгүй харах
               </summary>
-              <ul className="mt-3 max-h-64 space-y-1.5 overflow-y-auto text-[13px] text-coral-900">
+              <ul className="mt-3 max-h-64 space-y-1.5 overflow-y-auto text-[13px] text-gold-900">
                 {conflicts.slice(0, 60).map((c, i) => (
                   <li key={i} className="rounded-lg bg-white/70 px-3 py-1.5">
-                    <b className="uppercase text-[10px] text-coral-600">
+                    <b className="uppercase text-[10px] text-gold-600">
                       {c.type === "teacher" ? "багш" : c.type === "class" ? "анги" : c.type === "room" ? "кабинет" : "цаг"}
                     </b>{" "}
                     {c.message}
@@ -471,7 +471,7 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
                         <div className="flex items-center gap-2 text-sm font-bold text-ink-800">
                           {v.name}
                           {v.is_active && (
-                            <span className="badge bg-seafoam-100 text-seafoam-800">Идэвхтэй</span>
+                            <span className="badge bg-aqua-100 text-aqua-800">Идэвхтэй</span>
                           )}
                         </div>
                         <div className="truncate text-[11px] text-ink-400">
@@ -526,7 +526,7 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
             <label className="flex items-start gap-3 text-sm">
               <input
                 type="checkbox"
-                className="mt-0.5 h-4 w-4 accent-seafoam-500"
+                className="mt-0.5 h-4 w-4 accent-aqua-500"
                 checked={genOpts.peSharedHall}
                 onChange={(e) => setGenOpts({ ...genOpts, peSharedHall: e.target.checked })}
               />
@@ -598,9 +598,9 @@ export default function ScheduleClient({ profile }: { profile: Profile }) {
                 <MiniStat label="Хугацаа" value={`${result.stats.elapsedMs}мс`} />
               </div>
               {result.unplaced.length > 0 && (
-                <ul className="mt-3 max-h-40 space-y-1 overflow-y-auto text-xs text-coral-800">
+                <ul className="mt-3 max-h-40 space-y-1 overflow-y-auto text-xs text-gold-800">
                   {result.unplaced.slice(0, 20).map((u, i) => (
-                    <li key={i} className="rounded bg-coral-50 px-2 py-1">
+                    <li key={i} className="rounded bg-gold-50 px-2 py-1">
                       {u.teacherName} · {u.subjectName} · {u.className} — {u.reason}
                     </li>
                   ))}
@@ -676,7 +676,7 @@ function TeacherSummary({
                   <td className="td text-center">
                     <span
                       className={`badge ${
-                        ok ? "bg-seafoam-100 text-seafoam-800" : "bg-coral-100 text-coral-800"
+                        ok ? "bg-aqua-100 text-aqua-800" : "bg-gold-100 text-gold-800"
                       }`}
                     >
                       {ok ? "Таарсан" : got > need ? `+${got - need}` : `-${need - got}`}

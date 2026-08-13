@@ -246,15 +246,15 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
       ) : (
         <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Нийт ажил" value={visible.length} icon="📌" tone="geo" />
+            <StatCard label="Нийт ажил" value={visible.length} icon="📌" tone="teal" />
             <StatCard label="Гүйцэтгэсэн" value={doneCount} icon="✅" tone="aqua" />
             <StatCard
               label="Гүйцэтгэлийн хувь"
               value={visible.length ? `${Math.round((doneCount / visible.length) * 100)}%` : "0%"}
               icon="📈"
-              tone="sun"
+              tone="orange"
             />
-            <StatCard label="Дундаж оноо" value={`${avgPct}%`} icon="⭐" tone="amber" />
+            <StatCard label="Дундаж оноо" value={`${avgPct}%`} icon="⭐" tone="gold" />
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
@@ -338,7 +338,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                         <span className="text-ink-500">
                           Гүйцэтгэсэн: <b className="text-ink-800">{done}/{list.length}</b>
                         </span>
-                        <span className="badge bg-seafoam-100 text-seafoam-800">{pct}%</span>
+                        <span className="badge bg-aqua-100 text-aqua-800">{pct}%</span>
                       </div>
                     </div>
 
@@ -349,7 +349,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                             type="checkbox"
                             checked={t.is_done}
                             onChange={() => toggleDone(t)}
-                            className="mt-1 h-5 w-5 shrink-0 accent-seafoam-500"
+                            className="mt-1 h-5 w-5 shrink-0 accent-aqua-500"
                           />
                           <div className="min-w-[200px] flex-1">
                             <div
@@ -365,7 +365,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                               )}
                               {t.due_date && <span>⏱ {t.due_date}</span>}
                               {t.plan_item_id && (
-                                <span className="badge bg-pink-100 text-pink-700">
+                                <span className="badge bg-orange-100 text-orange-700">
                                   Төлөвлөгөөнөөс
                                 </span>
                               )}
@@ -541,7 +541,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                 <label className="flex items-center gap-2 text-sm font-semibold text-ink-700">
                   <input
                     type="checkbox"
-                    className="h-4 w-4 accent-seafoam-500"
+                    className="h-4 w-4 accent-aqua-500"
                     checked={!!modal.is_done}
                     onChange={(e) => setModal({ ...modal, is_done: e.target.checked })}
                   />
@@ -672,7 +672,7 @@ export default function PerformanceClient({ profile }: { profile: Profile }) {
                 >
                   <input
                     type="checkbox"
-                    className="h-4 w-4 accent-seafoam-500"
+                    className="h-4 w-4 accent-aqua-500"
                     checked={bulkTeachers.includes(t.id)}
                     onChange={(e) =>
                       setBulkTeachers((v) =>

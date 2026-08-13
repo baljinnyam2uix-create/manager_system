@@ -31,7 +31,7 @@ function useMaps(ctx: GridCtx) {
 
 /** Сонгон судлах хичээлийг тод шар/улбар өнгөөр ялгана */
 const ELECTIVE_STYLE =
-  "bg-gradient-to-br from-mint-300 to-mint-100 ring-2 ring-mint-500 text-mint-900";
+  "bg-gradient-to-br from-gold-300 to-gold-100 ring-2 ring-gold-500 text-gold-900";
 
 // ====================================================================
 // БАГШИЙН ХУВААРЬ
@@ -331,7 +331,7 @@ export function SchoolGrid({ ctx, shift }: { ctx: GridCtx; shift: number }) {
                           <div
                             className={`truncate rounded px-1 py-1 font-semibold leading-none ${
                               s0.is_elective
-                                ? "bg-mint-300 text-mint-900 ring-1 ring-mint-500"
+                                ? "bg-gold-300 text-gold-900 ring-1 ring-gold-500"
                                 : "text-white"
                             }`}
                             style={
@@ -384,7 +384,7 @@ export function Legend({ subjects }: { subjects: Subject[] }) {
           {s.name}
         </span>
       ))}
-      <span className="rounded-md bg-mint-300 px-2 py-0.5 text-[10px] font-bold text-mint-900 ring-1 ring-mint-500">
+      <span className="rounded-md bg-gold-300 px-2 py-0.5 text-[10px] font-bold text-gold-900 ring-1 ring-gold-500">
         Сонгон судлах
       </span>
     </div>

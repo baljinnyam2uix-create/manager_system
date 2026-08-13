@@ -27,16 +27,17 @@ import {
 // ---------------------------------------------------------------------
 // Брэндийн өнгө (ARGB — ExcelJS-ийн формат)
 // ---------------------------------------------------------------------
+// GEid логоны палитр (ARGB)
 const C = {
-  head: "FF045B5B", // гарчгийн дэвсгэр — гүн teal
+  head: "FF005F60", // гарчгийн дэвсгэр — хар ногоовтор teal
   headText: "FFFFFFFF",
-  sub: "FF008080", // дэд гарчиг — Teal Green
-  title: "FF1A2C2C",
-  border: "FFC9DCDC",
-  zebra: "FFF4F8F8",
-  elective: "FFA8E6CF", // сонгон судлах — Bright Mint
-  electiveText: "FF195442",
-  total: "FFD2F5F3",
+  sub: "FF008083", // дэд гарчиг — гүн turquoise
+  title: "FF182C2C",
+  border: "FFC6DBDB",
+  zebra: "FFF3F8F8",
+  elective: "FFFFE0A8", // сонгон судлах — алтан шар
+  electiveText: "FF7A3912",
+  total: "FFD6F4F4",
 };
 
 type Primitive = string | number | null;

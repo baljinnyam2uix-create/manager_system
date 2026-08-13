@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { LogoMark } from "@/components/logo";
+import { LogoMark, BackgroundIcons } from "@/components/logo";
 import SignOutButton from "@/components/sign-out-button";
 import type { Profile, ApprovalStatus, UserRole } from "@/lib/types";
 import { approveProfile, setRole, deleteProfile, assignSchool } from "./actions";
@@ -55,11 +55,12 @@ export default function AdminClient({
   const pending = profiles.filter((p) => p.status === "pending").length;
 
   return (
-    <div className="min-h-screen bg-[#f4fbfa]">
+    <div className="min-h-screen">
+      <BackgroundIcons />
       <header className="sticky top-0 z-20 border-b border-[#d7e8e6] bg-white/85 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-4">
           <div className="flex items-center gap-3">
-            <LogoMark size={42} />
+            <LogoMark width={112} priority />
             <div className="leading-tight">
               <div className="flex items-center gap-2 text-sm font-extrabold text-ink-900">
                 Админ удирдлага
@@ -92,7 +93,7 @@ export default function AdminClient({
               <span>{t.icon}</span>
               {t.label}
               {t.k === "managers" && pending > 0 && (
-                <span className="rounded-md bg-pink-700 px-1.5 text-[10px] font-bold text-white">
+                <span className="rounded-md bg-orange-700 px-1.5 text-[10px] font-bold text-white">
                   {pending}
                 </span>
               )}
@@ -106,7 +107,7 @@ export default function AdminClient({
           <div
             className={`rounded-xl border px-4 py-3 text-sm font-medium ${
               msg.ok
-                ? "border-seafoam-200 bg-seafoam-50 text-seafoam-800"
+                ? "border-aqua-200 bg-aqua-50 text-aqua-800"
                 : "border-red-200 bg-red-50 text-red-700"
             }`}
           >
@@ -201,7 +202,7 @@ function ManagersTab({
   return (
     <div className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Stat label="Хүлээгдэж буй" value={counts.pending} tone="amber" />
+        <Stat label="Хүлээгдэж буй" value={counts.pending} tone="gold" />
         <Stat label="Батлагдсан" value={counts.approved} tone="aqua" />
         <Stat label="Татгалзсан" value={counts.rejected} tone="red" />
         <Stat label="Админ" value={counts.admins} tone="ink" />
@@ -344,7 +345,7 @@ function ManagersTab({
                               `${p.first_name || p.email} батлагдлаа`
                             )
                           }
-                          className="btn btn-sm bg-seafoam-100 text-seafoam-800 hover:bg-seafoam-200"
+                          className="btn btn-sm bg-aqua-100 text-aqua-800 hover:bg-aqua-200"
                         >
                           Батлах
                         </button>
@@ -356,7 +357,7 @@ function ManagersTab({
                             setRejectFor(p);
                             setReason("");
                           }}
-                          className="btn btn-sm bg-coral-100 text-coral-800 hover:bg-coral-200"
+                          className="btn btn-sm bg-gold-100 text-gold-800 hover:bg-gold-200"
                         >
                           Татгалзах
                         </button>
@@ -434,8 +435,8 @@ function Chip({ n, l }: { n: number; l: string }) {
 
 function StatusBadge({ s }: { s: ApprovalStatus }) {
   const map = {
-    pending: ["bg-coral-100 text-coral-800", "Хүлээгдэж буй"],
-    approved: ["bg-seafoam-100 text-seafoam-800", "Батлагдсан"],
+    pending: ["bg-gold-100 text-gold-800", "Хүлээгдэж буй"],
+    approved: ["bg-aqua-100 text-aqua-800", "Батлагдсан"],
     rejected: ["bg-red-100 text-red-700", "Татгалзсан"],
   } as const;
   const [cls, label] = map[s];

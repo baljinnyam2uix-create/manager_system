@@ -160,16 +160,16 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
       ) : (
         <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Нийт тэмдэглэл" value={rows.length} icon="🔍" tone="geo" />
+            <StatCard label="Нийт тэмдэглэл" value={rows.length} icon="🔍" tone="teal" />
             <StatCard label="Энэ сард" value={thisMonth} icon="📅" tone="aqua" />
             <StatCard
               label="Хамрагдсан багш"
               value={new Set(rows.map((r) => r.teacher_id)).size}
               sub={`нийт ${teachers.length}`}
               icon="👩‍🏫"
-              tone="sun"
+              tone="orange"
             />
-            <StatCard label="Дундаж оноо" value={avgScore || "—"} icon="⭐" tone="amber" />
+            <StatCard label="Дундаж оноо" value={avgScore || "—"} icon="⭐" tone="gold" />
           </div>
 
           <div className="flex flex-wrap gap-3">
@@ -256,7 +256,7 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
                       </td>
                       <td className="td text-center">
                         {r.score != null && (
-                          <span className="badge bg-seafoam-100 text-seafoam-800">{r.score}</span>
+                          <span className="badge bg-aqua-100 text-aqua-800">{r.score}</span>
                         )}
                       </td>
                       <td className="td" onClick={(e) => e.stopPropagation()}>
@@ -451,7 +451,7 @@ export default function ObservationsClient({ profile }: { profile: Profile }) {
           <div className="space-y-4 text-sm">
             <Block title="Тэмдэглэл" text={view.note} />
             <Block title="Давуу тал" text={view.strengths} tone="aqua" />
-            <Block title="Зөвлөмж" text={view.suggestions} tone="amber" />
+            <Block title="Зөвлөмж" text={view.suggestions} tone="gold" />
             <div className="flex flex-wrap gap-4 rounded-xl bg-ink-50 p-4 text-xs">
               <span>
                 <b className="text-ink-500">Цаг:</b>{" "}
@@ -478,13 +478,13 @@ function Block({
 }: {
   title: string;
   text: string | null;
-  tone?: "ink" | "aqua" | "amber";
+  tone?: "ink" | "aqua" | "gold";
 }) {
   if (!text) return null;
   const tones = {
     ink: "border-[#d7e8e6] bg-white",
-    aqua: "border-seafoam-200 bg-seafoam-50",
-    amber: "border-coral-200 bg-coral-50",
+    aqua: "border-aqua-200 bg-aqua-50",
+    gold: "border-gold-200 bg-gold-50",
   };
   return (
     <div className={`rounded-xl border p-4 ${tones[tone]}`}>

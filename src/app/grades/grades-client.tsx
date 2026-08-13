@@ -22,10 +22,10 @@ function letterOf(score: number | null | undefined) {
 function scoreColor(score: number | null | undefined) {
   if (score == null) return "";
   // Ногооноос улаан руу: сайн → муу
-  if (score >= 90) return "bg-mint-300 text-mint-900";
-  if (score >= 80) return "bg-seafoam-100 text-seafoam-800";
+  if (score >= 90) return "bg-gold-300 text-gold-900";
+  if (score >= 80) return "bg-aqua-100 text-aqua-800";
   if (score >= 70) return "bg-teal-100 text-teal-800";
-  if (score >= 60) return "bg-coral-100 text-coral-800";
+  if (score >= 60) return "bg-gold-100 text-gold-800";
   return "bg-red-100 text-red-700";
 }
 
@@ -399,10 +399,10 @@ export default function GradesClient({ profile }: { profile: Profile }) {
       ) : (
         <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Бүртгэсэн дүн" value={stats.total} icon="📊" tone="geo" />
+            <StatCard label="Бүртгэсэн дүн" value={stats.total} icon="📊" tone="teal" />
             <StatCard label="Дундаж оноо" value={stats.avg || "—"} icon="📈" tone="aqua" />
-            <StatCard label="Чанарын хувь" value={`${stats.quality}%`} sub="80-аас дээш" icon="⭐" tone="sun" />
-            <StatCard label="Амжилтгүй" value={stats.fails} sub="60-аас доош" icon="⚠️" tone="amber" />
+            <StatCard label="Чанарын хувь" value={`${stats.quality}%`} sub="80-аас дээш" icon="⭐" tone="orange" />
+            <StatCard label="Амжилтгүй" value={stats.fails} sub="60-аас доош" icon="⚠️" tone="gold" />
           </div>
 
           <div className="flex flex-wrap items-center gap-3">

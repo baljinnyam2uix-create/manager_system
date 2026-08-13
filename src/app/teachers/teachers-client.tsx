@@ -328,20 +328,20 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
       ) : (
         <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Нийт багш" value={teachers.length} icon="👩‍🏫" tone="geo" />
+            <StatCard label="Нийт багш" value={teachers.length} icon="👩‍🏫" tone="teal" />
             <StatCard
               label="Анги даасан"
               value={teachers.filter((t) => t.is_homeroom).length}
               icon="🏫"
               tone="aqua"
             />
-            <StatCard label="7 хоногийн нийт цаг" value={totalHours} icon="⏱️" tone="sun" />
+            <StatCard label="7 хоногийн нийт цаг" value={totalHours} icon="⏱️" tone="orange" />
             <StatCard
               label="Дундаж ачаалал"
               value={teachers.length ? (totalHours / teachers.length).toFixed(1) : 0}
               sub="цаг / багш"
               icon="📈"
-              tone="amber"
+              tone="gold"
             />
           </div>
 
@@ -430,7 +430,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
                                 ? "bg-ink-100 text-ink-500"
                                 : h > 30
                                   ? "bg-red-100 text-red-700"
-                                  : "bg-seafoam-100 text-seafoam-800"
+                                  : "bg-aqua-100 text-aqua-800"
                             }`}
                           >
                             {h}
@@ -438,7 +438,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
                         </td>
                         <td className="td text-xs">
                           {t.is_homeroom ? (
-                            <span className="badge bg-pink-100 text-pink-800">
+                            <span className="badge bg-orange-100 text-orange-800">
                               {classes.find((c) => c.id === t.homeroom_class_id)?.name || "Анги сонгоогүй"}
                             </span>
                           ) : (
@@ -571,7 +571,7 @@ export default function TeachersClient({ profile }: { profile: Profile }) {
               <label className="ml-auto flex items-center gap-2 text-sm font-semibold text-ink-700">
                 <input
                   type="checkbox"
-                  className="h-4 w-4 accent-seafoam-500"
+                  className="h-4 w-4 accent-aqua-500"
                   checked={form.active !== false}
                   onChange={(e) => setForm({ ...form, active: e.target.checked })}
                 />

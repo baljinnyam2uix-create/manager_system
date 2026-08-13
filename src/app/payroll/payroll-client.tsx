@@ -279,10 +279,10 @@ export default function PayrollClient({ profile }: { profile: Profile }) {
       ) : (
         <div className="space-y-5">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Нийт цалин" value={money(totals.gross)} icon="💰" tone="geo" />
+            <StatCard label="Нийт цалин" value={money(totals.gross)} icon="💰" tone="teal" />
             <StatCard label="НДШ" value={money(totals.ndsh)} icon="🏥" tone="aqua" />
-            <StatCard label="ХХОАТ" value={money(totals.hhoat)} icon="🧾" tone="amber" />
-            <StatCard label="Гарт олгох" value={money(totals.net)} icon="✅" tone="sun" />
+            <StatCard label="ХХОАТ" value={money(totals.hhoat)} icon="🧾" tone="gold" />
+            <StatCard label="Гарт олгох" value={money(totals.net)} icon="✅" tone="orange" />
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -345,7 +345,7 @@ export default function PayrollClient({ profile }: { profile: Profile }) {
                         <td className="td text-right text-red-600">
                           −{money(r.ndsh + r.hhoat + r.otherDeduction)}
                         </td>
-                        <td className="td text-right font-black text-seafoam-700">{money(r.net)}</td>
+                        <td className="td text-right font-black text-aqua-700">{money(r.net)}</td>
                         <td className="td">
                           <div className="flex justify-end gap-1.5">
                             <button onClick={() => setDetail(t)} className="btn-ghost btn-sm">
@@ -373,7 +373,7 @@ export default function PayrollClient({ profile }: { profile: Profile }) {
                     <td className="td text-right font-black text-red-600">
                       −{money(totals.ndsh + totals.hhoat)}
                     </td>
-                    <td className="td text-right font-black text-seafoam-700">{money(totals.net)}</td>
+                    <td className="td text-right font-black text-aqua-700">{money(totals.net)}</td>
                     <td />
                   </tr>
                 </tfoot>

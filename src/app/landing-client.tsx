@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
-import { LogoMark } from "@/components/logo";
+import { LogoMark, BackgroundIcons } from "@/components/logo";
 
 type Aph = { text: string; author: string | null };
 
@@ -19,37 +19,37 @@ const FEATURES = [
     icon: "✅",
     title: "Ажлын гүйцэтгэл",
     desc: "Багшийн гүйцэтгэх ажлыг төлөвлөгөөнөөс сонгож эсвэл шинээр нэмж чеклэн дүгнэж, оноо, тайлбар бичнэ.",
-    tint: "from-seafoam-500/12 to-seafoam-500/0",
+    tint: "from-aqua-500/12 to-aqua-500/0",
   },
   {
     icon: "📋",
     title: "Менежерийн төлөвлөгөө",
     desc: "Жил, улирал, сар, 7 хоногийн төлөвлөгөөг зорилго, хугацаа, хариуцагч, шалгуур үзүүлэлттэйгээр боловсруулна.",
-    tint: "from-pink-500/12 to-pink-500/0",
+    tint: "from-orange-500/12 to-orange-500/0",
   },
   {
     icon: "💰",
     title: "Цагийн тооцоо, цалин",
     desc: "Хичээл заасан, орлон заасан, илүү цаг, СХА, анги даалт, зэрэг, ур чадварын нэмэгдлээр цалинг бодно.",
-    tint: "from-coral-500/12 to-coral-500/0",
+    tint: "from-gold-500/12 to-gold-500/0",
   },
   {
     icon: "👩‍🏫",
     title: "Багшийн бүртгэл",
     desc: "Овог нэр, РД, утас, хаяг, ажилласан жил, судлагдахуун, ордог анги, долоо хоногийн цаг, анги даалт.",
-    tint: "from-teal-500/12 to-seafoam-500/0",
+    tint: "from-teal-500/12 to-aqua-500/0",
   },
   {
     icon: "🔍",
     title: "Ажиглалтын тэмдэглэл",
     desc: "Хичээлд суусан тэмдэглэл: багш, анги, цаг, сэдэв, ажиглалт, давуу тал, зөвлөмж.",
-    tint: "from-seafoam-500/12 to-pink-500/0",
+    tint: "from-aqua-500/12 to-orange-500/0",
   },
   {
     icon: "📊",
     title: "Дүнгийн матриц",
     desc: "Сургуулийн хэмжээний дүнгийн нэгдсэн матриц: анги, сурагч, судлагдахуун, улирлаар шүүж дүгнэнэ.",
-    tint: "from-pink-500/12 to-coral-500/0",
+    tint: "from-orange-500/12 to-gold-500/0",
   },
   {
     icon: "🛡️",
@@ -113,21 +113,15 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
   const aph = aphorisms[idx] || aphorisms[0];
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#f4fbfa]">
-      {/* Дэвсгэрийн гялбаа */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-40 -top-40 h-[36rem] w-[36rem] rounded-full bg-teal-400/25 blur-3xl animate-float" />
-        <div className="absolute -right-32 top-24 h-[30rem] w-[30rem] rounded-full bg-seafoam-300/25 blur-3xl animate-float [animation-delay:2s]" />
-        <div className="absolute bottom-[-12rem] left-1/3 h-[32rem] w-[32rem] rounded-full bg-coral-300/25 blur-3xl animate-float [animation-delay:4s]" />
-        <div className="absolute -bottom-24 right-10 h-[24rem] w-[24rem] rounded-full bg-pink-300/20 blur-3xl animate-float [animation-delay:6s]" />
-      </div>
+    <div className="relative min-h-screen">
+      <BackgroundIcons dense />
 
       {/* ---------------- Толгой ---------------- */}
-      <header className="mx-auto flex max-w-7xl items-center justify-between px-5 py-6">
+      <header className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-5">
         <div className="flex items-center gap-3">
-          <LogoMark size={46} />
-          <div className="leading-tight">
-            <div className="text-[15px] font-extrabold tracking-tight text-ink-900">
+          <LogoMark width={148} priority />
+          <div className="hidden leading-tight sm:block">
+            <div className="text-[14px] font-extrabold tracking-tight text-ink-900">
               Сургалтын менежер
             </div>
             <div className="text-[11px] font-medium text-ink-400">
@@ -152,7 +146,7 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
             <h1 className="mt-5 text-4xl font-black leading-[1.1] tracking-tight text-ink-900 sm:text-5xl lg:text-[3.4rem]">
               Сургуулийн сургалтын
               {/* Цайвар дэвсгэр дээрх текст тул гүн сүүдрүүдийг ашиглав */}
-              <span className="block bg-gradient-to-r from-teal-600 via-seafoam-600 to-pink-600 bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-teal-700 via-aqua-600 to-orange-700 bg-clip-text text-transparent">
                 удирдлагыг нэг дороос
               </span>
             </h1>
@@ -165,7 +159,7 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
 
             {/* Афоризм */}
             <div className="relative mt-8 max-w-xl overflow-hidden rounded-3xl border border-white/70 bg-white/70 p-6 shadow-soft backdrop-blur-xl">
-              <div className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-teal-500 via-seafoam-400 to-pink-400" />
+              <div className="absolute inset-y-0 left-0 w-1.5 bg-gradient-to-b from-teal-500 via-aqua-400 to-orange-400" />
               <div className="pl-3">
                 <div className="mb-2 text-2xl leading-none text-teal-400">❝</div>
                 <p
@@ -198,24 +192,6 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
               </div>
             </div>
 
-            {/* Тоон үзүүлэлт */}
-            <div className="mt-8 grid max-w-xl grid-cols-3 gap-3">
-              {[
-                { n: "8", l: "модуль" },
-                { n: "3", l: "ээлж" },
-                { n: "Excel", l: "татах" },
-              ].map((s) => (
-                <div
-                  key={s.l}
-                  className="rounded-2xl border border-white/70 bg-white/60 px-4 py-3 backdrop-blur"
-                >
-                  <div className="text-xl font-black text-ink-900">{s.n}</div>
-                  <div className="text-[11px] font-semibold uppercase tracking-wide text-ink-400">
-                    {s.l}
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Баруун — нэвтрэх */}
@@ -306,7 +282,7 @@ export default function LandingClient({ aphorisms }: { aphorisms: Aph[] }) {
               Системийн боломжууд
             </h2>
             <p className="mx-auto mt-2 max-w-lg text-sm text-ink-400">
-              Сургалтын менежерийн өдөр тутмын ажлыг бүрэн хамарсан найман модуль
+              Сургалтын менежерийн өдөр тутмын ажлыг бүрэн хамарсан систем
             </p>
           </div>
 
