@@ -5,7 +5,29 @@ type CookieToSet = { name: string; value: string; options: CookieOptions };
 
 const PUBLIC_PATHS = ["/", "/register", "/login", "/pending", "/auth"];
 
+/**
+ * Сешн шинэчлэх + эрхийн урьдчилсан шалгалт.
+ *
+ * ⚠ ХАМГААЛАЛТЫН ЗАРЧИМ
+ * Энэ middleware бол ЗӨВХӨН чиглүүлэлтийн давхарга — хурдан шилжүүлэх,
+ * cookie сэргээх зорилготой. Жинхэнэ хамгаалалт хоёр газар байдаг:
+ *   1. Хуудас бүр дотор requireProfile() (сервер тал)
+ *   2. Өгөгдлийн санд RLS бодлого
+ * Тиймээс энд алдаа гарвал бүх сайтыг унагах ёсгүй — алгасаад
+ * үргэлжлүүлнэ. Хуудас өөрөө эрхгүй хэрэглэгчийг зогсооно.
+ */
 export async function updateSession(request: NextRequest) {
+  try {
+    return await run(request);
+  } catch (e) {
+    // Edge runtime дээрх ямар нэг гэнэтийн алдаа сайтыг бүхэлд нь
+    // унагахаас сэргийлнэ (MIDDLEWARE_INVOCATION_FAILED).
+    console.error("[middleware] алдаа гарлаа, алгаслаа:", e);
+    return NextResponse.next({ request });
+  }
+}
+
+async function run(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
